@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import Header from '../Header'
 import {syncBackendRequest, backendRequest} from '../../utils/backend'
-
+import './App.scss'
 
 export const App = () => {
   const [data, setData] = useState<string>('')
