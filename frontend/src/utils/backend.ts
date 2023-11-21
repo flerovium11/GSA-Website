@@ -31,7 +31,7 @@ export const backendRequest = async (url:string, data:sendData):Promise<response
     },
 
     error(xhr) {
-        reject({status: 'error', response: xhr.status + ' ' + xhr.statusText})
+        reject({status: 'error', response: xhr.statusText})
     }
 }))
 
@@ -49,7 +49,7 @@ export const syncBackendRequest = (url:string, data:sendData):responseData => {
         },
 
         error(xhr) {
-            returnVal = {status: 'error', response: xhr.status + ' ' + xhr.statusText}
+            returnVal = {status: 'error', response: xhr.statusText}
         },
     })
 
