@@ -1,2 +1,2 @@
 # GSA Website
-Das hier ist unser Repository
+Das hier ist unser Repository :D

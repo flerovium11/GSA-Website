@@ -1,8 +1,11 @@
 import {FC} from 'react'
 import {Route, Routes} from 'react-router-dom'
-import Header from '../Header'
+import {syncBackendRequest, backendRequest} from '../../utils/backend'
 
+import Header from '../Header'
 import Home from '../../pages/Home'
+
+import './App.scss'
 
 export const App:FC = () => {
   return (
