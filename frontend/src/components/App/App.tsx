@@ -1,30 +1,16 @@
-import {useState, useEffect} from 'react'
+import {FC} from 'react'
+import {Route, Routes} from 'react-router-dom'
 import Header from '../Header'
-import {syncBackendRequest, backendRequest} from '../../utils/backend'
 
+import Home from '../../pages/Home'
 
-export const App = () => {
-  const [data, setData] = useState<string>('')
-  const message = syncBackendRequest('php/test.php', {test: 'test'})
-
-  useEffect(() => {
-    backendRequest('php/test.php', {test: 'test'}).then(
-      (result) => {
-        setData(result.response)
-      },
-      (error) => {
-  
-      }
-    )
-  }, [])
-
+export const App:FC = () => {
   return (
     <>
       <Header></Header>
-      <h5>Sync response:</h5>
-      {message.response}
-      <h5>Async response:</h5>
-      {data}
+      <Routes>
+        <Route path='/' element={<Home />}/>
+      </Routes>
     </>
   )
 }

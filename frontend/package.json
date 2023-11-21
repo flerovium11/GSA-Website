@@ -13,7 +13,8 @@
     "@types/jquery": "^3.5.27",
     "jquery": "^3.7.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.19.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
