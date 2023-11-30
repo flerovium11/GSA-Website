@@ -9,5 +9,5 @@ export const setCookie:funcSetCookie = (name, value, days) => {
 }
 
 export const getCookie:funcGetCookie = (name) => {
-    return decodeURIComponent(document.cookie.split('; ').find(row => row.startsWith(name+'='))?.split('=')[1] ?? '');
+    return decodeURIComponent(document.cookie.split('; ').find(row => row.startsWith(name+'='))?.split('=')[1] ?? '')
 }

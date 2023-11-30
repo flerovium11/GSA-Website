@@ -14,6 +14,7 @@
     "jquery": "^3.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helper": "file:../../../../Users/Lenovo/Desktop/Programmieren/JavaScript/react-helper",
     "react-router-dom": "^6.19.0"
   },
   "devDependencies": {

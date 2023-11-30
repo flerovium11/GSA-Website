@@ -1,4 +1,10 @@
 <?php
+    function create_user_token() {
+        do {
+            true;
+        } while (false);
+    }
+
     function rand_item(iterable $array) {
         return $array[rand(0, count($array)-1)];
     }
@@ -62,8 +68,7 @@
         echo "<script>window.location.href = window.location.href</script>";
     }
     
-    function flrand(float $min, float $max):float {
-        $decimal_places = 10;
+    function flrand(float $min, float $max, int $decimal_places = 10):float {
         $m = pow(10, $decimal_places);
         return rand($min * $m, $max * $m) / $m;
     }
@@ -129,30 +134,30 @@
         exit;
     }
 
-    require_once $source_path.'assets/PHPMailer/src/PHPMailer.php';
-    require_once $source_path.'assets/PHPMailer/src/Exception.php';
-    require_once $source_path.'assets/PHPMailer/src/SMTP.php';
+    // require_once $source_path.'assets/PHPMailer/src/PHPMailer.php';
+    // require_once $source_path.'assets/PHPMailer/src/Exception.php';
+    // require_once $source_path.'assets/PHPMailer/src/SMTP.php';
 
-    // update the email and password here before sending emails
-    function use_php_mailer(string $to, string $subject, string $body):bool {       
-        $mail = new PHPMailer\PHPMailer\PHPMailer();
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->Port = 587;
-        $mail->SMTPAuth = true;
-        $mail->Username = 'noreply.cleft@gmail.com';
-        $mail->Password = 'lmiqipfwatlrmrcp';
-        $mail->setFrom("noreply.cleft@gmail.com", 'Cleft');
-        $mail->addAddress($to, $to);
-        $mail->Subject = $subject;
-        $mail->Body = $body;
-        $mail->AltBody = "HTML Emails not supported by your Client.";
-        $mail->CharSet = 'UTF-8';  
+    // // update the email and password here before sending emails
+    // function use_php_mailer(string $to, string $subject, string $body):bool {       
+    //     $mail = new PHPMailer\PHPMailer\PHPMailer();
+    //     $mail->isSMTP();
+    //     $mail->Host = 'smtp.gmail.com';
+    //     $mail->Port = 587;
+    //     $mail->SMTPAuth = true;
+    //     $mail->Username = 'noreply.cleft@gmail.com';
+    //     $mail->Password = 'lmiqipfwatlrmrcp';
+    //     $mail->setFrom("noreply.cleft@gmail.com", 'Cleft');
+    //     $mail->addAddress($to, $to);
+    //     $mail->Subject = $subject;
+    //     $mail->Body = $body;
+    //     $mail->AltBody = "HTML Emails not supported by your Client.";
+    //     $mail->CharSet = 'UTF-8';  
 
-        if ($mail->Send()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    //     if ($mail->Send()) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 ?>
