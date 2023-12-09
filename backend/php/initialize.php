@@ -17,10 +17,21 @@
     } else if(
         !empty($_SERVER['HTTP_AUTHORIZATION'])
         && !empty($_SERVER['HTTP_GSA_USERNAME'])
-        && fetch('select * from admin where login_token = ? and username = ?', [$_SERVER['HTTP_AUTHORIZATION'], $_SERVER['HTTP_GSA_USERNAME']]) != false
     ) {
-        $loggedin = true;
-        $_SESSION['username'] = $_SERVER['HTTP_GSA_USERNAME'];
+        $user = fetch('select * from admin where username = ?', [$_SERVER['HTTP_GSA_USERNAME']]);
+
+        if($user != false) {
+            if(password_verify($_SERVER['HTTP_AUTHORIZATION'].$user['salt'], $user['login_token'])) {
+                $new_token = generate_login_token();
+                execute('update admin set login_token = ? where admin_id = ?', [password_hash($new_token.$user['salt'], PASSWORD_DEFAULT)]);
+                $loggedin = true;
+                $_SESSION['username'] = $_SERVER['HTTP_GSA_USERNAME'];
+            } else {
+                // warning you token was used
+            }
+        } else {
+            // this user doesn't exist
+        }
     }
 
     if($loggedin) {
