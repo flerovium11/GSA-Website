@@ -1,0 +1,79 @@
+@import '../../variables';
+
+.active-lang {
+    cursor: pointer;
+}
+
+.language-menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: fit-content;
+    border-radius: 1em;
+    position: relative;
+    margin: 0 1em;
+
+    .lang-icon {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        color: black;
+        transition: .3s;
+        display: block;
+        width: 2em;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        cursor: pointer;
+        overflow: hidden;
+
+        span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            z-index: 5;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: gray;
+            opacity: 0.6;
+        }
+    
+        &:hover {
+            transform: scale(1.2) translateY(-50%);
+        }
+    
+        &.active {
+            border: 1px solid black;
+        }
+    }
+
+    &.open .lang-icon {
+        opacity: 1;
+    }
+
+    &.list-left .lang-icon {
+        left: -3em;
+    }
+
+    &.list-left.open .lang-icon {
+        left: calc(var(--index) * -3em - 3em)
+    }
+
+    &.list-right .lang-icon {
+        right: -2em;
+    }
+
+    &.list-right.open .lang-icon {
+        right: calc(var(--index) * -3em - 3em)
+    }
+}

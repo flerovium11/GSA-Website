@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {BrowserRouter} from 'react-router-dom'
 import App from './components/App'
+import './i18n'
 import './main.scss'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import {getCookie, setCookie} from './cookies'
 
-const backendPath:string = 'http://localhost/GSA-Website/backend/'
+const backendURL = 'http://localhost/GSA-Website/backend/'
 
 export interface sendData {
     [key:string]:string|undefined
@@ -18,7 +18,6 @@ export interface loginInfo {
 }
 
 export const getLoginInfo = ():loginInfo|null => {
-    return {token: 'hi', username: 'lol'}
     const username = getCookie('user-login-name')
     const token = getCookie('user-login-token')
     return token === '' && username === '' ? null : {token: token, username: username}
@@ -39,7 +38,7 @@ export const backendRequest = async (url:string, data:sendData):Promise<response
     }
 
     return new Promise((resolve, reject) => $.ajax({
-        url: backendPath + url,
+        url: backendURL + url,
         method: 'POST',
         data: data,
         headers: headers,
@@ -75,7 +74,7 @@ export const syncBackendRequest = (url:string, data:sendData):responseData => {
     }
 
     $.ajax({
-        url: backendPath + url,
+        url: backendURL + url,
         method: 'POST',
         data: data,
         headers: headers,

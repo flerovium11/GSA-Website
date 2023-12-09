@@ -1,16 +1,16 @@
-import {FC} from 'react'
+import {FC, PropsWithChildren} from 'react'
 import './Button.scss'
 
 interface ButtonProps {
-    prop1:string
+    type:'primary'|'secondary'
 }
 
-export const Button:FC<ButtonProps> = (props) => {
-    const {prop1} = props
+export const Button:FC<PropsWithChildren<ButtonProps>> = (props) => {
+    const {type, children} = props
 
     return (
         <>
-            <h3>Button</h3>
+            <button className={`button button-${type}`}>{children}</button>
         </>
     )
 }

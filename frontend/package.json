@@ -11,10 +11,14 @@
   },
   "dependencies": {
     "@types/jquery": "^3.5.27",
+    "antd": "^5.12.1",
+    "i18next": "^23.7.8",
+    "i18next-http-backend": "^2.4.2",
     "jquery": "^3.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helper": "file:../../../../Users/Lenovo/Desktop/Programmieren/JavaScript/react-helper",
+    "react-i18next": "^13.5.0",
     "react-router-dom": "^6.19.0"
   },
   "devDependencies": {

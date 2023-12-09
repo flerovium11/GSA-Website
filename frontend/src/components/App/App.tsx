@@ -1,4 +1,4 @@
-import {FC} from 'react'
+import {FC, createContext} from 'react'
 import {Route, Routes} from 'react-router-dom'
 import {setLoginInfo, syncBackendRequest} from '../../utils/backend'
 
@@ -15,6 +15,7 @@ import Privacy from '../../pages/Privacy'
 import About from '../../pages/About'
 
 const loginInfo = syncBackendRequest('php/logininfo.php', {})
+console.log(loginInfo)
 
 if(loginInfo.status === 'success') {
   const parsed = JSON.parse(loginInfo.text)
@@ -23,22 +24,26 @@ if(loginInfo.status === 'success') {
   setLoginInfo('', '')
 }
 
+export const LoginContext = createContext({status: 'error', text: 'Access denied'})
+
 export const App:FC = () => {
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/blog" element={<BlogOverview />} />
-        <Route path="/blog/:id" element={<Blog />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/project" element={<Project />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/imprint" element={<Imprint />} />
-        <Route path="/privacy" element={<Privacy />} />
-      </Routes>
-      <Header></Header>
-      <Footer></Footer>
+      <LoginContext.Provider value={loginInfo}>
+        <Header></Header>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/blog" element={<BlogOverview />} />
+          <Route path="/blog/:id" element={<Blog />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/project" element={<Project />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/imprint" element={<Imprint />} />
+          <Route path="/privacy" element={<Privacy />} />
+        </Routes>
+        <Footer></Footer>
+      </LoginContext.Provider>
     </>
   )
 }
