@@ -1,8 +1,10 @@
 <?php
-    function create_user_token() {
+    function create_user_token():string {
         do {
-            true;
-        } while (false);
+            $token = randstr(20);
+        } while (fetch('select * from admin where login_token = ?', [$token]) != false);
+
+        return $token;
     }
 
     function rand_item(iterable $array) {

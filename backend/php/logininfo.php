@@ -1,6 +1,6 @@
 <?php 
     require_once 'initialize.php';
-    $response = [];
+    $response = ['status' => 'error', 'text' => 'Access denied'];
 
     if($loggedin) {
         $response['status'] = 'success';
@@ -8,9 +8,6 @@
             'username' => $admin['username'],
             'token' => $admin['login_token']
         ]);
-    } else {
-        $response['status'] = 'error';
-        $response['text'] = 'Access denied';
     }
 
     echo json_encode($response);
