@@ -21,9 +21,12 @@ export const Home:FC = () => {
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
             eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua
           </p>
+          <NavLink to='/'><img src='/graphics/logo_circle.svg' alt='GSA Logo' id="logo_circle"/></NavLink>
           <div>
             <Button type='secondary'>{t('the-project')}</Button>
             <Button type='secondary'>Blog</Button>
+            <div id='box_blue'></div>
+            <div id='galaxy_wrapper'></div>
           </div>
         </div>
         <div className="logo-in-circle"></div>
