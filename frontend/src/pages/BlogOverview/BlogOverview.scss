@@ -1,1 +1,9 @@
+@import '../../variables';
 
+h2{
+    font-family: $headings;
+    color: $text-color;
+    font-weight: lighter;
+    margin-left: 7vw;
+    margin-top: 5vw;
+}

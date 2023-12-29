@@ -1,5 +1,38 @@
 @import '../../variables';
 
 .blogpost {
-    
+    background-color: $text-color;
+    width: 25vw;
+    height: 35vw;
+    margin-bottom: 1em;
+    margin-left: 7vw;
+    border-radius: 20px;
+    margin-top: 3.5vw;
+}
+
+#blogpost_wrapper{
+    display: flex;
+    flex-direction: row;
+}
+
+.image_wrapper_blog{
+    height: 10vw;
+    overflow: hidden;
+}
+
+.blog_picture{
+    border-radius: 20px 20px 0 0;
+    width: 25vw !important;
+}
+
+.blogdata{
+    color: $blog-color;
+}
+
+.blogdata_title{
+    color: $blog-color;
+}
+
+p{
+    color: $blog-textcolor !important;
 }

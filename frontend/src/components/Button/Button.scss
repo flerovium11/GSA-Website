@@ -6,7 +6,18 @@
     }
 
     &.button-secondary {
-        
+        border: 2px solid $text-color;
+        background: none;
+        font-family: $headings;
+        color: $text-color;
+        cursor: pointer;
+        border-radius: 50px;
+        padding: .7em;
+        min-width: 14vw;
+        font-size: 1.2em;
+        margin-right: 1em;
+        margin-top: 1.5em;
+        white-space: nowrap;
     }
 }
 

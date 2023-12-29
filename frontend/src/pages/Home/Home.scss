@@ -1,0 +1,56 @@
+@import '../../variables';
+
+h1{
+    margin: 0;
+    padding-top: 14vw;
+    color: $text-color;
+    font-family: $headings;
+    z-index: 10;
+    font-size: 4vw;
+    font-weight: lighter;
+}
+
+p{
+    color: $text-color;
+    z-index: 10;
+}
+
+.home-top{
+    height: 100vh;
+    top: 0;
+    width: 40vw;
+    margin-left: 7vw;
+}
+
+#box_blue{
+    height: 100vh;
+    opacity: 0.718;
+    width: 100vw;
+    background-color: #111555ff;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    left: 0;
+}
+
+#galaxy_wrapper{
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url('/graphics/galaxy.jpg');
+    background-size: cover;
+    background-position: left;
+    z-index: -2;
+}
+
+#logo_circle{
+    position: absolute;
+    height: 25vw;
+    right: 9vw;
+    top: 60%;
+    transform: translateY(-60%);
+    cursor: auto;
+}
+
