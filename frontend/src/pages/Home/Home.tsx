@@ -33,11 +33,14 @@ export const Home:FC = () => {
       </section>
       <section className="home-content">
         <BlogOverview blogcount={2}/>
-        <Button type='secondary'>Zum Blog</Button>
+        <div id='blog_button'>
+          <Button type='secondary'>Zum Blog</Button>
+        </div>
 
-        <img src="" alt="Clouds behind" className="clouds-behind" />
+        {/* <img src="/graphics/cloud_3.png" alt="Clouds behind" className="clouds-behind" />
         <NavLink to='/project'><h1>{t('the-project')}</h1></NavLink>
-        <img src="" alt="Clouds infront" className="clouds-infront" />
+        <img src="/graphics/cloud_2.png" alt="Clouds infront" className="clouds-infront" />
+        <img src='/graphics/cloud_1.png' alt='Clouds middle' className='clouds-middle' /> */}
       </section>
     </>
   )

@@ -2,7 +2,21 @@
 
 .button {
     &.button-primary {
-
+        border: 2px solid $blog-color;
+        background: none;
+        font-family: $headings;
+        color: $blog-color;
+        cursor: pointer;
+        border-radius: 50px;
+        padding: .7em;
+        min-width: 12vw;
+        font-size: 1em;
+        white-space: nowrap;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 29.5vw;
+        z-index: 12;
     }
 
     &.button-secondary {
