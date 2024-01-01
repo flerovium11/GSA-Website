@@ -11,7 +11,7 @@ h1{
 }
 
 p{
-    color: $text-color;
+    color: $text-color !important;
     z-index: 10;
 }
 
@@ -20,6 +20,10 @@ p{
     top: 0;
     width: 40vw;
     margin-left: 7vw;
+}
+
+.home-content{
+    position: relative;
 }
 
 #box_blue{
@@ -54,3 +58,24 @@ p{
     cursor: auto;
 }
 
+#blog_button{
+    display: inline;
+    position: absolute;
+    right: 8.5vw;
+    top: 38%;
+}
+
+// .clouds-behind, .clouds-middle, .clouds-front{
+//     position: absolute;
+// }
+
+// .clouds-behind{
+//     width: 100vw;
+//     z-index: -2;
+// }
+
+// .clouds-infront{
+//     width: 150vw;
+//     z-index: -1;
+//     right: 150vw;
+// }

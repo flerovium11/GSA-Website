@@ -22,19 +22,18 @@ export const Blogpost:FC<BlogpostProps> = (props) => {
 
     return (
         <>
-            <div id='blogpost_wrapper'>
                 <div className='blogpost'>
                     <div className='image_wrapper_blog'>
                         <img src={blogdata.images[0]} className='blog_picture' alt="Titelbild" style={{width: '100px'}} />
                     </div>
                     <span className='blogdata'>{blogdata.date.toDateString()} von Maris</span>
                     <h1 className='blogdata_title'>{blogdata.title}</h1>
-                    <p>
+                    <p className='blogdata_p'>
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
                         {blogdata.content}
                     </p>
-                    <Button type='primary'>{t('more')}</Button>
+                        <Button type='primary'>{t('more')}</Button>
                 </div>
-            </div>
         </>
     )
 }

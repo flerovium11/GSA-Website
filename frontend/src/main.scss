@@ -12,10 +12,18 @@ html {
 }
 
 body {
-    padding: 0;
     margin: 0;
     font-family: Nunito;
     background-color: $main-color;
+    background: linear-gradient($main-color 40%, $blog-color);
+}
+
+h2{
+    font-family: $headings;
+    color: $text-color;
+    font-weight: lighter;
+    margin-left: 7vw;
+    margin-top: 5vw;
 }
 
 

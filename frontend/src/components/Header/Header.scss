@@ -7,14 +7,28 @@ header{
     width: 100vw;
     margin: 0;
     top: 0;
-    z-index: 10;
-}
+    z-index: 100;
+    
+    nav {
+        display: flex;
+        align-items: center;
+        padding: 1.5em;
+        font-family: $headings;
+    }
 
-nav {
-    display: flex;
-    align-items: center;
-    padding: 1.5em;
-    font-family: $headings;
+    ul{
+        display: flex;
+        list-style: none;
+        gap: 5em;
+        position: absolute;
+        right: 10vw;
+    
+        a{
+            text-decoration: none;
+            color: $text-color;
+            text-transform: uppercase;
+        }
+    }
 }
 
 #logo_simplified{
@@ -22,16 +36,4 @@ nav {
     margin-left: 5vw;
 }
 
-ul{
-    display: flex;
-    list-style: none;
-    gap: 5em;
-    position: absolute;
-    right: 10vw;
 
-    a{
-        text-decoration: none;
-        color: $text-color;
-        text-transform: uppercase;
-    }
-}
