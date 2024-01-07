@@ -33,7 +33,7 @@ export const App:FC = () => {
         <Header></Header>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/blog" element={<BlogOverview />} />
+          <Route path="/blog" element={<BlogOverview isSite={true}/>} />
           <Route path="/blog/:id" element={<Blog />} />
           <Route path="/login" element={<Login />} />
           <Route path="/project" element={<Project />} />

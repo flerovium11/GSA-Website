@@ -25,14 +25,14 @@ export const Home:FC = () => {
           <div>
             <Button type='secondary'>{t('the-project')}</Button>
             <Button type='secondary'>Blog</Button>
-            <div id='box_blue'></div>
-            <div id='galaxy_wrapper'></div>
+            <div className='box_blue'></div>
+            <div className='galaxy_wrapper'></div>
           </div>
         </div>
         <div className="logo-in-circle"></div>
       </section>
       <section className="home-content">
-        <BlogOverview blogcount={2}/>
+        <BlogOverview blogcount={2} />
         <div id='blog_button'>
           <Button type='secondary'>Zum Blog</Button>
         </div>

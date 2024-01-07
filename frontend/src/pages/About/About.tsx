@@ -9,8 +9,10 @@ export const About:FC = () => {
     return (
         <>
             <section className='about'>
+                <div className='galaxy_wrapper'></div>
+                <div className='box_blue'></div>
                 <h1>{t('the-team')}</h1>
-                <p>
+                <p className='introduction'>
                     Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
                     eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam 
                     voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita 
@@ -21,62 +23,62 @@ export const About:FC = () => {
                 <div className="teammembers">
                     <div className="teammember">
                         <div className="card">
-                            <h1>Maxine Mustermann</h1>
+                            <h1>Ennio (17)</h1>
                             <div className="icon"></div>
+                            <div className='fade'></div>
                         </div>
                         <p>
-                            Öffentlichkeitsarbeit, Hardware,
-                            Sekundärmission
+                        Programmieren, Zusammenbau, Signalübertragung
                         </p>
                     </div>
                     <div className="teammember">
                         <div className="card">
-                            <h1>Maxine Mustermann</h1>
+                            <h1>Robert (17)</h1>
                             <div className="icon"></div>
+                            <div className='fade'></div>
                         </div>
                         <p>
-                            Öffentlichkeitsarbeit, Hardware,
-                            Sekundärmission
+                        Programmieren, Zusammenbau, Bodenstation
                         </p>
                     </div>
                     <div className="teammember">
                         <div className="card">
-                            <h1>Maxine Mustermann</h1>
+                            <h1>Tanja (16)</h1>
                             <div className="icon"></div>
+                            <div className='fade'></div>
                         </div>
                         <p>
-                            Öffentlichkeitsarbeit, Hardware,
-                            Sekundärmission
+                        Fallschirm, Drehmechanismus    
                         </p>
                     </div>
                     <div className="teammember">
                         <div className="card">
-                            <h1>Maxine Mustermann</h1>
+                            <h1>Simeon (16)</h1>
                             <div className="icon"></div>
+                            <div className='fade'></div>
                         </div>
                         <p>
-                            Öffentlichkeitsarbeit, Hardware,
-                            Sekundärmission
+                        Programmieren, Zusammenbau, Drehmechanismus
                         </p>
                     </div>
                     <div className="teammember">
                         <div className="card">
-                            <h1>Maxine Mustermann</h1>
+                            <h1>Amelie (16)</h1>
                             <div className="icon"></div>
+                            <div className='fade'></div>
                         </div>
                         <p>
-                            Öffentlichkeitsarbeit, Hardware,
-                            Sekundärmission
+                        Fallschirm, Drehmechanismus, Öffentlichkeitsarbeit
                         </p>
                     </div>
                     <div className="teammember">
                         <div className="card">
-                            <h1>Maxine Mustermann</h1>
+                            <h1>Maris (17)</h1>
                             <div className="icon"></div>
+                            <div className='fade'></div>
                         </div>
                         <p>
-                            Öffentlichkeitsarbeit, Hardware,
-                            Sekundärmission
+                        Fallschirm, 3D Druck, Projektmanagement, Design
                         </p>
                     </div>
                 </div>

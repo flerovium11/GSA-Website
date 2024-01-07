@@ -7,16 +7,17 @@ interface BlogOverviewProps {
     blogcount?:number
     sort?:'date'|'views'
     ascending?:boolean
+    isSite?:boolean
 }
 
 export const BlogOverview:FC<BlogOverviewProps> = (props) => {
-    const {blogcount = 10, sort = 'date', ascending = false} = props
+    const {blogcount = 10, sort = 'date', ascending = false, isSite=false} = props
     const {t} = useTranslation()
     const blogposts = Array(blogcount).fill(0)
 
     return (
         <>
-            <h2>{t('news')}</h2>
+            <h2 className={isSite ? 'padding-top' : ''}>{t('news')}</h2>
             <div className='blogs'>
                 {blogposts.map((item, index) => {
                     return <Blogpost key={index} blogdata={{
