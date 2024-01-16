@@ -23,7 +23,7 @@ export const Header = () => {
           <li><NavLink to='/project'>{t('the-project')}</NavLink></li>
           <li><NavLink to='/blog'>Blog</NavLink></li>
           <li><NavLink to='/about'>{t('we')}</NavLink></li>
-          {loginInfo.status === 'success' && <li><NavLink to='/admin'>Admin</NavLink></li>}
+          {loginInfo !== null && <li><NavLink to='/admin'>Admin</NavLink></li>}
         </ul>
       </nav>
     </header>

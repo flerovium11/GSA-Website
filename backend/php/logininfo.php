@@ -8,6 +8,9 @@
             'username' => $admin['username'],
             'token' => $admin['login_token']
         ]);
+    } elseif(isset($login_warning)) {
+        $response['status'] = 'warning';
+        $response['text'] = $login_warning;
     }
 
     echo json_encode($response);

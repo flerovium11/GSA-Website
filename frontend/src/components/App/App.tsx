@@ -1,6 +1,8 @@
-import {FC, createContext} from 'react'
+import {FC, createContext, Context} from 'react'
 import {Route, Routes} from 'react-router-dom'
-import {setLoginInfo, syncBackendRequest} from '../../utils/backend'
+import type {loginInfoType} from '../../utils/backend'
+import {getLoginInfo, setLoginInfo, syncBackendRequest} from '../../utils/backend'
+import {WarningOutlined} from '@ant-design/icons'
 
 import Header from '../Header'
 import Footer from '../Footer'
@@ -13,24 +15,33 @@ import Admin from '../../pages/Admin'
 import Imprint from '../../pages/Imprint'
 import Privacy from '../../pages/Privacy'
 import About from '../../pages/About'
+import Infomessage from '../Infomessage'
 
-const loginInfo = syncBackendRequest('php/logininfo.php', {})
-console.log(loginInfo)
+const loginInfoResponse = syncBackendRequest('php/logininfo.php', {})
+console.log(loginInfoResponse)
 
-if(loginInfo.status === 'success') {
-  const parsed = JSON.parse(loginInfo.text)
+
+if(loginInfoResponse.status === 'success') {
+  const parsed = JSON.parse(loginInfoResponse.text)
   setLoginInfo(parsed.username, parsed.token)
 } else {
   setLoginInfo('', '')
 }
 
-export const LoginContext = createContext({status: 'error', text: 'Access denied'})
+const loginInfo = getLoginInfo()
+
+export const LoginContext:Context<loginInfoType|null> = createContext(null as loginInfoType|null)
 
 export const App:FC = () => {
   return (
     <>
       <LoginContext.Provider value={loginInfo}>
         <Header></Header>
+
+        {loginInfoResponse.status === 'warning' && 
+          <Infomessage type='warning' ><WarningOutlined /> {loginInfoResponse.text}</Infomessage>
+        }
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/blog" element={<BlogOverview />} />

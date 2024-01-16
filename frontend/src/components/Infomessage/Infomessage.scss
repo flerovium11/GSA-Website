@@ -1,0 +1,48 @@
+@import '../../variables';
+
+.infomessage {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: calc(100% - 2em);
+    top: -5em;
+    color: $font-color-primary;
+    background-color: $error-background;
+    padding: 1em;
+    border-radius: 1em;
+
+    .close {
+        margin: -1em -1em -1em 0em;
+        padding: 1em;
+        cursor: pointer;
+        font-size: 16px;
+
+        &:hover {
+            opacity: 0.5;
+        }
+    }
+
+    &.show {
+        top: 1em;
+        animation: infomessage_in 0.3s linear;
+        animation-fill-mode: forwards;
+    }
+
+    &.hide {
+        animation: infomessage_out 0.2s ease-out;
+        animation-fill-mode: forwards;
+    }
+}
+
+@keyframes infomessage_in {
+    0%{top: -5em}
+    75%{top: 1em}
+    90%{top: 0.5em}
+    100%{top: 1em}
+}
+
+@keyframes infomessage_out {
+    0%{top: 1}
+    100%{top: -5em}
+}
