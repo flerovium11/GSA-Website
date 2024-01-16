@@ -45,6 +45,15 @@
         background-size: cover;
         margin-left: 7vw;
         margin-top: 7vw;
+        
+        .instagram{
+            position: absolute;
+            right: -1vw;
+            z-index: 3;
+            bottom: 3.9vw;
+            height: 2.3em;
+            cursor: pointer;
+        }
 
         .fade{
             width: 20vw;
