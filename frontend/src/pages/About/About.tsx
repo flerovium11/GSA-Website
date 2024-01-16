@@ -24,7 +24,7 @@ export const About:FC = () => {
                     <div className="teammember">
                         <div className="card">
                             <h1>Ennio (17)</h1>
-                            <div className="icon"></div>
+                            <a href='https://www.instagram.com/bin.der.ennio'><img className='instagram' src='/graphics/instagram.svg'></img></a>
                             <div className='fade'></div>
                         </div>
                         <p>
@@ -34,7 +34,7 @@ export const About:FC = () => {
                     <div className="teammember">
                         <div className="card">
                             <h1>Robert (17)</h1>
-                            <div className="icon"></div>
+                            <a href='https://www.instagram.com/robrob4000'><img className='instagram' src='/graphics/instagram.svg'></img></a>
                             <div className='fade'></div>
                         </div>
                         <p>
@@ -44,7 +44,7 @@ export const About:FC = () => {
                     <div className="teammember">
                         <div className="card">
                             <h1>Tanja (16)</h1>
-                            <div className="icon"></div>
+                            <a href='https://www.instagram.com/_tanja.hessenberger_'><img className='instagram' src='/graphics/instagram.svg'></img></a>
                             <div className='fade'></div>
                         </div>
                         <p>
@@ -54,7 +54,7 @@ export const About:FC = () => {
                     <div className="teammember">
                         <div className="card">
                             <h1>Simeon (16)</h1>
-                            <div className="icon"></div>
+                            <a href='https://www.instagram.com/simeon__n'><img className='instagram' src='/graphics/instagram.svg'></img></a>
                             <div className='fade'></div>
                         </div>
                         <p>
@@ -64,7 +64,7 @@ export const About:FC = () => {
                     <div className="teammember">
                         <div className="card">
                             <h1>Amelie (16)</h1>
-                            <div className="icon"></div>
+                            <a href='https://www.instagram.com/schulz010'><img className='instagram' src='/graphics/instagram.svg'></img></a>
                             <div className='fade'></div>
                         </div>
                         <p>
@@ -74,7 +74,7 @@ export const About:FC = () => {
                     <div className="teammember">
                         <div className="card">
                             <h1>Maris (17)</h1>
-                            <div className="icon"></div>
+                            <a href='https://www.instagram.com/mariszellinger'><img className='instagram' src='/graphics/instagram.svg'></img></a>
                             <div className='fade'></div>
                         </div>
                         <p>
@@ -83,8 +83,8 @@ export const About:FC = () => {
                     </div>
                 </div>
                 <div>
-                    <Button type='secondary'>{t('to-blog')}</Button>
-                    <Button type='secondary'>{t('the-project')}</Button>
+                    {/* <Button type='secondary'>{t('to-blog')}</Button>
+                    <Button type='secondary'>{t('the-project')}</Button> */}
                 </div>
             </section>
         </>

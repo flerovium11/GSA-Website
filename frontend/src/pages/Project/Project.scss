@@ -1,5 +1,119 @@
 @import '../../variables';
 
 .project-top {
-    
+    .squares{
+        height: 28em;
+        position: absolute;
+        right: 10vw;
+        top: 13vw;
+        z-index: -1;
+    }
+
+    h1{
+        margin-left: 7vw;
+        margin-bottom: -1vw;
+    }
+
+    p{
+        margin-left: 7vw;
+        margin-right: 45vw;
+    }
+
+    h2{
+        margin-top: 1vw;
+        font-family: $text;
+        color: $blog-color;
+        font-size: 2.5em;
+        margin-bottom: 0;
+    }
+
+    a{
+        margin-left: 7vw;
+        text-decoration: none;
+        color: $blog-color;
+        font-size: 1.5em;
+    }
+
+    height: 100vh;
+}
+
+.primary-mission{
+    background-color: $main-color;
+    height: max-content;
+    padding-bottom: 8vw;
+
+    h1{
+        text-align: center;
+        padding-top: 8vw;
+    }
+
+    h2{
+        font-family: $text;
+        color: #627eaeff;
+        font-weight: bold;
+        filter: brightness(1.2);
+    }
+
+    .missions{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 6vw;
+        background-color: $main-color;
+        gap: 3vw;
+        flex-wrap: wrap;
+    }
+
+    .mission{
+        width: 20em;
+        height: 8em;
+        position: relative;
+        margin: 1em;
+        // background-color: $blog-textcolor;
+
+        img{
+            height: 6em;
+            position: absolute;
+            top: .5em;
+        }
+
+        h2{
+            margin: 0;
+            margin-left: 5em;
+            padding: 0;
+        }
+
+        p{
+            margin-left: 7.5em;
+            position: absolute;
+        }
+    }
+}
+
+.secondary-mission{
+    height: 100vh;
+
+   .box_blue_1{
+    height: 100vh;
+    opacity: 0.718;
+    width: 100vw;
+    background-color: #111555ff;
+    position: absolute;
+    z-index: -1;
+    left: 0;
+   }
+
+   .stars_wrapper{
+    background-image: url('/graphics/stars.jpg');
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    position: absolute;
+   }
+
+   h1{
+    text-align: center;
+    padding-top: 8vw;
+   }
 }
