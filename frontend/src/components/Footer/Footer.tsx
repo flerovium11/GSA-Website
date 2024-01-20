@@ -28,7 +28,7 @@ export const Footer:FC = () => {
                 <p>
                     {/* "GSA" ist der Link zum Admin Login, wenn dir eine bessere Position für 
                     den Link einfällt, dann ja bitte, ich hab den einfach irgendwohin gepackt */}
-                    &copy; 2023 <NavLink to={loginInfo.status === 'success' ? '/admin' : '/login'}>GSA</NavLink>
+                    &copy; 2023 <NavLink to={loginInfo === null ? '/login' : '/admin'}>GSA</NavLink>
                 </p>
             </footer>
         </>

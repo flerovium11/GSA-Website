@@ -8,6 +8,7 @@
     
     session_start();
     $loggedin = false;
+    $headers = apache_request_headers();
 
     if(
         isset($_SESSION['username']) 
@@ -15,22 +16,22 @@
     ) {
         $loggedin = true;
     } else if(
-        !empty($_SERVER['HTTP_AUTHORIZATION'])
-        && !empty($_SERVER['HTTP_GSA_USERNAME'])
+        !empty($headers['Authorization'])
+        && !empty($headers['GSA-Username'])
     ) {
-        $user = fetch('select * from admin where username = ?', [$_SERVER['HTTP_GSA_USERNAME']]);
+        $user = fetch('select * from admin where username = ?', [$headers['GSA-Username']]);
 
         if($user != false) {
-            if(password_verify($_SERVER['HTTP_AUTHORIZATION'].$user['salt'], $user['login_token'])) {
+            if(password_verify($headers['Authorization'].$user['salt'], $user['login_token'])) {
                 $new_token = generate_login_token();
                 execute('update admin set login_token = ? where admin_id = ?', [password_hash($new_token.$user['salt'], PASSWORD_DEFAULT)]);
                 $loggedin = true;
-                $_SESSION['username'] = $_SERVER['HTTP_GSA_USERNAME'];
+                $_SESSION['username'] = $headers['GSA-Username'];
             } else {
-                // warning you token was used
+                $login_warning = "Login with token failed! If you didn't login from another device, please change your password!";
             }
         } else {
-            // this user doesn't exist
+            $login_warning = "Login with cookie failed, this user doesn't exist!";
         }
     }
 

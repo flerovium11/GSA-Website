@@ -7,17 +7,17 @@ export interface sendData {
     [key:string]:string|undefined
 }
 
-export interface responseData {
+export interface responseDataType {
     status:string
     text:string
 }
 
-export interface loginInfo {
+export interface loginInfoType {
     username:string
     token:string
 }
 
-export const getLoginInfo = ():loginInfo|null => {
+export const getLoginInfo = ():loginInfoType|null => {
     const username = getCookie('user-login-name')
     const token = getCookie('user-login-token')
     return token === '' && username === '' ? null : {token: token, username: username}
@@ -28,9 +28,9 @@ export const setLoginInfo = (username:string, token:string):void => {
     setCookie('user-login-token', token, 365)
 }
 
-export const backendRequest = async (url:string, data:sendData):Promise<responseData> => {
+export const backendRequest = async (url:string, data:sendData):Promise<responseDataType> => {
     const headers:Record<string, string> = {}
-    const login:loginInfo|null = getLoginInfo()
+    const login:loginInfoType|null = getLoginInfo()
 
     if(login) {
         headers['GSA-Username'] = login.username
@@ -63,10 +63,10 @@ export const backendRequest = async (url:string, data:sendData):Promise<response
     }))
 }
 
-export const syncBackendRequest = (url:string, data:sendData):responseData => {
-    let returnVal:responseData = {status: 'error', text: 'No answer from server'}
+export const syncBackendRequest = (url:string, data:sendData):responseDataType => {
+    let returnVal:responseDataType = {status: 'error', text: 'No answer from server'}
     const headers:Record<string, string> = {}
-    const login:loginInfo|null = getLoginInfo()
+    const login:loginInfoType|null = getLoginInfo()
 
     if(login) {
         headers['GSA-Username'] = login.username
@@ -81,6 +81,7 @@ export const syncBackendRequest = (url:string, data:sendData):responseData => {
         async: false,
     
         success(result) {
+            console.log(result)
             returnVal = JSON.parse(result)
         },
 

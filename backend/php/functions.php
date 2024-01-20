@@ -35,21 +35,21 @@
                 array_map(__function__, glob($path.'/*')) == @rmdir($path);
     }
 
-    function fetch_cols(string $sql, iterable $parameters):iterable {
+    function fetch_cols(string $sql, iterable $parameters):iterable|false {
         global $conn;
         $stmt = $conn->prepare($sql);
         $stmt->execute($parameters);
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
-    function fetch_all(string $sql, iterable $parameters):iterable {
+    function fetch_all(string $sql, iterable $parameters):iterable|false {
         global $conn;
         $stmt = $conn->prepare($sql);
         $stmt->execute($parameters);
         return $stmt->fetchAll();
     }
 
-    function fetch(string $sql, iterable $parameters):object {
+    function fetch(string $sql, iterable $parameters):object|false {
         global $conn;
         $stmt = $conn->prepare($sql);
         $stmt->execute($parameters);
