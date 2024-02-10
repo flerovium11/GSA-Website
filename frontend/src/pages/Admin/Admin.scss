@@ -1,1 +1,28 @@
+@import '../../variables';
 
+button > *, .ant-tabs-tab > *, .light-font{
+    color: $text-color;
+}
+
+.ant-popover-content .ant-btn-default > *{
+    color: $blog-textcolor;
+}
+
+.ant-switch-inner {
+    border: 1px solid $text-color;
+}
+
+#admin-panel .ant-form-item-control-input-content {
+    h1, h2 {
+        padding-top: 0;
+        color: $blog-textcolor;
+    }
+
+    p {
+        color: $blog-textcolor!important;
+    }
+
+    img {
+        border-radius: 0.5em;
+    }
+}

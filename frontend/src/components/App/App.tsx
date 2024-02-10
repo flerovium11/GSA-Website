@@ -20,10 +20,9 @@ import Infomessage from '../Infomessage'
 const loginInfoResponse = syncBackendRequest('php/logininfo.php', {})
 console.log(loginInfoResponse)
 
-
 if(loginInfoResponse.status === 'success') {
   const parsed = JSON.parse(loginInfoResponse.text)
-  setLoginInfo(parsed.username, parsed.token)
+  if(parsed.token) setLoginInfo(parsed.username, parsed.token)
 } else {
   setLoginInfo('', '')
 }

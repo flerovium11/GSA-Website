@@ -80,9 +80,13 @@ export const syncBackendRequest = (url:string, data:sendData):responseDataType =
         headers: headers,
         async: false,
     
-        success(result) {
-            console.log(result)
-            returnVal = JSON.parse(result)
+        success(result) {            
+            try {
+                const parsedResult = JSON.parse(result)
+                returnVal = parsedResult
+            } catch(error) {
+                returnVal = {status: 'error', text: result}
+            }
         },
 
         error(xhr) {

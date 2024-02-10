@@ -1,57 +1,84 @@
-import React, { FC } from 'react';
-import { useTranslation } from 'react-i18next';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
-import './Login.scss';
+import {FC, useState, useContext, useEffect} from 'react'
+import { Button, Checkbox, Form, Input } from 'antd'
+import {loginInfoType, responseDataType, setLoginInfo, syncBackendRequest} from '../../utils/backend'
+import {useTranslation} from 'react-i18next'
+import './Login.scss'
+import Infomessage from '../../components/Infomessage'
+import { LockOutlined, UserOutlined, WarningOutlined } from '@ant-design/icons'
+import {LoginContext} from '../../components/App/App'
+import {useNavigate} from "react-router-dom"
+
+type FieldType = {
+  username?: string
+  password?: string
+  remember?: string
+}
 
 export const Login: FC = () => {
-  const { t } = useTranslation();
+  const navigate = useNavigate()
+  const {t} = useTranslation()
+  const [loginResponse, setLoginResponse] = useState<responseDataType|null>(null)
+  const loginInfo = useContext(LoginContext)
+
+  useEffect(() => {
+    if(loginInfo !== null) navigate('/admin')
+  }, [])
+
+  const onFinish = (values: any) => {
+    const response = syncBackendRequest('php/login.php', values)
+
+    if(response.status === 'success') {
+      const parsed:loginInfoType = JSON.parse(response.text)
+      if(parsed.token) setLoginInfo(parsed.username, parsed.token)
+      location.reload()
+    }
+
+    setLoginResponse(response)
+  }
 
   return (
     <>
-      <div className="container py-5 mt-5">
-        <h3>Admin Login</h3>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
+      {loginResponse && loginResponse.status === 'warning' && 
+        <Infomessage key={Math.random()} type='warning'><WarningOutlined /> {loginResponse.text}</Infomessage>
+      }
+
+      <Form
+        style={{ maxWidth: 500, margin: 'auto'}}
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
+        layout='vertical'
+        className='pb-10'
+      >
+        <h1 className='text-2xl mb-3'>Admin Login</h1>
+        <Form.Item<FieldType>
+          label="Username"
+          name="username"
+          rules={[{ required: true, message: 'Please input your username!' }]}
         >
-          <div className="form-group">
-            <label htmlFor="exampleInputEmail1">Email address</label>
-            <input
-              type="email"
-              className="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              placeholder="Enter email"
-            />
-            <small id="emailHelp" className="form-text text-muted">
-              We'll never share your email with anyone else.
-            </small>
-          </div>
-          <div className="form-group">
-            <label htmlFor="exampleInputPassword1">Password</label>
-            <input
-              type="password"
-              className="form-control"
-              id="exampleInputPassword1"
-              placeholder="Password"
-            />
-          </div>
-          <div className="form-check">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              id="exampleCheck1"
-            />
-            <label className="form-check-label" htmlFor="exampleCheck1">
-              Remember me
-            </label>
-          </div>
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
-        </form>
-      </div>
+          <Input placeholder='username' prefix={<UserOutlined />}/>
+        </Form.Item>
+
+        <Form.Item<FieldType>
+          label="Password"
+          name="password"
+          rules={[{ required: true, message: 'Please input your password!' }]}
+        >
+          <Input.Password placeholder='password123' prefix={<LockOutlined />}/>
+        </Form.Item>
+
+        <Form.Item<FieldType>
+          name="remember"
+          valuePropName="checked"
+        >
+          <Checkbox>Remember me</Checkbox>
+        </Form.Item>
+
+        <Form.Item>
+          <Button htmlType="submit">
+            Login
+          </Button>
+        </Form.Item>
+      </Form>
     </>
-  );
-};
+  )
+}

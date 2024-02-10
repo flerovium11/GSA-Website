@@ -2,15 +2,17 @@
 
 .infomessage {
     position: fixed;
+    z-index: 100;
     left: 50%;
     transform: translateX(-50%);
     width: max-content;
     max-width: calc(100% - 2em);
-    top: -5em;
     color: $text-color;
     background-color: $error-background;
     padding: 1em;
     border-radius: 1em;
+    bottom: -5em;
+    box-shadow: 0 0 5em -1em black!important;
 
     .close {
         margin: -1em -1em -1em 0em;
@@ -24,7 +26,6 @@
     }
 
     &.show {
-        top: 1em;
         animation: infomessage_in 0.3s linear;
         animation-fill-mode: forwards;
     }
@@ -36,13 +37,13 @@
 }
 
 @keyframes infomessage_in {
-    0%{top: -5em}
-    75%{top: 1em}
-    90%{top: 0.5em}
-    100%{top: 1em}
+    0%{bottom: -5em}
+    75%{bottom: 2em}
+    90%{bottom: 0.5em}
+    100%{bottom: 2em}
 }
 
 @keyframes infomessage_out {
-    0%{top: 1}
-    100%{top: -5em}
+    0%{bottom: 2em}
+    100%{bottom: -5em}
 }

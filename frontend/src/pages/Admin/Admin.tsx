@@ -1,11 +1,237 @@
-import {FC} from 'react'
+import {FC, useContext, useEffect, useState} from 'react'
 import './Admin.scss'
+import { LoginContext } from '../../components/App/App'
+import { Button, Form, Input, Popconfirm, Space, Switch, Tabs, Tooltip } from 'antd'
+import { CheckOutlined, CloseOutlined, FileAddOutlined, FormOutlined, InfoCircleOutlined, LockOutlined, QuestionCircleOutlined, UserAddOutlined, UserOutlined } from '@ant-design/icons'
+import { useNavigate } from 'react-router-dom'
+import { setLoginInfo } from '../../utils/backend'
+import TextArea from 'antd/es/input/TextArea'
+import MDEditor from '@uiw/react-md-editor'
 
 export const Admin:FC = () => {
+    const loginInfo = useContext(LoginContext)
+    const navigate = useNavigate()
+    const [blogpostValue, setBlogpostValue] = useState<string>(`<h1>Blogtitel</h1>
+<p>Jegliches HTML-Markup wird unterstützt</p>
+<blockquote>Probier die verschiedenen Ansichten und Werkzeuge in der Toolbar aus!</blockquote>
+<h3>Bilder können über Links eingefügt werden</h3>
+<img src="https://images.saymedia-content.com/.image/t_share/MTk2NzY3MjA5ODc0MjY5ODI2/top-10-cutest-cat-photos-of-all-time.jpg"/>
+    `)
+    const [ownDescriptionToggle, setOwnDescriptionToggle] = useState<boolean>(true)
+    const [ownTitleImageToggle, setOwnTitleImageToggle] = useState<boolean>(false)
+    const [ownImageUrl, setOwnImageUrl] = useState<string>('')
+
+    useEffect(() => {
+        if(loginInfo === null) navigate('/login')
+      }, [])
+
+    const [usernameValue, setUsernameValue] = useState<string>(loginInfo?.username ?? '')
+
+    const confirmDeleteAccount = () => {
+        console.log('confirm delete')
+    }
+
+    const cancelDeleteAccount = () => {
+        console.log('cancel delete')
+    }
+
+    const onSendPassword = (values:any) => {
+        console.log('password', values)
+    }
+
+    const onPostBlog = (values:any) => {
+        console.log('blog', values)
+    }
 
     return (
         <>
-            <h3>Admin</h3>
+            <main className='max-w-screen-md min-h-80 mx-auto' id='admin-panel'>
+                <h1 className='text-2xl pt-7' style={{marginTop: '100px'}}>Admin Panel</h1>
+                <Tabs
+                    defaultActiveKey={localStorage.getItem('admin-panel-active-tab') ?? '1'}
+                    className='pb-20'
+                    onChange={(activeKey:string) => {
+                        localStorage.setItem('admin-panel-active-tab', activeKey)
+                    }}
+                    items={[
+                        {
+                            key: '1',
+                            label: `My account`,
+                            children: <>
+                                <Form
+                                    initialValues={{ remember: true }}
+                                    layout='vertical'
+                                >
+                                    <h2 className='mb-2'>Username</h2>
+                                    <Form.Item>
+                                        <Space direction='horizontal'>
+                                            <Input
+                                                count={{
+                                                    show: true,
+                                                    max: 6,
+                                                    strategy: (txt) => txt.trim().length,
+                                                    exceedFormatter: (txt, {max}) => txt.trim().slice(0, max),
+                                                }}
+                                                value={usernameValue}
+                                                onChange={(e) => setUsernameValue(e.target?.value.trim().replaceAll(/[^a-zA-Z0-9_]/g, ''))}
+                                                defaultValue={loginInfo?.username}
+                                                prefix={<UserOutlined />}
+                                                placeholder='username'
+                                                status={usernameValue === '' ? 'error' : ''}
+                                            />
+                                            {loginInfo?.username !== usernameValue && <>
+                                                {usernameValue !== ''&& <Button>Save</Button>}
+                                                <Button 
+                                                    onClick={() => {
+                                                        setUsernameValue(loginInfo?.username ?? '')
+                                                    }}
+                                                    danger
+                                                >Cancel</Button>
+                                            </>}
+                                        </Space>
+                                        {usernameValue === '' && <div style={{color: '#ff4d4f'}}>Username already taken</div>}
+                                    </Form.Item>
+                                </Form>
+
+                                <h2 className='mt-10'>Password</h2>
+                                <Form
+                                    initialValues={{ remember: true }}
+                                    onFinish={onSendPassword}
+                                    layout='vertical'
+                                >
+                                    <Space direction='vertical'>
+                                        <Form.Item
+                                            label="Old Password"
+                                            name="old-password"
+                                            rules={[{ required: true, message: 'Please input your old password!' }]}
+                                        >
+                                            <Input.Password placeholder='password123' prefix={<LockOutlined />}/>
+                                        </Form.Item>
+
+                                        <Space direction='horizontal'>
+                                            <Form.Item
+                                                label="New Password"
+                                                name="new-password"
+                                                rules={[{ required: true, message: 'Please input your new password!' }]}
+                                            >
+                                                <Input.Password placeholder='password123' prefix={<LockOutlined />}/>
+                                            </Form.Item>
+                                            <Form.Item
+                                                label="Repeat new Password"
+                                                name="repeat-password"
+                                                rules={[{ required: true, message: 'Please repeat your new password!' }]}
+                                            >
+                                                <Input.Password placeholder='password123' prefix={<LockOutlined />}/>
+                                            </Form.Item>
+                                        </Space>
+                                        <Form.Item>
+                                            <Button htmlType="submit" className='-mt-2'>
+                                                Change
+                                            </Button>
+                                        </Form.Item>
+                                    </Space>
+                                </Form>
+                                
+                                <h2 className='mt-3'>Danger Zone</h2>
+                                <div className='flex flex-wrap gap-5 mt-2'>
+                                    <Button onClick={() => {setLoginInfo('', '')}}danger>Logout</Button>
+                                    <Popconfirm
+                                        title="Delete your account"
+                                        description={<span>Are you sure you want to delete your account? <br /> This action is <b>irreversible</b></span>}
+                                        onConfirm={confirmDeleteAccount}
+                                        onCancel={cancelDeleteAccount}
+                                        icon={<QuestionCircleOutlined />}
+                                        okButtonProps={{danger: true}}
+                                        okText="Yes"
+                                        cancelText="Cancel"
+                                    >
+                                        <Button type='primary' danger>Delete Account</Button>
+                                    </Popconfirm>
+                                </div>
+                            </>,
+                            icon: <FormOutlined />
+                        },
+                        {
+                            key: '2',
+                            label: `Create Blogpost`,
+                            children: <>
+                                <Form
+                                    initialValues={{remember: true}}
+                                    onFinish={onPostBlog}
+                                >
+                                    <Form.Item>
+                                        <MDEditor
+                                            value={blogpostValue}
+                                            onChange={setBlogpostValue}
+                                            height='30em'
+                                        />
+                                    </Form.Item>
+                                    <Form.Item name='use-own-description'>
+                                        <Space direction='horizontal'>
+                                            <span className='light-font'>Eigene Kurzbeschreibung definieren</span>
+                                            <Switch
+                                                checkedChildren={<CheckOutlined />}
+                                                unCheckedChildren={<CloseOutlined />}
+                                                value={ownDescriptionToggle}
+                                                onChange={setOwnDescriptionToggle}
+                                                defaultChecked
+                                            />
+                                        </Space>
+                                    </Form.Item>
+                                    {ownDescriptionToggle &&
+                                        <Form.Item name='own-description'>
+                                            <TextArea
+                                                showCount
+                                                maxLength={150}
+                                                placeholder="Gib hier die Kurzbeschreibung ein, die in der Blog-Preview sichtbar sein wird."
+                                                autoSize={{ minRows: 2, maxRows: 6 }}
+                                            />
+                                        </Form.Item>
+                                    }
+                                    <Form.Item name='use-own-image'>
+                                        <Space direction='horizontal'>
+                                            <span className='light-font'>Eigenes Titelbild wählen (URL)</span>
+                                            <Switch
+                                                checkedChildren={<CheckOutlined />}
+                                                unCheckedChildren={<CloseOutlined />}
+                                                value={ownTitleImageToggle}
+                                                onChange={setOwnTitleImageToggle}
+                                                defaultChecked
+                                            />
+                                        </Space>
+                                    </Form.Item>
+                                    {ownTitleImageToggle && <>
+                                        <Form.Item name='own-image-url'>
+                                            <Input 
+                                                value={ownImageUrl}
+                                                onChange={(e) => setOwnImageUrl(e.target?.value)}
+                                                placeholder='https://www.meinbild.at'
+                                                suffix={
+                                                    <Tooltip title="Nutze für eigene Bilder einen Image-Hosting Service wie https://imgbb.com/ oder nimm einfach Bilder unter öffentlicher Lizenz">
+                                                        <InfoCircleOutlined style={{ color: 'rgba(0,0,0,.45)' }} />
+                                                    </Tooltip>
+                                                }
+                                            />
+                                        </Form.Item>
+                                        <img src={ownImageUrl} className='w-1/2 rounded-xl' alt="Bild nicht gefunden"/>
+                                    </>}
+                                    <Form.Item>
+                                        <Button className='mt-10' htmlType='submit'>Blog posten</Button>
+                                    </Form.Item>
+                                </Form>
+                            </>,
+                            icon: <FileAddOutlined />,
+                        },
+                        {
+                            key: '3',
+                            label: `Add admin`,
+                            children: <>
+                            </>,
+                            icon: <UserAddOutlined />,
+                        },
+                    ]}
+                />
+            </main>
         </>
     )
 }
