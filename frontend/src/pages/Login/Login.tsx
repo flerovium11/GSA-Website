@@ -1,7 +1,7 @@
-import {FC} from 'react'
-import { useTranslation } from 'react-i18next'
-import './Login.scss'
-import 'bootstrap/scss/bootstrap.scss'
+import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
+// import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import './Login.scss';
 
 export const Login:FC = () => {
     const {t} = useTranslation()

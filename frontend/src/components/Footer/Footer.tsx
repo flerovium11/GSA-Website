@@ -13,7 +13,7 @@ export const Footer:FC = () => {
         <>
             <footer>
                 <nav>
-                <NavLink to='/'><img src='/graphics/logo_simplified.svg' alt='GSA Logo' /></NavLink>
+                <NavLink to='/'><img src='/graphics/logo_simplified.png' alt='GSA Logo' /></NavLink>
                     <ul>
                         <li><NavLink to='/privacy'>{t('privacy')}</NavLink></li>
                         <li><NavLink to='/imprint'>{t('imprint')}</NavLink></li>

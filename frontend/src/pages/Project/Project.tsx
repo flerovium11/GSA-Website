@@ -57,21 +57,21 @@ export const Project:FC = () => {
                 <h1>Secondary Mission</h1>
                 <div className="cards">
                     <div className="card">
-                        <div className="planet-icon"></div>
+                        <img src="/graphics/solar_panel.svg" alt="Planet" />
                         <p>
                             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
                             eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam 
                             voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clia
                         </p>
                     </div>
-                    <div className="card">
+                    {/* <div className="card">
                         <div className="planet-icon"></div>
                         <p>
                             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
                             eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam 
                             voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clia
                         </p>
-                    </div>
+                    </div> */}
                 </div>
             </section>
         </>

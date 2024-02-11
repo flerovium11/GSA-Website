@@ -18,7 +18,7 @@ export const Header = () => {
           <div className="burger-line"></div>
         </label>
         <input type="checkbox" id="cb-burger-menu" hidden/>
-        <NavLink to='/'><img src='/graphics/logo_simplified.svg' alt='GSA Logo' id="logo_simplified"/></NavLink>
+        <NavLink to='/'><img src='/graphics/logo_simplified.png' alt='GSA Logo' id="logo_simplified"/></NavLink>
         <ul>
           <li><NavLink to='/project'>{t('the-project')}</NavLink></li>
           <li><NavLink to='/blog'>Blog</NavLink></li>

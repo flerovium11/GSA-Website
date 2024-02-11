@@ -114,6 +114,39 @@
 
    h1{
     text-align: center;
-    padding-top: 8vw;
+    padding-top: 5vw;
    }
+
+   .card{
+        position: relative;
+        height: 25em;
+        width: 20em;
+        margin: auto;
+        margin-top: 3vw;
+        background: linear-gradient(hsla(232, 28%, 40%, 0.7) 25%, rgba(214, 216, 229, 0.7) 25%);
+        border-radius: 10px;
+
+        p{
+            padding-top: 55%;
+            margin-left: 2em;
+            margin-right: 2em;
+            text-align: justify;
+            hyphens: auto;
+            color: $main-color !important;
+        }
+        
+        img{
+            height: 5.5em;
+            width: 5.5em;
+            padding: .5em;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 3em;
+            background-color: $text-color;
+            border-radius: 1000px;
+        }
+    
+   }
+
 }
