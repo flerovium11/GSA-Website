@@ -2,8 +2,8 @@
 
 .blogpost {
     background-color: $text-color;
-    width: 25vw;
-    height: 35vw;
+    width: 24em;
+    height: 35em;
     margin-bottom: 10em;
     margin-left: 7vw;
     border-radius: 20px;
@@ -27,39 +27,42 @@
 #blogpost_wrapper{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .image_wrapper_blog{
-    height: 13vw;
+    height: 13em;
     overflow: hidden;
 }
 
 .blog_picture{
     border-radius: 20px 20px 0 0;
-    width: 25vw !important;
+    width: 24em !important;
 }
 
 .blogdata{
     color: $blog-color;
     position: absolute;
-    left: 3vw;
-    top: 14vw;
-    font-size: .9vw;
+    left: 3em;
+    top: 16em;
+    font-size: .9em;
 }
 
 .blogdata_title{
     color: $blog-color;
-    font-size: 2vw;
+    font-size: 2em;
     position: absolute;
-    left: 3vw;
-    top: 1.5vw;
+    left: 1.3em;
+    top: 8.1em;
+    padding: 0;
+    margin: 0;
 }
 
 .blogdata_p{
     color: $blog-textcolor !important;
     position: absolute;
-    left: 3vw;
-    right: 3vw;
-    top: 17.5vw;
+    left: 2.7em;
+    right: 2.7em;
+    top: 18.5em;
 }
 

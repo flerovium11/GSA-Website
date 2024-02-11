@@ -6,7 +6,7 @@ h1{
     color: $text-color;
     font-family: $headings;
     z-index: 10;
-    font-size: 4vw;
+    font-size: 4em;
     font-weight: lighter;
 }
 
@@ -24,6 +24,8 @@ p{
 
 .home-content{
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .box_blue{
@@ -86,3 +88,20 @@ h2{
 //     z-index: -1;
 //     right: 150vw;
 // }
+@media (max-width: 1000px){
+    #logo_circle{
+        display: none;
+    }
+
+    .home-top{
+        margin: auto;
+        width: 80vw;
+        margin-top: 8%;
+    }
+}
+
+@media (max-width: 900px){
+    h1{
+        font-size: 8vw;
+    }
+}
