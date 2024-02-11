@@ -1,19 +1,84 @@
-import React, { FC } from 'react';
-import { useTranslation } from 'react-i18next';
-// import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
-import './Login.scss';
+import {FC, useState, useContext, useEffect} from 'react'
+import { Button, Checkbox, Form, Input } from 'antd'
+import {loginInfoType, responseDataType, setLoginInfo, syncBackendRequest} from '../../utils/backend'
+import {useTranslation} from 'react-i18next'
+import './Login.scss'
+import Infomessage from '../../components/Infomessage'
+import { LockOutlined, UserOutlined, WarningOutlined } from '@ant-design/icons'
+import {LoginContext} from '../../components/App/App'
+import {useNavigate} from "react-router-dom"
 
-export const Login:FC = () => {
-    const {t} = useTranslation()
+type FieldType = {
+  username?: string
+  password?: string
+  remember?: string
+}
 
-    return (
-        <>
-            <h3>Admin Login</h3>
-            <form>
-                <input type='text' id='username' placeholder={t()}/>
-                <input type='text' id='password' />
-                <button type='submit'>{t('login')}</button>
-            </form>
-        </>
-    )
+export const Login: FC = () => {
+  const navigate = useNavigate()
+  const {t} = useTranslation()
+  const [loginResponse, setLoginResponse] = useState<responseDataType|null>(null)
+  const loginInfo = useContext(LoginContext)
+
+  useEffect(() => {
+    if(loginInfo !== null) navigate('/admin')
+  }, [])
+
+  const onFinish = (values: any) => {
+    const response = syncBackendRequest('php/login.php', values)
+
+    if(response.status === 'success') {
+      const parsed:loginInfoType = JSON.parse(response.text)
+      if(parsed.token) setLoginInfo(parsed.username, parsed.token)
+      location.reload()
+    }
+
+    setLoginResponse(response)
+  }
+
+  return (
+    <>
+      {loginResponse && loginResponse.status === 'warning' && 
+        <Infomessage key={Math.random()} type='warning'><WarningOutlined /> {loginResponse.text}</Infomessage>
+      }
+
+      <Form
+        style={{ maxWidth: 500, margin: 'auto'}}
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
+        layout='vertical'
+        className='pb-10'
+      >
+        <h1 className='text-2xl mb-3'>Admin Login</h1>
+        <Form.Item<FieldType>
+          label="Username"
+          name="username"
+          rules={[{ required: true, message: 'Please input your username!' }]}
+        >
+          <Input placeholder='username' prefix={<UserOutlined />}/>
+        </Form.Item>
+
+        <Form.Item<FieldType>
+          label="Password"
+          name="password"
+          rules={[{ required: true, message: 'Please input your password!' }]}
+        >
+          <Input.Password placeholder='password123' prefix={<LockOutlined />}/>
+        </Form.Item>
+
+        <Form.Item<FieldType>
+          name="remember"
+          valuePropName="checked"
+        >
+          <Checkbox>Remember me</Checkbox>
+        </Form.Item>
+
+        <Form.Item>
+          <Button htmlType="submit">
+            Login
+          </Button>
+        </Form.Item>
+      </Form>
+    </>
+  )
 }

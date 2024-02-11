@@ -4,10 +4,13 @@
 
     if($loggedin) {
         $response['status'] = 'success';
-        $response['text'] = json_encode([
-            'username' => $admin['username'],
-            'token' => $admin['login_token']
-        ]);
+        $info = ['username' => $admin['username']];
+
+        if(isset($new_token)) {
+            $info['token'] = $new_token;
+        }
+
+        $response['text'] = json_encode($info);
     } elseif(isset($login_warning)) {
         $response['status'] = 'warning';
         $response['text'] = $login_warning;

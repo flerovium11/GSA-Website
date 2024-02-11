@@ -49,7 +49,7 @@
         return $stmt->fetchAll();
     }
 
-    function fetch(string $sql, iterable $parameters):object|false {
+    function fetch(string $sql, iterable $parameters):array|false {
         global $conn;
         $stmt = $conn->prepare($sql);
         $stmt->execute($parameters);
