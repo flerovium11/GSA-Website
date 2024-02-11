@@ -1,10 +1,10 @@
 import {FC, useState, useContext, useEffect} from 'react'
 import { Button, Checkbox, Form, Input } from 'antd'
-import {loginInfoType, responseDataType, setLoginInfo, syncBackendRequest} from '../../utils/backend'
+import {loginInfoType, responseDataType, setLoginInfo, backendRequest} from '../../utils/backend'
 import {useTranslation} from 'react-i18next'
 import './Login.scss'
 import Infomessage from '../../components/Infomessage'
-import { LockOutlined, UserOutlined, WarningOutlined } from '@ant-design/icons'
+import {LockOutlined, UserOutlined, WarningOutlined} from '@ant-design/icons'
 import {LoginContext} from '../../components/App/App'
 import {useNavigate} from "react-router-dom"
 
@@ -18,6 +18,7 @@ export const Login: FC = () => {
   const navigate = useNavigate()
   const {t} = useTranslation()
   const [loginResponse, setLoginResponse] = useState<responseDataType|null>(null)
+  const [inWaiting, setInWaiting] = useState<boolean>(false)
   const loginInfo = useContext(LoginContext)
 
   useEffect(() => {
@@ -25,21 +26,28 @@ export const Login: FC = () => {
   }, [])
 
   const onFinish = (values: any) => {
-    const response = syncBackendRequest('php/login.php', values)
+    setInWaiting(true)
 
-    if(response.status === 'success') {
-      const parsed:loginInfoType = JSON.parse(response.text)
-      if(parsed.token) setLoginInfo(parsed.username, parsed.token)
-      location.reload()
-    }
-
-    setLoginResponse(response)
+    backendRequest('php/login.php', values).then((response) => {
+      if(response.status === 'success') {
+        const parsed:loginInfoType = JSON.parse(response.text)
+        if(parsed.token) setLoginInfo(parsed.username, parsed.token)
+        location.reload() // auto navigates to admin panel
+      }
+  
+      setLoginResponse(response)
+    }).catch((reason) => {
+      console.log(reason)
+      setLoginResponse(reason)
+    }).finally(() => {
+      setInWaiting(false)
+    })
   }
 
   return (
     <>
-      {loginResponse && loginResponse.status === 'warning' && 
-        <Infomessage key={Math.random()} type='warning'><WarningOutlined /> {loginResponse.text}</Infomessage>
+      {['warning', 'connerror'].includes(loginResponse?.status ?? '') && 
+        <Infomessage key={Math.random()} type='warning'><WarningOutlined /> {loginResponse?.text}</Infomessage>
       }
 
       <Form
@@ -74,7 +82,7 @@ export const Login: FC = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button htmlType="submit">
+          <Button htmlType="submit" loading={inWaiting}>
             Login
           </Button>
         </Form.Item>

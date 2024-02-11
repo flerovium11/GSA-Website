@@ -52,19 +52,19 @@ export const backendRequest = async (url:string, data:sendData):Promise<response
                 else reject(parsedResult)
 
             } catch(error) {
-                reject({status: 'error', text: result})
+                reject({status: 'connerror', text: result})
             }
 
         },
 
         error(xhr) {
-            reject({status: 'error', text: xhr.statusText})
+            reject({status: 'connerror', text: 'Connection to server failed, please inform site admin'})
         }
     }))
 }
 
 export const syncBackendRequest = (url:string, data:sendData):responseDataType => {
-    let returnVal:responseDataType = {status: 'error', text: 'No answer from server'}
+    let returnVal:responseDataType = {status: 'connerror', text: 'No answer from server'}
     const headers:Record<string, string> = {}
     const login:loginInfoType|null = getLoginInfo()
 
@@ -85,12 +85,12 @@ export const syncBackendRequest = (url:string, data:sendData):responseDataType =
                 const parsedResult = JSON.parse(result)
                 returnVal = parsedResult
             } catch(error) {
-                returnVal = {status: 'error', text: result}
+                returnVal = {status: 'connerror', text: result}
             }
         },
 
         error(xhr) {
-            returnVal = {status: 'error', text: xhr.statusText}
+            returnVal = {status: 'connerror', text: xhr.statusText}
         },
     })
 

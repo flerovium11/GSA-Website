@@ -10,15 +10,19 @@
     color: $text-color;
     background-color: $error-background;
     padding: 1em;
+    padding-right: 2.5em;
     border-radius: 1em;
     bottom: -5em;
     box-shadow: 0 0 5em -1em black!important;
 
     .close {
-        margin: -1em -1em -1em 0em;
         padding: 1em;
+        top: 50%;
+        transform: translateY(-51%);
         cursor: pointer;
+        position: absolute;
         font-size: 16px;
+        right: 0;
 
         &:hover {
             opacity: 0.5;

@@ -134,7 +134,7 @@ export const Admin:FC = () => {
                                 
                                 <h2 className='mt-3'>Danger Zone</h2>
                                 <div className='flex flex-wrap gap-5 mt-2'>
-                                    <Button onClick={() => {setLoginInfo('', '')}}danger>Logout</Button>
+                                    <Button onClick={() => {setLoginInfo('', ''); location.reload()}}danger>Logout</Button>
                                     <Popconfirm
                                         title="Delete your account"
                                         description={<span>Are you sure you want to delete your account? <br /> This action is <b>irreversible</b></span>}
@@ -162,7 +162,7 @@ export const Admin:FC = () => {
                                     <Form.Item>
                                         <MDEditor
                                             value={blogpostValue}
-                                            onChange={setBlogpostValue}
+                                            onChange={(value) => setBlogpostValue(value  ?? '')}
                                             height='30em'
                                         />
                                     </Form.Item>

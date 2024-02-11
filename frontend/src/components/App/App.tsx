@@ -1,6 +1,6 @@
 import {FC, createContext, Context} from 'react'
 import {Route, Routes} from 'react-router-dom'
-import type {loginInfoType} from '../../utils/backend'
+import type {loginInfoType, responseDataType} from '../../utils/backend'
 import {getLoginInfo, setLoginInfo, syncBackendRequest} from '../../utils/backend'
 import {WarningOutlined} from '@ant-design/icons'
 
@@ -17,14 +17,19 @@ import Privacy from '../../pages/Privacy'
 import About from '../../pages/About'
 import Infomessage from '../Infomessage'
 
-const loginInfoResponse = syncBackendRequest('php/logininfo.php', {})
-console.log(loginInfoResponse)
+// when a user cookie is set, try to contact backend
+let loginInfoResponse:responseDataType|null = null
 
-if(loginInfoResponse.status === 'success') {
-  const parsed = JSON.parse(loginInfoResponse.text)
-  if(parsed.token) setLoginInfo(parsed.username, parsed.token)
-} else {
-  setLoginInfo('', '')
+if(getLoginInfo() !== null) {
+  loginInfoResponse = syncBackendRequest('php/logininfo.php', {})
+  console.log(loginInfoResponse)
+
+  if(loginInfoResponse.status === 'success') {
+    const parsed = JSON.parse(loginInfoResponse.text)
+    if(parsed.token) setLoginInfo(parsed.username, parsed.token)
+  } else if(loginInfoResponse.status !== 'connerror') {
+    setLoginInfo('', '')
+  }
 }
 
 const loginInfo = getLoginInfo()
@@ -37,7 +42,8 @@ export const App:FC = () => {
       <LoginContext.Provider value={loginInfo}>
         <Header></Header>
 
-        {loginInfoResponse.status === 'warning' && 
+        {/* when the user cookie is set but the server doesn't respond display the error message*/}
+        {(loginInfoResponse?.status === 'warning' || loginInfoResponse?.status === 'connerror') && 
           <Infomessage type='warning' ><WarningOutlined /> {loginInfoResponse.text}</Infomessage>
         }
 
