@@ -23,9 +23,9 @@ export const getLoginInfo = ():loginInfoType|null => {
     return token === '' && username === '' ? null : {token: token, username: username}
 }
 
-export const setLoginInfo = (username:string, token:string):void => {
-    setCookie('user-login-name', username, 365)
-    setCookie('user-login-token', token, 365)
+export const setLoginInfo = (username:string, token:string, days:number=365):void => {
+    setCookie('user-login-name', username, days)
+    setCookie('user-login-token', token, days)
 }
 
 export const backendRequest = async (url:string, data:sendData):Promise<responseDataType> => {

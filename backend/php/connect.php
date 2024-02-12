@@ -9,7 +9,7 @@
       $result = $stmt->fetchAll();
    }catch(PDOException $error) {
       $result = [
-         'status' => 'error',
+         'status' => 'connerror',
          'response' => $error->getCode(),
       ];
 

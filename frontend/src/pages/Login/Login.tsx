@@ -31,13 +31,17 @@ export const Login: FC = () => {
     backendRequest('php/login.php', values).then((response) => {
       if(response.status === 'success') {
         const parsed:loginInfoType = JSON.parse(response.text)
-        if(parsed.token) setLoginInfo(parsed.username, parsed.token)
-        location.reload() // auto navigates to admin panel
+
+        if (parsed.token) {
+          if (values.remember === true) setLoginInfo(parsed.username, parsed.token)
+          else setLoginInfo(parsed.username, parsed.token, 0.00017361111)
+        }
+
+        // location.reload() // auto navigates to admin panel
       }
   
       setLoginResponse(response)
     }).catch((reason) => {
-      console.log(reason)
       setLoginResponse(reason)
     }).finally(() => {
       setInWaiting(false)
@@ -78,7 +82,7 @@ export const Login: FC = () => {
           name="remember"
           valuePropName="checked"
         >
-          <Checkbox>Remember me</Checkbox>
+          <Checkbox checked>Remember me</Checkbox>
         </Form.Item>
 
         <Form.Item>

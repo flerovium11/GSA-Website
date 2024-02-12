@@ -1,7 +1,7 @@
 import {FC, useContext, useEffect, useState} from 'react'
 import './Admin.scss'
 import { LoginContext } from '../../components/App/App'
-import { Button, Form, Input, Popconfirm, Space, Switch, Tabs, Tooltip } from 'antd'
+import { Button, Checkbox, Form, Input, Popconfirm, Space, Switch, Tabs, Tooltip } from 'antd'
 import { CheckOutlined, CloseOutlined, FileAddOutlined, FormOutlined, InfoCircleOutlined, LockOutlined, QuestionCircleOutlined, UserAddOutlined, UserOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import { setLoginInfo } from '../../utils/backend'
@@ -11,21 +11,25 @@ import MDEditor from '@uiw/react-md-editor'
 export const Admin:FC = () => {
     const loginInfo = useContext(LoginContext)
     const navigate = useNavigate()
-    const [blogpostValue, setBlogpostValue] = useState<string>(`<h1>Blogtitel</h1>
-<p>Jegliches HTML-Markup wird unterstützt</p>
-<blockquote>Probier die verschiedenen Ansichten und Werkzeuge in der Toolbar aus!</blockquote>
-<h3>Bilder können über Links eingefügt werden</h3>
-<img src="https://images.saymedia-content.com/.image/t_share/MTk2NzY3MjA5ODc0MjY5ODI2/top-10-cutest-cat-photos-of-all-time.jpg"/>
-    `)
-    const [ownDescriptionToggle, setOwnDescriptionToggle] = useState<boolean>(true)
-    const [ownTitleImageToggle, setOwnTitleImageToggle] = useState<boolean>(false)
-    const [ownImageUrl, setOwnImageUrl] = useState<string>('')
 
     useEffect(() => {
         if(loginInfo === null) navigate('/login')
       }, [])
 
+    const [blogpostValue, setBlogpostValue] = useState<string>(`<h1>Blogtitel</h1>
+    <p>Jegliches HTML-Markup wird unterstützt</p>
+    <blockquote>Probier die verschiedenen Ansichten und Werkzeuge in der Toolbar aus!</blockquote>
+    <h3>Bilder können über Links eingefügt werden</h3>
+    <img src="https://images.saymedia-content.com/.image/t_share/MTk2NzY3MjA5ODc0MjY5ODI2/top-10-cutest-cat-photos-of-all-time.jpg"/>
+        `)
+    
+    const [ownDescriptionToggle, setOwnDescriptionToggle] = useState<boolean>(true)
+    const [ownTitleImageToggle, setOwnTitleImageToggle] = useState<boolean>(false)
+    const [ownImageUrl, setOwnImageUrl] = useState<string>('')
+    const [addAdminLoading, setAddAdminLoading] = useState<boolean>(false)
+    const [postBlogLoading, setPostBlogLoading] = useState<boolean>(false)
     const [usernameValue, setUsernameValue] = useState<string>(loginInfo?.username ?? '')
+    const [newUsernameValue, setNewUsernameValue] = useState<string>('')
 
     const confirmDeleteAccount = () => {
         console.log('confirm delete')
@@ -41,6 +45,10 @@ export const Admin:FC = () => {
 
     const onPostBlog = (values:any) => {
         console.log('blog', values)
+    }
+
+    const onAddUser = (values:any) => {
+        console.log('user', values)
     }
 
     return (
@@ -101,7 +109,7 @@ export const Admin:FC = () => {
                                 >
                                     <Space direction='vertical'>
                                         <Form.Item
-                                            label="Old Password"
+                                            label="Old password"
                                             name="old-password"
                                             rules={[{ required: true, message: 'Please input your old password!' }]}
                                         >
@@ -110,14 +118,14 @@ export const Admin:FC = () => {
 
                                         <Space direction='horizontal'>
                                             <Form.Item
-                                                label="New Password"
+                                                label="New password"
                                                 name="new-password"
                                                 rules={[{ required: true, message: 'Please input your new password!' }]}
                                             >
                                                 <Input.Password placeholder='password123' prefix={<LockOutlined />}/>
                                             </Form.Item>
                                             <Form.Item
-                                                label="Repeat new Password"
+                                                label="Repeat new password"
                                                 name="repeat-password"
                                                 rules={[{ required: true, message: 'Please repeat your new password!' }]}
                                             >
@@ -216,7 +224,7 @@ export const Admin:FC = () => {
                                         <img src={ownImageUrl} className='w-1/2 rounded-xl' alt="Bild nicht gefunden"/>
                                     </>}
                                     <Form.Item>
-                                        <Button className='mt-10' htmlType='submit'>Blog posten</Button>
+                                        <Button className='mt-10' htmlType='submit' loading={postBlogLoading}>Blog posten</Button>
                                     </Form.Item>
                                 </Form>
                             </>,
@@ -226,6 +234,58 @@ export const Admin:FC = () => {
                             key: '3',
                             label: `Add admin`,
                             children: <>
+                                <Form
+                                    initialValues={{ remember: true }}
+                                    onFinish={onAddUser}
+                                    layout='vertical'
+                                >
+                                <Space direction='vertical'>
+                                    <Form.Item
+                                        label="Username"
+                                        name="username"
+                                        rules={[{ required: true, message: 'Please input the username!' }]}
+                                        hasFeedback
+                                        validateStatus="warning"
+                                        help="The information is being validated..."
+                                    >
+                                        <Input
+                                            count={{
+                                                show: true,
+                                                max: 6,
+                                                strategy: (txt) => txt.trim().length,
+                                                exceedFormatter: (txt, {max}) => txt.trim().slice(0, max),
+                                            }}
+                                            value={newUsernameValue}
+                                            onChange={(e) => setNewUsernameValue(e.target?.value.trim().replaceAll(/[^a-zA-Z0-9_]/g, ''))}
+                                            prefix={<UserOutlined />}
+                                            placeholder='username'
+                                        />
+                                    </Form.Item>
+
+                                    <Space direction='horizontal'>
+                                        <Form.Item
+                                            label="Password"
+                                            name="new-password"
+                                            rules={[{ required: true, message: 'Please input a password!' }]}
+                                        >
+                                            <Input.Password placeholder='password123' prefix={<LockOutlined />}/>
+                                        </Form.Item>
+                                        <Form.Item
+                                            label="Repeat password"
+                                            name="repeat-password"
+                                            rules={[{ required: true, message: 'Please repeat the password!' }]}
+                                        >
+                                            <Input.Password placeholder='password123' prefix={<LockOutlined />}/>
+                                        </Form.Item>
+                                    </Space>
+
+                                    <Form.Item>
+                                    <Button htmlType="submit" loading={addAdminLoading}>
+                                        Add admin
+                                    </Button>
+                                    </Form.Item>
+                                </Space>
+                                </Form>
                             </>,
                             icon: <UserAddOutlined />,
                         },

@@ -17,13 +17,9 @@
         } else {
             $response['status'] = 'success';
             $info = ['username' => $user['username']];
-            
-            if($_POST['remember'] == 'true') {
-                $new_token = create_user_token();
-                $info['token'] = $new_token;
-                execute('update admin set login_token = ? where admin_id = ?', [password_hash($new_token.$user['salt'], PASSWORD_DEFAULT), $user['admin_id']]);
-            }
-
+            $new_token = create_user_token();
+            $info['token'] = $new_token;
+            execute('update admin set login_token = ? where admin_id = ?', [password_hash($new_token.$user['salt'], PASSWORD_DEFAULT), $user['admin_id']]);
             $response['text'] = json_encode($info);
         }
     }
