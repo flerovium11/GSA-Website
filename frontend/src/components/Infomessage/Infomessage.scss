@@ -12,7 +12,7 @@
     padding: 1em;
     padding-right: 2.5em;
     border-radius: 1em;
-    bottom: -5em;
+    bottom: -10em;
     box-shadow: 0 0 5em -1em black!important;
 
     .close {
@@ -49,5 +49,5 @@
 
 @keyframes infomessage_out {
     0%{bottom: 2em}
-    100%{bottom: -5em}
+    100%{bottom: -10em}
 }
