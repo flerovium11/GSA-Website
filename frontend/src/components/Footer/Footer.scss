@@ -23,6 +23,12 @@ footer {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 5em;
+        margin-top: 1em;
 
     
         a{
@@ -39,5 +45,19 @@ footer {
 
     a{
         color: $blog-color;
+    }
+}
+
+@media (max-width: 1200px){
+    
+    footer{
+        height: 50vw;
+    }
+}
+
+@media (max-width: 600px){
+    
+    footer{
+        height: 120vw;
     }
 }

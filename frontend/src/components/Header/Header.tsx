@@ -11,13 +11,13 @@ export const Header = () => {
 
   return (
     <header>
-      <nav>
+      <nav className='nav_header'>
+        <input type="checkbox" id="cb-burger-menu" hidden/>
         <label htmlFor="cb-burger-menu" className='burger-menu'>
           <div className="burger-line"></div>
           <div className="burger-line"></div>
           <div className="burger-line"></div>
         </label>
-        <input type="checkbox" id="cb-burger-menu" hidden/>
         <NavLink to='/'><img src='/graphics/logo_simplified.png' alt='GSA Logo' id="logo_simplified"/></NavLink>
         <ul>
           <li><NavLink to='/project'>{t('the-project')}</NavLink></li>

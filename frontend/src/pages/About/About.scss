@@ -3,10 +3,18 @@
 .about {
     h1{
         margin-left: 7vw;
+        padding-top: 14vw;
+        color: $text-color;
+        font-family: $headings;
+        z-index: 10;
+        font-size: 5vw !important;
+        font-weight: lighter;
+        padding-top: 10vw !important;
     }
 
     p{
         margin-left: 7vw;
+        margin-top: 1em;
     }
 
     .introduction{
@@ -19,16 +27,17 @@
     }
 
     .teammember{
-        height: 40vw;
-        width: 25vw;
+        height: 45em;
+        width: 25em;
         position: relative;
+        margin-right: 5em;
 
         h1{
             margin-left: .3em;
             padding-top: 0;
-            font-size: 2em;
+            font-size: 2em !important;
             position: absolute;
-            bottom: 3.5vw;
+            bottom: 1em;
         }
     }
 
@@ -40,27 +49,28 @@
     }
 
     .card{
-        height: 30vw;
-        width: 20vw;
+        height: 33em;
+        width: 24em;
         background-size: cover;
         margin-left: 7vw;
-        margin-top: 7vw;
+        margin-top: 8.5em;
+        position: relative;
         
         .instagram{
             position: absolute;
-            right: -1vw;
+            right: 2em;
             z-index: 3;
-            bottom: 3.9vw;
+            bottom: 2.5em;
             height: 2.3em;
             cursor: pointer;
         }
 
         .fade{
-            width: 20vw;
-            height: 20%;
+            width: 24em;
+            height: 10em;
             background: linear-gradient(transparent, #282563ff);
             position: absolute;
-            bottom: 3vw;
+            bottom: 0;
         }
     }
 
@@ -70,6 +80,8 @@
 
     .teammember:nth-of-type(2) .card{
         background-image: url('/graphics/robert.jpeg');
+        background-size: 130%;
+        background-position: bottom;
     }
 
     .teammember:nth-of-type(3) .card{
@@ -91,6 +103,81 @@
     }
     
 }
+
+
+
+@media (max-width: 1500px){
+    .about h1{
+        padding-top: 14vw !important;
+    }
+
+    .introduction{
+        margin-right: 30vw !important;
+    }
+}
+
+@media (max-width: 1000px){
+    .about h1{
+        font-size: 7vw !important;
+        padding-top: 26vw !important;
+    }
+
+    .introduction{
+        margin-right: 20vw !important;
+    }
+}
+
+@media (max-width: 900px){
+    .about h1{
+        font-size: 10vw !important;
+    }
+
+    .introduction{
+        margin-right: 10vw !important;
+    }
+}
+
+@media (max-width: 400px){
+    .about h1{
+        padding-top: 46vw !important;
+    }
+
+    .introduction{
+        margin-right: 5vw !important;
+    }
+}
+
+@media (max-height: 800px){
+    .about h1{
+        padding-top: 10vw !important;
+    }
+
+    .introduction{
+        margin-right: 1vw !important;
+    }
+}
+
+@media (max-width: 500px){
+    
+    .card{
+        margin-left: 0 !important;
+        width: 100vw !important;
+    }
+
+    .fade{
+        width: 100vw !important;
+    }
+
+    .teammembers p{
+        margin: 2em;
+        text-align: center;
+        margin-top: 2em !important;
+    }
+}
+
+
+
+
 
 
 

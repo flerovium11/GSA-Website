@@ -17,7 +17,7 @@ export const BlogOverview:FC<BlogOverviewProps> = (props) => {
 
     return (
         <>
-            <h2 className={isSite ? 'padding-top' : ''}>{t('news')}</h2>
+            <h2 className= 'h2_blog'>Neues</h2>
             <div className='blogs'>
                 {blogposts.map((item, index) => {
                     return <Blogpost key={index} blogdata={{

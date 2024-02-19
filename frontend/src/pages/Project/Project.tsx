@@ -8,7 +8,7 @@ export const Project:FC = () => {
     return (
         <>
             <section className='project-top'>
-                <div>
+                <div className='project-wrapper'>
                     <div className='box_blue'></div>
                     <div className='galaxy_wrapper'></div>
                     <img className='squares' src='/graphics/squares.svg'></img>
@@ -62,6 +62,13 @@ export const Project:FC = () => {
                             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
                             eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam 
                             voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clia
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
+                        eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam 
+                        voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
+                        <br />
+                        <br />
+
+                        kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
                         </p>
                     </div>
                     {/* <div className="card">
