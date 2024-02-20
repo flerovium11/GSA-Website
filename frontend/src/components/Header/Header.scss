@@ -34,6 +34,10 @@ header{
 #logo_simplified{
     height: 3.5em;
     margin-left: 5vw;
+
+    &:hover {
+        filter: brightness(1.5);
+    }
 }
 
 .burger-menu{
@@ -55,6 +59,8 @@ header{
     border-radius: 20px;
     width: 3em;
     margin: .3em;
+    transition: .1s;
+    transform-origin: center;
 }
 
 @media (max-width: 600px){
@@ -65,6 +71,22 @@ header{
 
     .nav_header ul a{
         display: none !important;
+    }
+
+    #cb-burger-menu:checked + .burger-menu {
+        transform: translateY(-50%) translateX(1em);
+
+        .burger-line:first-of-type {
+            transform: rotate(45deg) translateY(1.5em);
+        }
+
+        .burger-line:nth-of-type(2) {
+            transform: rotate(45deg) scaleY(0);
+        }
+
+        .burger-line:last-of-type {
+            transform: rotate(-45deg) translateY(-1.5em);
+        }
     }
 
     #cb-burger-menu:checked + .burger-menu ~ ul a {
