@@ -4,7 +4,7 @@
     background-color: $text-color;
     width: 24em;
     height: 35em;
-    margin-bottom: 10em;
+    margin-bottom: 8em;
     margin-left: 7vw;
     border-radius: 20px;
     margin-top: 3.5vw;
@@ -50,10 +50,10 @@
 
 .blogdata_title{
     color: $blog-color;
-    font-size: 2em;
+    font-size: 2em !important;
     position: absolute;
     left: 1.3em;
-    top: 8.1em;
+    top: 7.9em;
     padding: 0;
     margin: 0;
 }
@@ -64,5 +64,18 @@
     left: 2.7em;
     right: 2.7em;
     top: 18.5em;
+}
+
+@media (max-width: 500px){
+    .blogpost{
+        width: 100vw !important;
+        margin-left: 0;
+        border-radius: 0;
+    }
+
+    .image_wrapper_blog img{
+        border-radius: 0;
+        width: 100vw !important;
+    }
 }
 

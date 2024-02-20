@@ -11,24 +11,24 @@ export const Home:FC = () => {
   return (
     <>
       <section className='home-top'>
-        <div>
-          <h1>Cansat 2024</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
-            eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam 
-            voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita 
-            kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
-            eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua
-          </p>
-          <NavLink to='/'><img src='/graphics/logo_circle.svg' alt='GSA Logo' id="logo_circle"/></NavLink>
-          <div>
-            <Button type='secondary'>{t('the-project')}</Button>
-            <Button type='secondary'>Blog</Button>
-            <div className='box_blue'></div>
-            <div className='galaxy_wrapper'></div>
+          <div className='home-top-wrapper'>
+            <h1 className='h1_home'>Cansat 2024</h1>
+            <p>
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
+              eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam 
+              voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita 
+              kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
+              eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua
+            </p>
+            <NavLink to='/'><img src='/graphics/logo_circle.svg' alt='GSA Logo' id="logo_circle"/></NavLink>
+
+              <Button type='secondary'>{t('the-project')}</Button>
+              <Button type='secondary'>Blog</Button>
           </div>
-        </div>
+              <div className='box_blue'></div>
+              <div className='galaxy_wrapper'></div>
+
         <div className="logo-in-circle"></div>
       </section>
       <section className="home-content">

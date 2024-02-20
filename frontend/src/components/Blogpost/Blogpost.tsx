@@ -24,7 +24,7 @@ export const Blogpost:FC<BlogpostProps> = (props) => {
         <>
                 <div className='blogpost'>
                     <div className='image_wrapper_blog'>
-                        <img src={blogdata.images[0]} className='blog_picture' alt="Titelbild" style={{width: '100px'}} />
+                        <img src={blogdata.images[0]} className='blog_picture' alt="Titelbild"/>
                     </div>
                     <span className='blogdata'>{blogdata.date.toDateString()} von Maris</span>
                     <h1 className='blogdata_title'>{blogdata.title}</h1>
