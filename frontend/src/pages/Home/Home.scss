@@ -2,13 +2,12 @@
 
 .h1_home{
     margin: 0;
-    padding-top: 14vw;
+    padding-top: 5vw !important;
     color: $text-color;
     font-family: $headings;
     z-index: 10;
     font-size: 5vw !important;
     font-weight: lighter;
-    padding-top: 10vw !important;
 }
 
 p{
@@ -84,7 +83,7 @@ h2{
 
 @media (max-width: 1500px){
     .h1_home{
-        padding-top: 14vw !important;
+        padding-top: 5vw !important;
     }
 }
 
@@ -101,24 +100,18 @@ h2{
 
     .h1_home{
         font-size: 7vw !important;
-        padding-top: 26vw !important;
+        padding-top: 10vw !important;
     }
 }
 
 @media (max-width: 900px){
     .h1_home{
-        font-size: 10vw !important;
+        font-size: 8vw !important;
     }
 }
 
 @media (max-width: 400px){
     .h1_home{
-        padding-top: 46vw !important;
-    }
-}
-
-@media (max-height: 800px){
-    .h1_home{
-        padding-top: 10vw !important;
+        padding-top: 30vw !important;
     }
 }

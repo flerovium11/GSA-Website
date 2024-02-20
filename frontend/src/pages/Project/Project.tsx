@@ -1,6 +1,7 @@
 import {FC} from 'react'
 import './Project.scss'
 import { useTranslation } from 'react-i18next'
+import { ExportOutlined } from '@ant-design/icons'
 
 export const Project:FC = () => {
     const {t} = useTranslation()
@@ -27,7 +28,7 @@ export const Project:FC = () => {
                         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
                         eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
                     </p>
-                    <a href="https://ars.electronica.art/esero/de/projects/cansat/">Mehr zum Wettbewerb</a>
+                    <a target="_blank" href="https://ars.electronica.art/esero/de/projects/cansat/">Mehr zum Wettbewerb &nbsp;<ExportOutlined /></a>
                 </div>
                 <div className='outlined-rect'></div>
                 </section>

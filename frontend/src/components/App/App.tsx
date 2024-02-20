@@ -67,7 +67,7 @@ export const App:FC = () => {
 
         {isLoadingLoginInfo !== '' && 
           <main className='p-10 mt-28 m-auto w-2/3'>
-            <h1 className='pt-0 mb-5'>{isLoadingLoginInfo}</h1>
+            <h2 className='pt-0 mb-5'>{isLoadingLoginInfo}</h2>
             <Space>
               <Skeleton.Button active/>
               <Skeleton.Avatar active/>

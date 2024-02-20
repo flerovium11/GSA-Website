@@ -23,8 +23,8 @@ export const Home:FC = () => {
             </p>
             <NavLink to='/'><img src='/graphics/logo_circle.svg' alt='GSA Logo' id="logo_circle"/></NavLink>
 
-              <Button type='secondary'>{t('the-project')}</Button>
-              <Button type='secondary'>Blog</Button>
+              <NavLink to='project'><Button type='secondary'>{t('the-project')}</Button></NavLink>
+              <NavLink to='blog'><Button type='secondary'>Blog</Button></NavLink>
           </div>
               <div className='box_blue'></div>
               <div className='galaxy_wrapper'></div>
@@ -34,7 +34,7 @@ export const Home:FC = () => {
       <section className="home-content">
         <BlogOverview blogcount={2} />
         <div id='blog_button'>
-          <Button type='secondary'>Zum Blog</Button>
+          <NavLink to='blog'><Button type='secondary'>Zum Blog</Button></NavLink>
         </div>
 
         {/* <img src="/graphics/cloud_3.png" alt="Clouds behind" className="clouds-behind" />

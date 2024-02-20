@@ -104,10 +104,9 @@
 }
 
 .secondary-mission{
-    min-height: 100vh;
 
    .box_blue_1{
-    height: 100vh;
+    height: 1000px;
     opacity: 0.718;
     width: 100vw;
     background-color: #111555ff;
@@ -120,7 +119,6 @@
     background-image: url('/graphics/stars.jpg');
     background-size: cover;
     width: 100vw;
-    height: 100vh;
     z-index: -1;
     position: absolute;
    }
@@ -138,6 +136,7 @@
         margin-top: 3vw;
         background: linear-gradient(hsla(232, 28%, 40%, 0.7) 25%, rgba(214, 216, 229, 0.7) 25%);
         border-radius: 10px;
+        margin-bottom: 5em;
 
         p{
             text-align: justify;
@@ -233,18 +232,6 @@
 
     .project-top p{
         margin-bottom: 1em !important;
-    }
-
-    .project-top p{
-        margin-right: 1vw !important;
-    }
-
-    .card{
-        height: 30em !important;
-    }
-
-    .card img{
-        display: none;
     }
 }
 

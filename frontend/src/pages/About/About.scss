@@ -27,7 +27,6 @@
     }
 
     .teammember{
-        height: 45em;
         width: 25em;
         position: relative;
         margin-right: 5em;
@@ -53,7 +52,7 @@
         width: 24em;
         background-size: cover;
         margin-left: 7vw;
-        margin-top: 8.5em;
+        margin-top: 5em;
         position: relative;
         
         .instagram{
@@ -81,7 +80,7 @@
     .teammember:nth-of-type(2) .card{
         background-image: url('/graphics/robert.jpeg');
         background-size: 130%;
-        background-position: bottom;
+        background-position: center;
     }
 
     .teammember:nth-of-type(3) .card{
@@ -99,7 +98,7 @@
     .teammember:nth-of-type(6) .card{
         background-image: url('/graphics/maris.jpeg');
         background-size: 130%;
-        background-position: top;
+        background-position: center;
     }
     
 }
@@ -151,10 +150,6 @@
     .about h1{
         padding-top: 10vw !important;
     }
-
-    .introduction{
-        margin-right: 1vw !important;
-    }
 }
 
 @media (max-width: 500px){
@@ -170,6 +165,9 @@
 
     .teammembers p{
         margin: 2em;
+        margin-bottom: 0;
+        width: 100%;
+        font-size: 20px;
         text-align: center;
         margin-top: 2em !important;
     }

@@ -8,7 +8,7 @@
 @font-face {
     font-family: Astro Space;
     src: url('fonts/AstroSpace-eZ2Bg.ttf');
-  }
+}
 
 html {
     scroll-behavior: smooth;
@@ -33,4 +33,45 @@ h1{
     z-index: 10;
     font-size: 5vw !important;
     font-weight: lighter;
+}
+
+.home-top button, .home-content button, .blogpost button {
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+
+    &::after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        bottom: 0;
+        left: 0;
+        background-color: $blog-color;
+        width: 100%;
+        height: 100%;
+        transition: .2s ease-out;
+        transform: scaleY(0);
+        transform-origin: bottom;
+    }
+
+    &:hover {
+        font-weight: 500;
+        color: $text-color!important;
+
+        &::after {
+            transform: scaleY(1);
+        }
+    }
+}
+
+a:not(a:has(img, button)) {
+    &:hover {
+        filter: brightness(1.5);
+    }
+}
+
+#admin-panel h1:not(#blogtitel), html * .ant-form h1:not(#blogtitel) {
+    margin-top: 100px !important;
+    font-size: 50px !important;
+    padding: 1em 0 .5em 0 !important;
 }
