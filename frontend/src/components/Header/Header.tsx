@@ -1,13 +1,28 @@
 import {NavLink} from 'react-router-dom'
-import {useContext} from 'react'
+import {useContext, FC} from 'react'
 import {useTranslation} from 'react-i18next'
 import {LoginContext} from '../App/App'
 
 import './Header.scss'
+import { List, Skeleton, Space } from 'antd'
 
-export const Header = () => {
+interface HeaderProps {
+  loading?:boolean
+}
+
+export const Header:FC<HeaderProps> = ({loading=false}) => {
   const loginInfo = useContext(LoginContext)
   const {t} = useTranslation()
+
+  if (loading) {
+    return (
+      <header className='flex items-center p-10' style={{height:'100px'}}>
+        <Skeleton avatar active />
+        <Skeleton active />
+        <Skeleton active />
+      </header>
+    )
+  }
 
   return (
     <header>

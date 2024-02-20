@@ -9,7 +9,7 @@
 
             if ($exists != false) {
                 $response['status'] = 'warning';
-                $response['test'] = 'This admin already exists';
+                $response['text'] = 'Username taken!';
             } else {
                 execute('update admin set username = ? where admin_id = ?', [$new_name, $admin['admin_id']]);
             }

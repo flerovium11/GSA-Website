@@ -4,10 +4,25 @@ import {NavLink} from 'react-router-dom'
 import LanguageMenu from '../LanguageMenu'
 import './Footer.scss'
 import {useTranslation} from 'react-i18next'
+import { Skeleton } from 'antd'
 
-export const Footer:FC = () => {
+interface FooterProps {
+    loading?:boolean
+}
+
+export const Footer:FC<FooterProps> = ({loading=false}) => {
     const loginInfo = useContext(LoginContext)
     const {t} = useTranslation()
+
+    if (loading) {
+        return (
+            <footer className='flex items-center p-10 gap-10'>
+                <Skeleton avatar active />
+                <Skeleton active />
+                <Skeleton active />
+            </footer>
+        )
+    }
 
     return (
         <>

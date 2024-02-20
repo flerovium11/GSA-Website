@@ -1,6 +1,6 @@
 import {FC, useState, useContext, useEffect} from 'react'
 import { Button, Checkbox, Form, Input } from 'antd'
-import {loginInfoType, responseDataType, setLoginInfo, backendRequest} from '../../utils/backend'
+import {responseDataType, backendRequest} from '../../utils/backend'
 import {useTranslation} from 'react-i18next'
 import './Login.scss'
 import Infomessage from '../../components/Infomessage'
@@ -14,7 +14,7 @@ type FieldType = {
   remember?: string
 }
 
-export const Login: FC = () => {
+export const Login:FC = () => {
   const navigate = useNavigate()
   const {t} = useTranslation()
   const [loginResponse, setLoginResponse] = useState<responseDataType|null>(null)
@@ -23,23 +23,16 @@ export const Login: FC = () => {
 
   useEffect(() => {
     if(loginInfo !== null) navigate('/admin')
-  }, [])
+  }, [loginInfo])
 
-  const onFinish = (values: any) => {
+  const onFinish = (values:any) => {
     setInWaiting(true)
 
-    backendRequest('php/login.php', values).then((response) => {
+    backendRequest('php/login.php', values, true, values.remember).then((response) => {
       if(response.status === 'success') {
-        const parsed:loginInfoType = JSON.parse(response.text)
-
-        if (parsed.token) {
-          if (values.remember === true) setLoginInfo(parsed.username, parsed.token)
-          else setLoginInfo(parsed.username, parsed.token, 0.00017361111)
-        }
-
-        // location.reload() // auto navigates to admin panel
+        location.reload() // auto navigates to admin panel
       }
-  
+
       setLoginResponse(response)
     }).catch((reason) => {
       setLoginResponse(reason)
