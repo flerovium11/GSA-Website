@@ -1,10 +1,10 @@
 import {NavLink} from 'react-router-dom'
-import {useContext, FC} from 'react'
+import {useContext, FC, useEffect, useRef} from 'react'
 import {useTranslation} from 'react-i18next'
 import {LoginContext} from '../App/App'
 
 import './Header.scss'
-import { List, Skeleton, Space } from 'antd'
+import {Skeleton} from 'antd'
 
 interface HeaderProps {
   loading?:boolean
@@ -13,6 +13,18 @@ interface HeaderProps {
 export const Header:FC<HeaderProps> = ({loading=false}) => {
   const loginInfo = useContext(LoginContext)
   const {t} = useTranslation()
+  const cbRef = useRef<null|HTMLInputElement>(null)
+
+  useEffect(() => {
+    const handleClick = (e:MouseEvent) => {
+      console.log(cbRef.current?.checked, e.target)
+      if (cbRef.current?.checked && e.target !== cbRef.current && !cbRef.current.nextElementSibling?.contains(e.target as HTMLElement)) cbRef.current.checked = false
+    }
+
+    window.addEventListener('click', handleClick)
+
+    return () => {window.removeEventListener('click', handleClick)}
+  }, [])
 
   if (loading) {
     return (
@@ -27,7 +39,7 @@ export const Header:FC<HeaderProps> = ({loading=false}) => {
   return (
     <header>
       <nav className='nav_header'>
-        <input type="checkbox" id="cb-burger-menu" hidden/>
+        <input type="checkbox" ref={cbRef} id="cb-burger-menu" hidden/>
         <label htmlFor="cb-burger-menu" className='burger-menu'>
           <div className="burger-line"></div>
           <div className="burger-line"></div>

@@ -195,8 +195,8 @@
 
     .primary-mission h1{
         font-size: 8vw !important;
+        margin-top: 2em !important;
     }
-
     
     .secondary-mission h1{
         font-size: 7vw !important;
@@ -204,6 +204,10 @@
 
     .project-top p{
         margin-right: 10vw !important;
+    }
+
+    .box_blue, .galaxy_wrapper {
+        height: 120vh;
     }
 }
 
@@ -264,5 +268,10 @@
         margin: 2em;
         text-align: center;
         margin-top: 2em !important;
+    }
+
+    
+    .box_blue, .galaxy_wrapper {
+        height: 110vh !important;
     }
 }
