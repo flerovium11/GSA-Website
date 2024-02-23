@@ -14,12 +14,10 @@ export const Home:FC = () => {
           <div className='home-top-wrapper'>
             <h1 className='h1_home'>Cansat 2024</h1>
             <p>
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
-              eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam 
-              voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita 
-              kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
-              eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua
+            <b>CanSat ist ein Team-Wettbewerb der ESA</b> <br /> <br />
+            Die Aufgabe der Teams besteht darin, einen Satelliten (Sat) in Getränkedosengröße (Can) zu bauen. Dieser wird mit einer Rakete in eine Höhe von mindestens 500 Metern befördert und ausgeworfen. Während des Sinkflugs muss der CanSat bestimmte Missionen erfüllen. 
+            <br /> <br />
+            Wir sind die <b>Gmunden Space Agency </b>, besuchen das BG/BRG Gmunden und nehmen am CanSat-Wettbewerb 2023/2024 teil.
             </p>
             <NavLink to='/'><img src='/graphics/logo_circle.svg' alt='GSA Logo' id="logo_circle"/></NavLink>
 

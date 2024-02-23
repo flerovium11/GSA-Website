@@ -1,3 +1,38 @@
 @import '../../variables';
 
+@import '../../variables';
+
+
+.imprint{
+    
+
+    margin-left: 7vw;
+    margin-right: 20vw;
+    text-align: left;
+
+    h1{
+        padding-top: 4vw !important;
+        margin-right: 20vw;
+    }
+
+    h2, h3{
+        font-family: Nunito;
+        font-weight: bold;
+        color: $text-color;
+        font-size: 1.5em;
+        padding-top: 2em;
+        padding-bottom: 1em;
+    }
+
+    li{
+        color: #a0b2ff;
+        font-weight: bold;
+    }
+
+    a{
+        color: #a0b2ff;
+    }
+}
+
+
 

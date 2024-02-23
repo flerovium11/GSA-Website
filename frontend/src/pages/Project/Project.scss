@@ -1,6 +1,8 @@
 @import '../../variables';
 
 .project-top {
+
+
     .squares{
         height: 28em;
         position: absolute;
@@ -53,6 +55,7 @@
     background-color: $main-color;
     height: max-content;
     padding-bottom: 8vw;
+    text-align: left !important;
 
     h1{
         text-align: center;

@@ -13,12 +13,7 @@ export const About:FC = () => {
                 <div className='box_blue'></div>
                 <h1>{t('the-team')}</h1>
                 <p className='introduction'>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
-                    eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam 
-                    voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita 
-                    kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
-                    eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua
+                Mit dem klaren Ziel, nicht nur einen funktionsfähigen Satelliten zu bauen, sondern auch den CanSat-Wettbewerb zu gewinnen, starteten wir, die Gmunden Space Agency (GSA), bestehend aus sechs Mitgliedern des Naturwissenschaftlichen Zweigs des BG/BRG Gmunden, im Oktober in die Recherche und Planung. Uns treibt nicht nur das Interesse an einem Luft- und Raumfahrtprojekt, sondern auch der Wunsch, unsere wissenschaftlichen Kompetenzen zu vertiefen, an. Teamarbeit und das Knüpfen von Kontakten stehen für uns im Vordergrund. 
                 </p>
                 <div className="teammembers">
                     <div className="teammember">
