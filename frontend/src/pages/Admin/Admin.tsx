@@ -1,19 +1,23 @@
 import {FC, useContext, useEffect, useState} from 'react'
 import './Admin.scss'
-import { LoginContext } from '../../components/App/App'
+import { LoginContext, InfoContext } from '../../components/App/App'
 import { Button, Checkbox, Form, Input, Popconfirm, Skeleton, Space, Switch, Tabs, Tooltip } from 'antd'
 import { CheckOutlined, CloseOutlined, DotChartOutlined, FileAddOutlined, FormOutlined, InfoCircleOutlined, LockOutlined, QuestionCircleOutlined, UserAddOutlined, UserOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
-import { setLoginInfo } from '../../utils/backend'
+import { backendRequest, setLoginInfo } from '../../utils/backend'
 import TextArea from 'antd/es/input/TextArea'
 import MDEditor from '@uiw/react-md-editor'
 
-export const Admin:FC = () => {
-    const loginInfo = useContext(LoginContext)
+type AdminProps = {
+    setUsername:Function
+}
+
+export const Admin:FC<AdminProps> = ({setUsername}) => {
+    const username = useContext(LoginContext)
     const navigate = useNavigate()
 
     useEffect(() => {
-        if(loginInfo === null) navigate('/login')
+        if(username === null) navigate('/login')
       }, [])
 
     const [blogpostValue, setBlogpostValue] = useState<string>(`<h1>Blogtitel</h1>
@@ -28,8 +32,10 @@ export const Admin:FC = () => {
     const [ownImageUrl, setOwnImageUrl] = useState<string>('')
     const [addAdminLoading, setAddAdminLoading] = useState<boolean>(false)
     const [postBlogLoading, setPostBlogLoading] = useState<boolean>(false)
-    const [usernameValue, setUsernameValue] = useState<string>(loginInfo?.username ?? '')
+    const [usernameLoading, setUsernameLoading] = useState<boolean>(false)
+    const [usernameValue, setUsernameValue] = useState<string>(username ?? '')
     const [newUsernameValue, setNewUsernameValue] = useState<string>('')
+    const setInfo = useContext(InfoContext)
 
     const confirmDeleteAccount = () => {
         console.log('confirm delete')
@@ -82,16 +88,30 @@ export const Admin:FC = () => {
                                                 }}
                                                 value={usernameValue}
                                                 onChange={(e) => setUsernameValue(e.target?.value.trim().replaceAll(/[^a-zA-Z0-9_]/g, ''))}
-                                                defaultValue={loginInfo?.username}
+                                                defaultValue={username ?? ''}
                                                 prefix={<UserOutlined />}
                                                 placeholder='username'
                                                 status={usernameValue === '' ? 'error' : ''}
                                             />
-                                            {loginInfo?.username !== usernameValue && <>
-                                                {usernameValue !== ''&& <Button>Save</Button>}
+                                            {username !== usernameValue && <>
+                                                {usernameValue !== ''&& <Button
+                                                    onClick={() => {
+                                                        setUsernameLoading(true)
+
+                                                        backendRequest('php/update_username.php', {new_username: usernameValue}).then((response) => {
+                                                            setInfo('Username changed successfully!', 'success')
+                                                       }).catch((reason) => {
+                                                            setInfo(reason.text, reason.status)
+                                                        }).finally(() => {
+                                                            setUsernameLoading(false)
+                                                            setUsername(usernameValue)
+                                                        })
+                                                    }}
+                                                    loading={usernameLoading}
+                                                >Save</Button>}
                                                 <Button 
                                                     onClick={() => {
-                                                        setUsernameValue(loginInfo?.username ?? '')
+                                                        setUsernameValue(username ?? '')
                                                     }}
                                                     danger
                                                 >Cancel</Button>

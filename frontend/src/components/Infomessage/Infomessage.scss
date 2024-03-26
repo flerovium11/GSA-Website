@@ -8,12 +8,24 @@
     width: max-content;
     max-width: calc(100% - 2em);
     color: $text-color;
-    background-color: $error-background;
+    background-color: $info-background;
     padding: 1em;
     padding-right: 2.5em;
     border-radius: 1em;
     bottom: -10em;
     box-shadow: 0 0 5em -1em black!important;
+
+    &.warning {
+        background-color: $error-background;
+    }
+
+    &.error {
+        background-color: $error-background;
+    }
+
+    &.success {
+        background-color: $success-background;
+    }
 
     .close {
         padding: 1em;

@@ -11,13 +11,12 @@ interface HeaderProps {
 }
 
 export const Header:FC<HeaderProps> = ({loading=false}) => {
-  const loginInfo = useContext(LoginContext)
+  const username = useContext(LoginContext)
   const {t} = useTranslation()
   const cbRef = useRef<null|HTMLInputElement>(null)
 
   useEffect(() => {
     const handleClick = (e:MouseEvent) => {
-      console.log(cbRef.current?.checked, e.target)
       if (cbRef.current?.checked && e.target !== cbRef.current && !cbRef.current.nextElementSibling?.contains(e.target as HTMLElement)) cbRef.current.checked = false
     }
 
@@ -50,7 +49,7 @@ export const Header:FC<HeaderProps> = ({loading=false}) => {
           <li><NavLink to='/project'>{t('the-project')}</NavLink></li>
           <li><NavLink to='/blog'>Blog</NavLink></li>
           <li><NavLink to='/about'>{t('we')}</NavLink></li>
-          {loginInfo !== null && <li><NavLink to='/admin'>Admin</NavLink></li>}
+          {username !== null && <li><NavLink to='/admin'>{username}</NavLink></li>}
         </ul>
       </nav>
     </header>

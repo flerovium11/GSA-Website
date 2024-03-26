@@ -11,6 +11,8 @@ export interface sendData {
 export interface responseDataType {
     status:string
     text:string
+    username?:string
+    token?:string
 }
 
 export interface loginInfoType {
@@ -29,7 +31,7 @@ export const setLoginInfo = (username:string, token:string, days:number=365):voi
     setCookie('user-login-token', token, days)
 }
 
-export const backendRequest = async (url:string, data:sendData, updateToken:boolean=false, stayLoggedIn:boolean|null=null):Promise<responseDataType> => {
+export const backendRequest = async (url:string, data:sendData, stayLoggedIn:boolean|null=null):Promise<responseDataType> => {
     const headers:Record<string, string> = {}
     const login:loginInfoType|null = getLoginInfo()
 
@@ -48,40 +50,34 @@ export const backendRequest = async (url:string, data:sendData, updateToken:bool
         success(result) {
             try {
                 const parsedResult = JSON.parse(result)
-
-                if(parsedResult.status === 'success') {
-                    if(updateToken) {
-                        try {
-                            const parsed = JSON.parse(parsedResult.text)
-
-                            const stay:null|boolean = stayLoggedIn ?? !!getCookie('user-stay-loggedin')
                 
-                            if(stay) {
-                                setCookie('user-stay-loggedin', 'true', 1000)
-                                setLoginInfo(parsed.username, parsed.token)
-                            } else {
-                                deleteCookie('user-stay-loggedin')
-                                setLoginInfo(parsed.username, parsed.token, shortRememberTimeHours / 24)
-                            }
-                        } catch(error) {
-                            reject({status: 'connerror', text: "Update token parameter was set but php response didn't match requirements: " + parsedResult.text})
+                if(parsedResult.status !== 'connerror' && parsedResult.username !== null && parsedResult.token !== null) {
+                    try {
+                        const stay:null|boolean = stayLoggedIn ?? !!getCookie('user-stay-loggedin')
+
+                        if(stay) {
+                            setCookie('user-stay-loggedin', 'true', 1000)
+                            setLoginInfo(parsedResult.username, parsedResult.token)
+                        } else {
+                            deleteCookie('user-stay-loggedin')
+                            setLoginInfo(parsedResult.username, parsedResult.token, shortRememberTimeHours / 24)
                         }
-                    }
 
-                    resolve(parsedResult)
+                        delete parsedResult.username
+                        delete parsedResult.token
+                    } catch(error) {
+                        reject({status: 'connerror', text: "Update token parameter was set but php response didn't match requirements: " + parsedResult.text})
+                    }
                 } else {
-                    // don't delete the stored user data if only the connection to server failed
-                    if(updateToken && parsedResult.status !== 'connerror') {
-                        setLoginInfo('', '')
-                    }
-
-                    reject(parsedResult)
+                    setLoginInfo('', '')
                 }
+
+                if(parsedResult.status === 'success') resolve(parsedResult)
+                else reject(parsedResult)
 
             } catch(error) {
                 reject({status: 'connerror', text: result})
             }
-
         },
 
         error(xhr) {
@@ -90,7 +86,7 @@ export const backendRequest = async (url:string, data:sendData, updateToken:bool
     }))
 }
 
-export const syncBackendRequest = (url:string, data:sendData, updateToken:boolean=false, stayLoggedIn:null|boolean=null):responseDataType => {
+export const syncBackendRequest = (url:string, data:sendData, stayLoggedIn:null|boolean=null):responseDataType => {
     let returnVal:responseDataType = {status: 'connerror', text: 'No answer from server'}
     const headers:Record<string, string> = {}
     const login:loginInfoType|null = getLoginInfo()
@@ -121,25 +117,24 @@ export const syncBackendRequest = (url:string, data:sendData, updateToken:boolea
         },
     })
 
-    if(updateToken) {
-        if(returnVal.status === 'success') {
-            try {
-                const parsed = JSON.parse(returnVal.text)
-                const stay:null|boolean = stayLoggedIn ?? !!getCookie('user-stay-loggedin')
-                
-                if(stay) {
-                    setCookie('user-stay-loggedin', 'true', 1000)
-                    setLoginInfo(parsed.username, parsed.token)
-                } else {
-                    deleteCookie('user-stay-loggedin')
-                    setLoginInfo(parsed.username, parsed.token, shortRememberTimeHours / 24)
-                }
-            } catch(error) {
-                console.error("Update token parameter was set but php response didn't match requirements: " + returnVal.text)
+    // don't delete the stored user data if only the connection to server failed
+    if(returnVal.status !== 'connerror' && returnVal.username !== null && returnVal.token !== null) {
+        try {
+            const parsed = JSON.parse(returnVal.text)
+            const stay:null|boolean = stayLoggedIn ?? !!getCookie('user-stay-loggedin')
+            
+            if(stay) {
+                setCookie('user-stay-loggedin', 'true', 1000)
+                setLoginInfo(parsed.username, parsed.token)
+            } else {
+                deleteCookie('user-stay-loggedin')
+                setLoginInfo(parsed.username, parsed.token, shortRememberTimeHours / 24)
             }
-        // don't delete the stored user data if only the connection to server failed
-        } else if(returnVal.status !== 'connerror') {
-            setLoginInfo('', '')
+
+            delete returnVal.username
+            delete returnVal.token
+        } catch(error) {
+            console.error("Update token parameter was set but php response didn't match requirements: " + returnVal.text)
         }
     }
 

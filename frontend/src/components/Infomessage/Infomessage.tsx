@@ -1,8 +1,10 @@
 import {FC, PropsWithChildren, useEffect, useRef} from 'react'
 import './Infomessage.scss'
 
-interface InfomessageProps {
-    type:'info'|'warning'|'success'
+export type InfoMessageType = 'info'|'warning'|'success'
+
+type InfomessageProps = {
+    type:InfoMessageType
     activeTimeMS?:number
     delayMS?:number
 }

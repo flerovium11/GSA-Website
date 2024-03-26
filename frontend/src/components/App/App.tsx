@@ -3,6 +3,7 @@ import {Route, Routes} from 'react-router-dom'
 import type {loginInfoType, responseDataType} from '../../utils/backend'
 import {getLoginInfo, backendRequest} from '../../utils/backend'
 import {DotChartOutlined, WarningOutlined} from '@ant-design/icons'
+import {InfoMessageType} from '../Infomessage/Infomessage'
 
 import Header from '../Header'
 import Footer from '../Footer'
@@ -18,16 +19,32 @@ import About from '../../pages/About'
 import Infomessage from '../Infomessage'
 import { Skeleton, Space } from 'antd'
 
-export const LoginContext:Context<loginInfoType|null> = createContext(null as loginInfoType|null)
+export const LoginContext:Context<string|null> = createContext(null as string|null)
+
+type TypeInfoMessage = null|{
+  message:string
+  type:InfoMessageType
+}
+
+export const InfoContext:Context<any> = createContext({
+  setInfo: (message:string, type:InfoMessageType) => {}
+})
 
 export const App:FC = () => {
-  const [loginInfo, setLoginInfo] = useState<loginInfoType|null>(null)
+  const [username, setUsername] = useState<string|null>(null)
   const [loginInfoResponse, setLoginResponse] = useState<responseDataType|null>(null)
   const [isLoadingLoginInfo, setIsLoadingLoginInfo] = useState<string>('')
+  const [infoMessage, setInfoMessage] = useState<TypeInfoMessage>(null)
 
   const updateLoadingInfo = (info:string) => {
-    console.log(isLoadingLoginInfo)
     setIsLoadingLoginInfo((prev) => prev === '' ? '' : info)
+  }
+
+  const setInfo = (message:string, type:InfoMessageType) : void => {
+    setInfoMessage({
+      message: message,
+      type: type,
+    })
   }
 
   useEffect(() => {
@@ -38,7 +55,7 @@ export const App:FC = () => {
       setTimeout(() => updateLoadingInfo('Hang on...'), 1000)
       setTimeout(() => updateLoadingInfo('This is taking longer than expected...'), 2000)
 
-      backendRequest('php/logininfo.php', {}, true).then((response) => {
+      backendRequest('php/logininfo.php', {}).then((response) => {
         console.log(response)
         setLoginResponse(response)
       }).catch((reason) => {
@@ -46,22 +63,28 @@ export const App:FC = () => {
         setLoginResponse(reason)
       }).finally(() => {
         const fetchedLoginInfo = getLoginInfo()
-        setLoginInfo(fetchedLoginInfo)
+        setUsername(fetchedLoginInfo?.username ?? null)
         setIsLoadingLoginInfo('')
       })
     } else {
       const fetchedLoginInfo = getLoginInfo()
-      setLoginInfo(fetchedLoginInfo)
+      setUsername(fetchedLoginInfo?.username ?? null)
     }
   }, [])
 
   return (
     <>
-      <LoginContext.Provider value={loginInfo}>
+      <InfoContext.Provider value={setInfo}>
+      <LoginContext.Provider value={username}>
         {/* when the user cookie is set but the server doesn't respond display the error message*/}
         {(loginInfoResponse?.status === 'warning' || loginInfoResponse?.status === 'connerror') && 
           <Infomessage type='warning' ><WarningOutlined /> {loginInfoResponse.text}</Infomessage>
         }
+
+        {infoMessage !== null && <Infomessage key={Math.random()} type={infoMessage.type}>
+          {infoMessage.type === 'warning' && <WarningOutlined />}
+           {infoMessage.message}
+        </Infomessage>}
 
         <Header loading={isLoadingLoginInfo !== ''} />
 
@@ -99,7 +122,7 @@ export const App:FC = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/project" element={<Project />} />
             <Route path="/about" element={<About />} />
-            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin" element={<Admin setLoginInfo={setUsername}/>} />
             <Route path="/imprint" element={<Imprint />} />
             <Route path="/privacy" element={<Privacy />} />
           </Routes>
@@ -107,6 +130,7 @@ export const App:FC = () => {
         </>}
         <Footer loading={isLoadingLoginInfo !== ''} />
       </LoginContext.Provider>
+      </InfoContext.Provider>
     </>
   )
 }
