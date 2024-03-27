@@ -10,7 +10,9 @@
     gap: 20px;
     width: fit-content;
     border-radius: 1em;
-    position: relative;
+    position: absolute;
+    left: 0.5em;
+    bottom: 1em;
     margin: 0 1em;
 
     .lang-icon {

@@ -67,10 +67,14 @@
 }
 
 @media (max-width: 500px){
-    .blogpost{
+    .blogpost {
         width: 100vw !important;
         margin-left: 0;
         border-radius: 0;
+    }
+
+    .blog-container.nopad {
+        padding: 0!important;
     }
 
     .image_wrapper_blog img{

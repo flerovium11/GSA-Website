@@ -1,8 +1,8 @@
 import {FC, createContext, Context, useState, useEffect} from 'react'
-import {Route, Routes} from 'react-router-dom'
+import {Route, Routes, useLocation} from 'react-router-dom'
 import type {loginInfoType, responseDataType} from '../../utils/backend'
 import {getLoginInfo, backendRequest} from '../../utils/backend'
-import {DotChartOutlined, WarningOutlined} from '@ant-design/icons'
+import {CheckCircleOutlined, CloseCircleOutlined, DotChartOutlined, WarningOutlined} from '@ant-design/icons'
 import {InfoMessageType} from '../Infomessage/Infomessage'
 
 import Header from '../Header'
@@ -35,6 +35,11 @@ export const App:FC = () => {
   const [loginInfoResponse, setLoginResponse] = useState<responseDataType|null>(null)
   const [isLoadingLoginInfo, setIsLoadingLoginInfo] = useState<string>('')
   const [infoMessage, setInfoMessage] = useState<TypeInfoMessage>(null)
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   const updateLoadingInfo = (info:string) => {
     setIsLoadingLoginInfo((prev) => prev === '' ? '' : info)
@@ -83,7 +88,9 @@ export const App:FC = () => {
 
         {infoMessage !== null && <Infomessage key={Math.random()} type={infoMessage.type}>
           {infoMessage.type === 'warning' && <WarningOutlined />}
-           {infoMessage.message}
+          {['error', 'connerror'].includes(infoMessage.type) && <CloseCircleOutlined />}
+          {infoMessage.type === 'success' && <CheckCircleOutlined />}
+            &nbsp;{infoMessage.message}
         </Infomessage>}
 
         <Header loading={isLoadingLoginInfo !== ''} />
@@ -122,7 +129,7 @@ export const App:FC = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/project" element={<Project />} />
             <Route path="/about" element={<About />} />
-            <Route path="/admin" element={<Admin setLoginInfo={setUsername}/>} />
+            <Route path="/admin" element={<Admin setUsername={setUsername}/>} />
             <Route path="/imprint" element={<Imprint />} />
             <Route path="/privacy" element={<Privacy />} />
           </Routes>

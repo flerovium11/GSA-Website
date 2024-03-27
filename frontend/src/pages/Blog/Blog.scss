@@ -1,0 +1,138 @@
+@import '../../variables';
+
+.blog-container {
+    padding: 3em;
+    background: linear-gradient(#495182 40%, #627eae);
+    min-height: 50vh;
+}
+
+.content-container {
+    margin: auto;
+    max-width: 1000px;
+    color: white;
+
+    img {
+        width: 50%;
+        min-width: 10em;
+        border-radius: 1em;
+        margin: 2em 0;
+    }
+}
+
+.blog-bottom {
+    color: white;
+    font-size: 20px;
+    padding: 2em 0;
+    margin-top: 5em;
+    border-top: 1px solid white;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em 5em;
+
+    .author {
+        display: flex;
+        align-items: center;
+        gap: .5em 1em;
+        img {
+            width: 3em;
+        }
+    }
+
+    .reactions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2em;
+
+        .reaction {
+            cursor: pointer;
+            border: 0.5px solid white;
+            border-radius: .5em;
+            padding: .3em .5em;
+            display: flex;
+            gap: .5em;
+            justify-content: space-between;
+            align-items: center;
+
+            .old-num, .new-num {
+                display: inline-block;
+                transition: transform .5s, opacity .5s;
+            }
+
+            .new-num {
+                transform: translateX(calc(-1em * var(--len))) translateY(1em) rotateX(-100deg);
+                opacity: 0;
+                margin-right: calc(-1em * var(--len));
+            }
+
+            &.active {
+                color: #a0b2ff;
+                border-color: #a0b2ff;
+                font-weight: bold;
+
+                .new-num {
+                    transform: translateX(calc(-1em * var(--len))) translateY(0) rotateX(0deg);
+                    opacity: 1;
+                }
+
+                .old-num {
+                    transform: translateY(-1em) rotateX(100deg);
+                    opacity: 0;
+                }
+            }
+
+            &:hover {
+                .emoji {
+                    transform: scale(1.3);
+                }
+            }
+
+
+
+            .emoji {
+                font-size: 30px;
+                transition: .2s;
+            }
+        }
+    }
+}
+
+.blog-bottom ~ main {
+    margin: 0 -3em;
+}
+
+.sad {
+    font-size: 60px;
+}
+
+.more-posts {
+    padding: 1.5em 0!important;
+    font-size: min(30px, 5vw)!important;
+    width: fit-content;
+    margin: auto;
+}
+
+.page-bottom {
+    background-image: url('/graphics/galaxy.jpg');
+    background-size: cover;
+    position: relative;
+    overflow-y: hidden;
+    margin: 5em -3em -3em -3em;
+
+    & > * {
+        z-index: 1;
+        position: relative;
+    }
+
+    &::after {
+        content: '';
+        position: absolute!important;
+        width: 100%;
+        height: 500vh;
+        top: 0;
+        left: 0;
+        opacity: 0.718;
+        background-color: #111555ff;
+    }
+}

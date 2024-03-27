@@ -7,7 +7,7 @@
 
 @font-face {
     font-family: Astro Space;
-    src: url('fonts/AstroSpace-eZ2Bg.ttf');
+    src: url('/fonts/AstroSpace-eZ2Bg.ttf');
 }
 
 html {
@@ -85,7 +85,7 @@ a:not(a:has(img, button)) {
     }
 }
 
-#admin-panel h1:not(#blogtitel), html * .ant-form h1:not(#blogtitel) {
+#admin-panel h1:not(.w-md-editor-preview h1), html * .ant-form h1:not(.w-md-editor-preview h1) {
     margin-top: 100px !important;
     font-size: 50px !important;
     padding: 1em 0 .5em 0 !important;

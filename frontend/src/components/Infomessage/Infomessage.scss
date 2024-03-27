@@ -11,6 +11,7 @@
     background-color: $info-background;
     padding: 1em;
     padding-right: 2.5em;
+    text-align: start;
     border-radius: 1em;
     bottom: -10em;
     box-shadow: 0 0 5em -1em black!important;
@@ -19,7 +20,7 @@
         background-color: $error-background;
     }
 
-    &.error {
+    &.error, &.connerror {
         background-color: $error-background;
     }
 

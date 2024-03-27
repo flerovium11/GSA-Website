@@ -2,7 +2,7 @@ import {FC, useContext, useEffect, useState} from 'react'
 import './Admin.scss'
 import { LoginContext, InfoContext } from '../../components/App/App'
 import { Button, Checkbox, Form, Input, Popconfirm, Skeleton, Space, Switch, Tabs, Tooltip } from 'antd'
-import { CheckOutlined, CloseOutlined, DotChartOutlined, FileAddOutlined, FormOutlined, InfoCircleOutlined, LockOutlined, QuestionCircleOutlined, UserAddOutlined, UserOutlined } from '@ant-design/icons'
+import { CheckOutlined, CloseOutlined, DotChartOutlined, FileAddOutlined, FormOutlined, InfoCircleOutlined, LockOutlined, MailOutlined, QuestionCircleOutlined, UserAddOutlined, UserOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import { backendRequest, setLoginInfo } from '../../utils/backend'
 import TextArea from 'antd/es/input/TextArea'
@@ -20,41 +20,108 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
         if(username === null) navigate('/login')
       }, [])
 
-    const [blogpostValue, setBlogpostValue] = useState<string>(`<h1>Blogtitel</h1>
+    const [blogpostValue, setBlogpostValue] = useState<string>(localStorage.getItem('blog-content') ?? `<h1>Blogtitel</h1>
     <p>Jegliches HTML-Markup wird unterstützt</p>
     <blockquote>Probier die verschiedenen Ansichten und Werkzeuge in der Toolbar aus!</blockquote>
-    <h3>Bilder können über Links eingefügt werden</h3>
+    <h3>Bilder können über Links eingefügt werden (Für eigene Bilder einfach nach "image hosting" googlen</h3>
     <img src="https://images.saymedia-content.com/.image/t_share/MTk2NzY3MjA5ODc0MjY5ODI2/top-10-cutest-cat-photos-of-all-time.jpg"/>
         `)
     
-    const [ownDescriptionToggle, setOwnDescriptionToggle] = useState<boolean>(true)
     const [ownTitleImageToggle, setOwnTitleImageToggle] = useState<boolean>(false)
     const [ownImageUrl, setOwnImageUrl] = useState<string>('')
     const [addAdminLoading, setAddAdminLoading] = useState<boolean>(false)
     const [postBlogLoading, setPostBlogLoading] = useState<boolean>(false)
     const [usernameLoading, setUsernameLoading] = useState<boolean>(false)
+    const [deleteLoading, setDeleteLoading] = useState<boolean>(false)
+    const [changePasswordLoading, setChangePasswordLoading] = useState<boolean>(false)
     const [usernameValue, setUsernameValue] = useState<string>(username ?? '')
     const [newUsernameValue, setNewUsernameValue] = useState<string>('')
     const setInfo = useContext(InfoContext)
 
     const confirmDeleteAccount = () => {
-        console.log('confirm delete')
+        setDeleteLoading(true)
+
+        backendRequest('php/update_password.php', {}).then((response) => {
+            setLoginInfo('', '')
+            location.reload()
+        }).catch((reason) => {
+            setInfo(reason.text, reason.status)
+        }).finally(() => {
+            setDeleteLoading(false)
+        })
     }
 
     const cancelDeleteAccount = () => {
-        console.log('cancel delete')
+        setInfo('Puh, gerade nochmal gut gegangen', 'info')
     }
 
     const onSendPassword = (values:any) => {
-        console.log('password', values)
+        if (values['new-password'] !== values['repeat-password']) return setInfo('Passwords do not match!', 'warning')
+        if (values['new-password'] === values['old-password']) return setInfo("You didn't change anything!", 'warning')
+
+        setChangePasswordLoading(true)
+
+        backendRequest('php/update_password.php', values).then((response) => {
+            setInfo('Password changed successfully!', 'success')
+        }).catch((reason) => {
+            setInfo(reason.text, reason.status)
+        }).finally(() => {
+            setChangePasswordLoading(false)
+        })
     }
 
     const onPostBlog = (values:any) => {
-        console.log('blog', values)
+        if (blogpostValue === '') return setInfo('Blog content cannot be left empty!', 'warning')
+        if (values['own-description'] === undefined || values['own-description'] === '') return setInfo('Blog description cannot be left empty!', 'warning')
+        
+        setPostBlogLoading(true)
+
+        if (Object.hasOwn(values, 'own-image-url')) {
+            const image = new Image();
+
+            image.onload = function() {
+                if (image.width > 0) {
+                    continuePostBlog(values)
+                } else {
+                    setPostBlogLoading(false)
+                    return setInfo('Image URL does not exist!', 'warning')
+                }
+            }
+
+            image.onerror = function() {
+                setPostBlogLoading(false)
+                return setInfo('Image URL does not exist!', 'warning')
+            }
+
+            image.src = values['own-image-url']
+        } else {
+            continuePostBlog(values)
+        }
     }
 
-    const onAddUser = (values:any) => {
-        console.log('user', values)
+    const continuePostBlog = (values:any) => {        
+        backendRequest('php/post_blog.php', {...values, content: blogpostValue}).then((response) => {
+            setInfo(`Blog posted successfully! Visit it at www.gmundenspaceagency.org/blog/${response.text}`, 'success')
+            localStorage.removeItem('blog-content')
+            localStorage.removeItem('blog-description')
+        }).catch((reason) => {
+            setInfo(reason.text, reason.status)
+        }).finally(() => {
+            setPostBlogLoading(false)
+        })
+    }
+
+    const onAddAdmin = (values:any) => {
+        if (values['new-password'] !== values['repeat-password']) return setInfo('Passwords do not match!', 'warning')
+        setAddAdminLoading(true)
+
+        backendRequest('php/add_admin.php', values).then((response) => {
+            setInfo('Admin added successfully!', 'success')
+        }).catch((reason) => {
+            setInfo(reason.text, reason.status)
+        }).finally(() => {
+            setAddAdminLoading(false)
+        })
     }
 
     return (
@@ -117,7 +184,6 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
                                                 >Cancel</Button>
                                             </>}
                                         </Space>
-                                        {usernameValue === '' && <div style={{color: '#ff4d4f'}}>Username already taken</div>}
                                     </Form.Item>
                                 </Form>
 
@@ -153,7 +219,7 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
                                             </Form.Item>
                                         </Space>
                                         <Form.Item>
-                                            <Button htmlType="submit" className='-mt-2'>
+                                            <Button htmlType="submit" className='-mt-2' loading={changePasswordLoading}>
                                                 Change
                                             </Button>
                                         </Form.Item>
@@ -169,11 +235,11 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
                                         onConfirm={confirmDeleteAccount}
                                         onCancel={cancelDeleteAccount}
                                         icon={<QuestionCircleOutlined />}
-                                        okButtonProps={{danger: true}}
+                                        okButtonProps={{danger: true, loading: deleteLoading}}
                                         okText="Yes"
                                         cancelText="Cancel"
                                     >
-                                        <Button type='primary' danger>Delete Account</Button>
+                                        <Button type='primary' danger loading={deleteLoading}>Delete Account</Button>
                                     </Popconfirm>
                                 </div>
                             </>,
@@ -184,39 +250,30 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
                             label: `Create Blogpost`,
                             children: <>
                                 <Form
-                                    initialValues={{remember: true}}
+                                    initialValues={{remember: true, 'own-description': localStorage.getItem('blog-description') ?? ''}}
                                     onFinish={onPostBlog}
                                 >
                                     <Form.Item>
                                         <MDEditor
                                             value={blogpostValue}
-                                            onChange={(value) => setBlogpostValue(value  ?? '')}
+                                            onChange={(value) => {
+                                                setBlogpostValue(value ?? '')
+                                                if (value && value.trim() !== '') localStorage.setItem('blog-content', value)
+                                                else localStorage.removeItem('blog-content')
+                                            }}
                                             height='30em'
                                         />
                                     </Form.Item>
-                                    <Form.Item name='use-own-description'>
-                                        <Space direction='horizontal'>
-                                            <span className='light-font'>Eigene Kurzbeschreibung definieren</span>
-                                            <Switch
-                                                checkedChildren={<CheckOutlined />}
-                                                unCheckedChildren={<CloseOutlined />}
-                                                value={ownDescriptionToggle}
-                                                onChange={setOwnDescriptionToggle}
-                                                defaultChecked
-                                            />
-                                        </Space>
+                                    <Form.Item name='own-description'>
+                                        <TextArea
+                                            showCount
+                                            maxLength={150}
+                                            placeholder="Gib hier die Kurzbeschreibung ein, die in der Blog-Preview sichtbar sein wird."
+                                            autoSize={{ minRows: 2, maxRows: 6 }}
+                                            onChange={(el) => localStorage.setItem('blog-description', el.target.value)}
+                                        />
                                     </Form.Item>
-                                    {ownDescriptionToggle &&
-                                        <Form.Item name='own-description'>
-                                            <TextArea
-                                                showCount
-                                                maxLength={150}
-                                                placeholder="Gib hier die Kurzbeschreibung ein, die in der Blog-Preview sichtbar sein wird."
-                                                autoSize={{ minRows: 2, maxRows: 6 }}
-                                            />
-                                        </Form.Item>
-                                    }
-                                    <Form.Item name='use-own-image'>
+                                    <Form.Item>
                                         <Space direction='horizontal'>
                                             <span className='light-font'>Eigenes Titelbild wählen (URL)</span>
                                             <Switch
@@ -256,7 +313,7 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
                             children: <>
                                 <Form
                                     initialValues={{ remember: true }}
-                                    onFinish={onAddUser}
+                                    onFinish={onAddAdmin}
                                     layout='vertical'
                                 >
                                 <Space direction='vertical'>
@@ -265,8 +322,6 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
                                         name="username"
                                         rules={[{ required: true, message: 'Please input the username!' }]}
                                         hasFeedback
-                                        validateStatus="warning"
-                                        help="The information is being validated..."
                                     >
                                         <Input
                                             count={{
@@ -279,6 +334,24 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
                                             onChange={(e) => setNewUsernameValue(e.target?.value.trim().replaceAll(/[^a-zA-Z0-9_]/g, ''))}
                                             prefix={<UserOutlined />}
                                             placeholder='username'
+                                        />
+                                    </Form.Item>
+
+                                    <Form.Item
+                                        label="Email"
+                                        name="email"
+                                        rules={[
+                                            {
+                                              required: true,
+                                              type: "email",
+                                              message: "This is not not a valid email!",
+                                            },
+                                        ]}
+                                        hasFeedback
+                                    >
+                                        <Input
+                                            prefix={<MailOutlined />}
+                                            placeholder='john@cena.xyz'
                                         />
                                     </Form.Item>
 

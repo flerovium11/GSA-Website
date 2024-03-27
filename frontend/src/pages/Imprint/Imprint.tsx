@@ -15,9 +15,12 @@ export const Imprint:FC = () => {
         <a href="mailto:gmundenspaceangency@gmail.com">gmundenspaceangency@gmail.com</a> </p>
 
         <h2>Redaktionell verantwortlich</h2>
-        <p>Ennio Binder<br />
-        Heckenweg 18<br />
-        4813 Altm&uuml;nster</p>
+        <p>Ennio Binder<br /></p>
+        
+
+        <h2>Grafiken dankend mit der Gestattung der Ersteller/innen verwendet</h2>
+        <a href="https://www.flaticon.com/free-icons/person" title="person icons">Person icons created by Freepik - Flaticon</a> <br />
+        <a href="https://www.flaticon.com/free-icons/person" title="person icons">Person icons created by Freepik - Flaticon</a>
         <br />
         <br />
         <br />

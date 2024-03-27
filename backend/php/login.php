@@ -1,6 +1,5 @@
 <?php 
     require_once 'initialize.php';
-    $response = ['status' => 'error', 'text' => "Nope, try again later :("];
 
     if($loggedin) {
         $response['status'] = 'warning';
@@ -16,11 +15,10 @@
             $response['text'] = 'Wrong password!';
         } else {
             $response['status'] = 'success';
-            $info = ['username' => $user['username']];
             $new_token = create_user_token();
-            $info['token'] = $new_token;
+            $response['token'] = $new_token;
+            $response['username'] = $user['username'];
             execute('update admin set login_token = ? where admin_id = ?', [password_hash($new_token.$user['salt'], PASSWORD_DEFAULT), $user['admin_id']]);
-            $response['text'] = json_encode($info);
         }
     }
 

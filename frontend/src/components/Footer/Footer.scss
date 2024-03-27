@@ -23,7 +23,7 @@ footer {
     ul{
         display: flex;
         list-style: none;
-        gap: 5em;
+        gap: 2em 5em;
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
@@ -67,5 +67,12 @@ footer {
     
     footer{
         height: 120vw;
+    }
+}
+
+@media (max-width: 300px){
+    
+    footer{
+        height: 50vh;
     }
 }

@@ -4,6 +4,10 @@ button > *, .ant-tabs-tab > *, .light-font{
     color: $text-color;
 }
 
+#admin-panel {
+    padding: 0 5em;
+}
+
 .ant-popover-content .ant-btn-default > *{
     color: $blog-textcolor;
 }
@@ -24,5 +28,6 @@ button > *, .ant-tabs-tab > *, .light-font{
 
     img {
         border-radius: 0.5em;
+        margin: 0.5em;
     }
 }

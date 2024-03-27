@@ -9,9 +9,6 @@ export const Project:FC = () => {
     return (
         <>
             <section className='project-top'>
-                <div className='project-wrapper'>
-                    <div className='box_blue'></div>
-                    <div className='galaxy_wrapper'></div>
                     <img className='squares' src='/graphics/squares.svg'></img>
                     <h1>{t('the-project')}</h1>
                     <h2>{t('what-is-cansat')}</h2>
@@ -22,7 +19,6 @@ export const Project:FC = () => {
                     Die Teilnahme am CanSat-Wettbewerb bietet uns die einzigartige Gelegenheit, sämtliche Phasen eines realen Weltraumprojekts zu durchlaufen. Dies umfasst die Auswahl der Mission, das Design des CanSats, die Integration technischer Komponenten, technische Testläufe sowie den eigentlichen Start des Minisatelliten. Darüber hinaus gehört auch die wissenschaftliche Analyse der gesammelten Daten zu den Aufgaben.
                     </p>
                     <a target="_blank" href="https://ars.electronica.art/esero/de/projects/cansat/">Mehr zum Wettbewerb &nbsp;<ExportOutlined /></a>
-                </div>
                 <div className='outlined-rect'></div>
                 </section>
             <section className="primary-mission">

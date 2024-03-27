@@ -4,12 +4,13 @@
     padding-top: 4.5em;
 }
 
-.h2_blog{
-    margin-left: 7vw;
-    position: absolute;
-    top: -3em;
-}
-
 .blogdata_title{
     animation: none;
+}
+
+#blog_button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 5em;
 }

@@ -39,9 +39,7 @@ export const Footer:FC<FooterProps> = ({loading=false}) => {
                 <p>
                     {t('contact')}: <a href={`mailto:gmundenspaceagency@gmail.com?subject=${t('request-over-website')}`}>gmundenspaceagency@gmail.com</a>
                 </p>
-                <p>Instagram:
-                    <a href='https://www.instagram.com/gmundenspaceagency'>gmundenspaceagency</a>
-                </p>
+                <p>Instagram: <a href='https://www.instagram.com/gmundenspaceagency'>gmundenspaceagency</a></p>
                 <LanguageMenu />
                 <p>
                     {/* "GSA" ist der Link zum Admin Login, wenn dir eine bessere Position für 

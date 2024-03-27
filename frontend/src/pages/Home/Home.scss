@@ -15,16 +15,33 @@ p{
     z-index: 10;
 }
 
-.home-top{
-    height: 100vh;
-    width: 100vw;
-    margin-left: 7vw;
+.home-top, .project-top{
+    padding: 100px 7vw 5em 7vw;
+    background-image: url('/graphics/galaxy.jpg');
+    background-size: cover;
+    position: relative;
+    overflow-y: hidden;
+    margin-top: -100px;
+
+    * {
+        z-index: 1;
+        position: relative;
+    }
+
+    &::after {
+        content: '';
+        position: absolute!important;
+        width: 100%;
+        height: 200vh;
+        top: 0;
+        left: 0;
+        opacity: 0.718;
+        background-color: #111555ff;
+    }
 }
 
-.home-top-wrapper{
-    height: 95vh;
-    width: 40vw;
-    position: absolute;
+#logo_circle {
+    width: 100%;
 }
 
 .home-content{
@@ -33,45 +50,6 @@ p{
     flex-wrap: wrap;
     margin-top: 4em;
     min-height: 100vh;
-}
-
-.box_blue{
-    height: 100vh;
-    opacity: 0.718;
-    width: 100vw;
-    background-color: #111555ff;
-    position: absolute;
-    top: 0;
-    z-index: -1;
-    left: 0;
-}
-
-.galaxy_wrapper{
-    height: 100vh;
-    width: 100vw;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-image: url('/graphics/galaxy.jpg');
-    background-size: cover;
-    background-position: left;
-    z-index: -2;
-}
-
-#logo_circle{
-    position: absolute;
-    height: 25vw;
-    right: -40vw;
-    top: 50%;
-    transform: translateY(-60%);
-    cursor: auto;
-}
-
-#blog_button{
-    position: absolute;
-    bottom: 5vh;
-    left: 50%;
-    transform: translateX(-50%);
 }
 
 h2{
@@ -88,16 +66,6 @@ h2{
 }
 
 @media (max-width: 1000px){
-    #logo_circle{
-        display: none;
-    }
-
-    .home-top-wrapper{
-        margin: auto;
-        width: 80vw;
-        margin-top: 0vw;
-    }
-
     .h1_home{
         font-size: 7vw !important;
         padding-top: 10vw !important;
@@ -107,6 +75,31 @@ h2{
 @media (max-width: 900px){
     .h1_home{
         font-size: 8vw !important;
+    }
+
+    #logo_circle {
+        width: 40%;
+        margin: auto;
+    }
+
+    .home-top {
+        flex-wrap: wrap;
+        gap: 1em!important;
+
+        h1 {
+            padding-top: .5em!important;
+        }
+    }
+
+    .logo-wrapper {
+        order: -1;
+        width: 100%!important;
+        justify-items: center;
+        margin-top: 2em;
+    }
+
+    .content-wrapper {
+        width: 100%!important;
     }
 }
 

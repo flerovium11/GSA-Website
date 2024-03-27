@@ -10,8 +10,8 @@ export const Home:FC = () => {
 
   return (
     <>
-      <section className='home-top'>
-          <div className='home-top-wrapper'>
+      <section className='home-top flex gap-16'>
+          <div className='w-2/3 content-wrapper'>
             <h1 className='h1_home'>Cansat 2024</h1>
             <p>
             <b>CanSat ist ein Team-Wettbewerb der ESA</b> <br /> <br />
@@ -19,17 +19,15 @@ export const Home:FC = () => {
             <br /> <br />
             Wir sind die <b>Gmunden Space Agency </b>, besuchen das BG/BRG Gmunden und nehmen am CanSat-Wettbewerb 2023/2024 teil.
             </p>
-            <NavLink to='/'><img src='/graphics/logo_circle.svg' alt='GSA Logo' id="logo_circle"/></NavLink>
-
+            <div className='w-full'>
               <NavLink to='project'><Button type='secondary'>{t('the-project')}</Button></NavLink>
               <NavLink to='blog'><Button type='secondary'>Blog</Button></NavLink>
+            </div>
           </div>
-              <div className='box_blue'></div>
-              <div className='galaxy_wrapper'></div>
-
-        <div className="logo-in-circle"></div>
+          <div className='w-1/3 flex items-center justify-center logo-wrapper'><NavLink to='/'><img src='/graphics/logo_circle.svg' alt='GSA Logo' id="logo_circle"/></NavLink></div>
       </section>
       <section className="home-content">
+        <h2 className='ml-24 mb-6' style={{fontSize: '20px'}}>Neues</h2>
         <BlogOverview blogcount={2} />
         <div id='blog_button'>
           <NavLink to='blog'><Button type='secondary'>Zum Blog</Button></NavLink>

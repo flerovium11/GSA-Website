@@ -17,13 +17,12 @@
 
     h1{
         margin-left: 7vw;
-        padding-top: 14vw;
+        padding-top: 10vh!important;
         color: $text-color;
         font-family: $headings;
         z-index: 10;
         font-size: 5vw !important;
         font-weight: lighter;
-        padding-top: 10vw !important;
     }
 
     p{
@@ -47,8 +46,6 @@
         color: $blog-color;
         font-size: 1.5em;
     }
-
-    height: 100vh;
 }
 
 .primary-mission{
@@ -59,7 +56,7 @@
 
     h1{
         text-align: center;
-        padding-top: 8vw;
+        padding-top: 3vw!important;
     }
 
     h2{
@@ -118,10 +115,16 @@
     left: 0;
    }
 
+   overflow: hidden;
+   position: relative;
+
    .stars_wrapper{
     background-image: url('/graphics/stars.jpg');
     background-size: cover;
-    width: 100vw;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     z-index: -1;
     position: absolute;
    }
@@ -169,9 +172,6 @@
 
 
 @media (max-width: 1500px){
-    .project-top h1{
-        padding-top: 14vw !important;
-    }
 
     .project-top p{
         margin-right: 30vw !important;
@@ -215,9 +215,6 @@
 }
 
 @media (max-width: 400px){
-    .project-top h1{
-        padding-top: 10vw !important;
-    }
 
     .project-top h2{
         font-size: 1.5em;
@@ -233,9 +230,6 @@
 }
 
 @media (max-height: 800px){
-    .project-top h1{
-        padding-top: 5vw !important;
-    }
 
     .project-top p{
         margin-bottom: 1em !important;
