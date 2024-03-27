@@ -61,10 +61,9 @@ export const App:FC = () => {
       setTimeout(() => updateLoadingInfo('This is taking longer than expected...'), 2000)
 
       backendRequest('php/logininfo.php', {}).then((response) => {
-        console.log(response)
         setLoginResponse(response)
       }).catch((reason) => {
-        console.log(reason)
+        console.error(reason)
         setLoginResponse(reason)
       }).finally(() => {
         const fetchedLoginInfo = getLoginInfo()

@@ -27,7 +27,7 @@ export const Home:FC = () => {
           <div className='w-1/3 flex items-center justify-center logo-wrapper'><NavLink to='/'><img src='/graphics/logo_circle.svg' alt='GSA Logo' id="logo_circle"/></NavLink></div>
       </section>
       <section className="home-content">
-        <h2 className='ml-24 mb-6' style={{fontSize: '20px'}}>Neues</h2>
+        <h2 className='ml-24 mb-6' style={{fontSize: '25px', height: 'min-content'}}>Neues</h2>
         <BlogOverview blogcount={2} />
         <div id='blog_button'>
           <NavLink to='blog'><Button type='secondary'>Zum Blog</Button></NavLink>

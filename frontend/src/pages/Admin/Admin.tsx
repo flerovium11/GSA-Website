@@ -41,7 +41,7 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
     const confirmDeleteAccount = () => {
         setDeleteLoading(true)
 
-        backendRequest('php/update_password.php', {}).then((response) => {
+        backendRequest('php/delete_account.php', {}).then((response) => {
             setLoginInfo('', '')
             location.reload()
         }).catch((reason) => {

@@ -22,6 +22,12 @@ export const LanguageMenu:FC<LanguageMenuProps> = (props) => {
     }
 
     useEffect(() => {
+        i18n.changeLanguage('de')
+    }, [])
+
+    return null
+
+    useEffect(() => {
         const clickOutside = (event:MouseEvent) => {
             if(
                 languageMenuRef.current 

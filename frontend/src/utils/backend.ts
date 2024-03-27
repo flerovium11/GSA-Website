@@ -31,11 +31,11 @@ export const setLoginInfo = (username:string, token:string, days:number=365):voi
     setCookie('user-login-token', token, days)
 }
 
-export const backendRequest = async (url:string, data:sendData, stayLoggedIn:boolean|null=null):Promise<responseDataType> => {
+export const backendRequest = async (url:string, data:sendData, stayLoggedIn:boolean|null=null, adminTransaction:boolean=true):Promise<responseDataType> => {
     const headers:Record<string, string> = {}
     const login:loginInfoType|null = getLoginInfo()
 
-    if(login) {
+    if(login && adminTransaction) {
         headers['GSA-Username'] = login.username
         headers['Authorization'] = `Bearer ${login.token}`
     }
@@ -51,25 +51,27 @@ export const backendRequest = async (url:string, data:sendData, stayLoggedIn:boo
             try {
                 const parsedResult = JSON.parse(result)
                 
-                if(parsedResult.status !== 'connerror' && parsedResult.username !== null && parsedResult.token !== null) {
-                    try {
-                        const stay:null|boolean = stayLoggedIn ?? !!getCookie('user-stay-loggedin')
+                if (adminTransaction && parsedResult.status !== 'connerror') {
+                    if(parsedResult.username !== null && parsedResult.token !== null) {
+                        try {
+                            const stay:null|boolean = stayLoggedIn ?? !!getCookie('user-stay-loggedin')
 
-                        if(stay) {
-                            setCookie('user-stay-loggedin', 'true', 1000)
-                            setLoginInfo(parsedResult.username, parsedResult.token)
-                        } else {
-                            deleteCookie('user-stay-loggedin')
-                            setLoginInfo(parsedResult.username, parsedResult.token, shortRememberTimeHours / 24)
+                            if(stay) {
+                                setCookie('user-stay-loggedin', 'true', 1000)
+                                setLoginInfo(parsedResult.username, parsedResult.token)
+                            } else {
+                                deleteCookie('user-stay-loggedin')
+                                setLoginInfo(parsedResult.username, parsedResult.token, shortRememberTimeHours / 24)
+                            }
+
+                            delete parsedResult.username
+                            delete parsedResult.token
+                        } catch(error) {
+                            reject({status: 'connerror', text: "Update token parameter was set but php response didn't match requirements: " + parsedResult.text})
                         }
-
-                        delete parsedResult.username
-                        delete parsedResult.token
-                    } catch(error) {
-                        reject({status: 'connerror', text: "Update token parameter was set but php response didn't match requirements: " + parsedResult.text})
+                    } else {
+                        setLoginInfo('', '')
                     }
-                } else {
-                    setLoginInfo('', '')
                 }
 
                 if(parsedResult.status === 'success') resolve(parsedResult)
@@ -86,12 +88,12 @@ export const backendRequest = async (url:string, data:sendData, stayLoggedIn:boo
     }))
 }
 
-export const syncBackendRequest = (url:string, data:sendData, stayLoggedIn:null|boolean=null):responseDataType => {
+export const syncBackendRequest = (url:string, data:sendData, stayLoggedIn:null|boolean=null, adminTransaction:boolean=true):responseDataType => {
     let returnVal:responseDataType = {status: 'connerror', text: 'No answer from server'}
     const headers:Record<string, string> = {}
     const login:loginInfoType|null = getLoginInfo()
 
-    if(login) {
+    if(login && adminTransaction) {
         headers['GSA-Username'] = login.username
         headers['Authorization'] = `Bearer ${login.token}`
     }
@@ -117,24 +119,27 @@ export const syncBackendRequest = (url:string, data:sendData, stayLoggedIn:null|
         },
     })
 
-    // don't delete the stored user data if only the connection to server failed
-    if(returnVal.status !== 'connerror' && returnVal.username !== null && returnVal.token !== null) {
-        try {
-            const parsed = JSON.parse(returnVal.text)
-            const stay:null|boolean = stayLoggedIn ?? !!getCookie('user-stay-loggedin')
-            
-            if(stay) {
-                setCookie('user-stay-loggedin', 'true', 1000)
-                setLoginInfo(parsed.username, parsed.token)
-            } else {
-                deleteCookie('user-stay-loggedin')
-                setLoginInfo(parsed.username, parsed.token, shortRememberTimeHours / 24)
-            }
+    if (adminTransaction && returnVal.status !== 'connerror') {
+        if(returnVal.username !== null && returnVal.token !== null) {
+            try {
+                const parsed = JSON.parse(returnVal.text)
+                const stay:null|boolean = stayLoggedIn ?? !!getCookie('user-stay-loggedin')
+                
+                if(stay) {
+                    setCookie('user-stay-loggedin', 'true', 1000)
+                    setLoginInfo(parsed.username, parsed.token)
+                } else {
+                    deleteCookie('user-stay-loggedin')
+                    setLoginInfo(parsed.username, parsed.token, shortRememberTimeHours / 24)
+                }
 
-            delete returnVal.username
-            delete returnVal.token
-        } catch(error) {
-            console.error("Update token parameter was set but php response didn't match requirements: " + returnVal.text)
+                delete returnVal.username
+                delete returnVal.token
+            } catch(error) {
+                console.error("Update token parameter was set but php response didn't match requirements: " + returnVal.text)
+            }
+        } else {
+            setLoginInfo('', '')
         }
     }
 

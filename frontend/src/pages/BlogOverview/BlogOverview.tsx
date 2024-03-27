@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next'
 import { backendRequest } from '../../utils/backend'
 import { Skeleton, Space } from 'antd'
 import { Blogdata } from '../../components/Blogpost/Blogpost'
-import { DotChartOutlined } from '@ant-design/icons'
 
 interface BlogOverviewProps {
     blogcount?:number
@@ -25,12 +24,12 @@ export const BlogOverview:FC<BlogOverviewProps> = (props) => {
     }
     
     useEffect(() => {
-        setIsLoadingInfo('Loading blogposts...')
+        setIsLoadingInfo('Posts werden geladen...')
 
-        setTimeout(() => updateLoadingInfo('Hang on...'), 1000)
-        setTimeout(() => updateLoadingInfo('This is taking longer than expected...'), 2000)
+        setTimeout(() => updateLoadingInfo('Nicht mehr lange...'), 1000)
+        setTimeout(() => updateLoadingInfo('Hmm, das dauert laenger als erwartet...'), 2000)
 
-        backendRequest('php/get_posts.php', {}).then((response) => {
+        backendRequest('php/get_posts.php', {}, null, false).then((response) => {
             setIsLoadingInfo('')
             const posts = JSON.parse(response.text)
             const sorted = posts.sort((a:any, b:any) => sort === 'views' ? (Number(a.views) < Number(b.views) ? 1 : -1) : (Date.parse(a.post_date) > Date.parse(a.post_date) ? 1 : -1))
@@ -40,7 +39,7 @@ export const BlogOverview:FC<BlogOverviewProps> = (props) => {
             setIsLoadingInfo('')
             setBlogposts('failed')
         })
-    }, [exclude])
+    }, [props])
 
     return (
         <main className={isSite ? 'blog-container nopad' : undefined} style={isSite ? {marginTop: '100px'} : undefined}>
@@ -58,7 +57,7 @@ export const BlogOverview:FC<BlogOverviewProps> = (props) => {
                         }}/>
                     })}
                     {blogposts.length === 0 &&
-                        <h2 className='m-5 sad'>No blogposts yet 😡</h2>
+                        <h2 className='m-5 sad'>Es gibt keine Posts 😡</h2>
                     }
                 </div>
             </>}
@@ -66,7 +65,7 @@ export const BlogOverview:FC<BlogOverviewProps> = (props) => {
                 <h2 className='pt-0 mb-5 mt-36 mt-36 m-5'>{isLoadingInfo}</h2>
                 <Skeleton active />
             </div>}
-            {blogposts === 'failed' && <h2 className='m-5 sad'>Sorry, loading the blogs failed 😢</h2>}
+            {blogposts === 'failed' && <h2 className='m-5 sad'>Tut uns leid, da hat etwas nicht geklappt 😢</h2>}
 
         </main>
     )
