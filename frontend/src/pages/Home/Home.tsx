@@ -17,7 +17,7 @@ export const Home:FC = () => {
             <b>CanSat ist ein Team-Wettbewerb der ESA</b> <br /> <br />
             Die Aufgabe der Teams besteht darin, einen Satelliten (Sat) in Getränkedosengröße (Can) zu bauen. Dieser wird mit einer Rakete in eine Höhe von mindestens 500 Metern befördert und ausgeworfen. Während des Sinkflugs muss der CanSat bestimmte Missionen erfüllen. 
             <br /> <br />
-            Wir sind die <b>Gmunden Space Agency </b>, besuchen das BG/BRG Gmunden und nehmen am CanSat-Wettbewerb 2023/2024 teil.
+            Wir sind die <b>Gmunden Space Agency</b>, besuchen das BG/BRG Gmunden und nehmen am CanSat-Wettbewerb 2023/2024 teil.
             </p>
             <div className='w-full'>
               <NavLink to='project'><Button type='secondary'>{t('the-project')}</Button></NavLink>

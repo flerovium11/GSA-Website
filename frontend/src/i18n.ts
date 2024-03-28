@@ -6,7 +6,7 @@ import {getCookie} from './utils/cookies'
 const currentHost:string =
   import.meta.env.MODE === "development"
     ? 'http://localhost:5173'
-    : 'http://gsa.bplaced.net'
+    : 'https://gsa.bplaced.net'
   
 const currentLang = ():string => {
   const languageCookie = getCookie('userLanguage')
