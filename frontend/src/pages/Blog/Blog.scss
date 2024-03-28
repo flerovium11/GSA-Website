@@ -54,7 +54,7 @@
             border-radius: .5em;
             padding: .3em .5em;
             display: flex;
-            gap: .5em;
+            gap: .7em;
             justify-content: space-between;
             align-items: center;
 
@@ -63,10 +63,14 @@
                 transition: transform .5s, opacity .5s;
             }
 
+            .new-num.content-len-1 {--len: 1}
+            .new-num.content-len-2 {--len: 1.35}
+            .new-num.content-len-3 {--len: 1.5}
+
             .new-num {
-                transform: translateX(calc(-1em * var(--len))) translateY(1em) rotateX(-100deg);
+                transform: translateX(calc(-1.35em * var(--len))) translateY(1em) rotateX(-100deg);
                 opacity: 0;
-                margin-right: calc(-1em * var(--len));
+                margin-right: calc(-1.35em * var(--len));
             }
 
             &.active {
@@ -75,7 +79,7 @@
                 font-weight: bold;
 
                 .new-num {
-                    transform: translateX(calc(-1em * var(--len))) translateY(0) rotateX(0deg);
+                    transform: translateX(calc(-1.35em * var(--len))) translateY(0) rotateX(0deg);
                     opacity: 1;
                 }
 

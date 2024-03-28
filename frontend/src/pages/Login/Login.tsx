@@ -30,7 +30,7 @@ export const Login:FC = () => {
 
     backendRequest('php/login.php', values, true, values.remember).then((response) => {
       if(response.status === 'success') {
-        location.reload() // auto navigates to admin panel
+        location.href = '/admin'
       }
 
       setLoginResponse(response)

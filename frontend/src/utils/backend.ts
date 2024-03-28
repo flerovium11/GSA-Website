@@ -1,7 +1,10 @@
 import $ from 'jquery'
 import {deleteCookie, getCookie, setCookie} from './cookies'
 
-const backendURL = 'http://localhost/GSA-Website/backend/'
+const backendURL:string =
+  import.meta.env.MODE === "development"
+    ? 'http://localhost/GSA-Website/backend/'
+    : 'http://gsa.bplaced.net/backend/'
 const shortRememberTimeHours = 4
 
 export interface sendData {

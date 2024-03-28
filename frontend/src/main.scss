@@ -23,6 +23,7 @@ body {
     background-color: $main-color;
     background: linear-gradient($main-color 40%, $blog-color);
     margin-top: 6em;
+    min-height: 100vh;
 }
 
 h1{

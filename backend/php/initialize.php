@@ -10,6 +10,13 @@
     $headers = apache_request_headers();
     $response = ['status' => 'error', 'text' => "Nope, try again later :(", 'username' => null, 'token' => null];
 
+    if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
+        $headers['Autorization'] = $_SERVER['HTTP_AUTHORIZATION'];
+    }
+    if (isset($_SERVER['HTTP_GSA_USERNAME'])) {
+        $headers['GSA-Username'] = $_SERVER['HTTP_GSA_USERNAME'];
+    }
+
     if(
         !empty($headers['Authorization'])
         && !empty($headers['GSA-Username'])

@@ -32,7 +32,7 @@ export const Footer:FC<FooterProps> = ({loading=false}) => {
                     <ul>
                         <li><NavLink to='/privacy'>{t('privacy')}</NavLink></li>
                         <li><NavLink to='/imprint'>{t('imprint')}</NavLink></li>
-                        <li><a href='#'>{t('to-top')}</a></li>
+                        <li><a onClick={() => window.scrollTo(0, 0)}>{t('to-top')}</a></li>
                     </ul>
                 </nav>
                 <br />  
