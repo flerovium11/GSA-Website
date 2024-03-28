@@ -63,8 +63,61 @@ header{
     transform-origin: center;
 }
 
+@media (max-width: 800px){
+    .loggedin {
+        .burger-menu{
+            display: flex;
+        }
+
+        .nav_header ul a{
+            display: none !important;
+        }
+
+        #cb-burger-menu:checked + .burger-menu {
+            transform: translateY(-50%) translateX(1em);
+
+            .burger-line:first-of-type {
+                transform: rotate(45deg) translateY(1.5em);
+            }
+
+            .burger-line:nth-of-type(2) {
+                transform: rotate(45deg) scaleY(0);
+            }
+
+            .burger-line:last-of-type {
+                transform: rotate(-45deg) translateY(-1.5em);
+            }
+        }
+
+        #cb-burger-menu:checked + .burger-menu ~ ul a {
+            display: block !important;
+            padding: 2em;
+            width: 100vw;
+            text-align: center;
+        }    
+
+        #cb-burger-menu:checked + .burger-menu ~ ul a:hover{
+            background: rgba(214, 216, 229, 0.322);
+            backdrop-filter: blur(10px);
+        }
+
+        #cb-burger-menu:checked + .burger-menu ~ ul {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            width: 100vw;
+            top: 6.5em;
+            right: 0;
+            justify-content: center;
+            align-items: center;
+            gap: 0;
+            background: rgba(73, 81, 130, 0.856);
+            backdrop-filter: blur(5px) !important;
+        }
+    }
+}
+
 @media (max-width: 600px){
-    
     .burger-menu{
         display: flex;
     }

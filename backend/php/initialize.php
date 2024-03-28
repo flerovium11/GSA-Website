@@ -26,13 +26,13 @@
                     $response['token'] = $new_token;
 
                 } else {
-                    $login_warning = "Login with token failed! If you didn't login from another device, please change your password!";
+                    $login_warning = "Login mit Token fehlgeschlagen! Wenn du dich nicht von einem anderen Gerät eingeloggt hast, bitte ändere dein Passwort!";
                 }
             } else {
-                $login_warning = "Login with cookie failed, this user doesn't exist!";
+                $login_warning = "Login mit Cookie fehlgeschlagen, dieser Admin existiert nicht!";
             }
         } catch (Exception $error) {
-            $login_warning = "Unexpected error, try again later!";
+            $login_warning = "Ups, da ist etwas schiefgegangen. Versuche es später erneut!";
         }
         
     }

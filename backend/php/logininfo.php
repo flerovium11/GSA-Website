@@ -3,7 +3,7 @@
 
     if($loggedin) {
         $response['status'] = 'success';
-        $response['text'] = 'Logged in successfully!';
+        $response['text'] = 'Erfolgreich eingeloggt!';
     } elseif(isset($login_warning)) {
         $response['status'] = 'warning';
         $response['text'] = $login_warning;

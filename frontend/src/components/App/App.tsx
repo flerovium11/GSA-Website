@@ -39,6 +39,7 @@ export const App:FC = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setInfoMessage(null)
   }, [pathname]);
 
   const updateLoadingInfo = (info:string) => {
@@ -55,10 +56,10 @@ export const App:FC = () => {
   useEffect(() => {
     // when a user cookie is set, try to contact backend
     if(getLoginInfo() !== null) {
-      setIsLoadingLoginInfo('Loading admin user interface...')
+      setIsLoadingLoginInfo('Admin Panel wird geladen...')
 
-      setTimeout(() => updateLoadingInfo('Hang on...'), 1000)
-      setTimeout(() => updateLoadingInfo('This is taking longer than expected...'), 2000)
+      setTimeout(() => updateLoadingInfo('Nicht mehr lange...'), 1000)
+      setTimeout(() => updateLoadingInfo('Hmm, das dauert laenger als erwartet...'), 2000)
 
       backendRequest('php/logininfo.php', {}).then((response) => {
         setLoginResponse(response)
@@ -82,10 +83,10 @@ export const App:FC = () => {
       <LoginContext.Provider value={username}>
         {/* when the user cookie is set but the server doesn't respond display the error message*/}
         {(loginInfoResponse?.status === 'warning' || loginInfoResponse?.status === 'connerror') && 
-          <Infomessage type='warning' ><WarningOutlined /> {loginInfoResponse.text}</Infomessage>
+          <Infomessage type='warning' activeTimeMS={10000}><WarningOutlined /> {loginInfoResponse.text}</Infomessage>
         }
 
-        {infoMessage !== null && <Infomessage key={Math.random()} type={infoMessage.type}>
+        {infoMessage !== null && <Infomessage activeTimeMS={10000} key={Math.random()} type={infoMessage.type}>
           {infoMessage.type === 'warning' && <WarningOutlined />}
           {['error', 'connerror'].includes(infoMessage.type) && <CloseCircleOutlined />}
           {infoMessage.type === 'success' && <CheckCircleOutlined />}

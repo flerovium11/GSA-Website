@@ -36,7 +36,7 @@ export const Header:FC<HeaderProps> = ({loading=false}) => {
   }
 
   return (
-    <header>
+    <header className={username === null ? undefined : 'loggedin'}>
       <nav className='nav_header'>
         <input type="checkbox" ref={cbRef} id="cb-burger-menu" hidden/>
         <label htmlFor="cb-burger-menu" className='burger-menu'>

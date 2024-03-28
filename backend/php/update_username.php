@@ -8,11 +8,11 @@
 
             if ($exists != false) {
                 $response['status'] = 'warning';
-                $response['text'] = 'Username taken!';
+                $response['text'] = 'Username ist schon vergeben!';
             } else {
                 execute('update admin set username = ? where admin_id = ?', [$new_name, $admin['admin_id']]);
                 $response['status'] = 'success';
-                $response['text'] = 'Username changed successfully!';
+                $response['text'] = 'Username erfolgreich geändert!';
                 $response['username'] = $new_name;
             }
 

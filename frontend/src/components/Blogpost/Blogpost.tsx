@@ -30,12 +30,14 @@ export const Blogpost:FC<BlogpostProps> = (props) => {
         <>
             <div className='blogpost'>
                 <div className='image_wrapper_blog'>
-                    <img src={blogdata.title_image} className='blog_picture' alt="Titelbild"/>
+                    <img src={blogdata.title_image} className='blog_picture' alt="Kein Titelbild"/>
                 </div>
-                <span className='blogdata'>{blogdata.post_date.toDateString()} von {blogdata.admin_name}</span>
-                <h1 className='blogdata_title'>{title}</h1>
-                <p className='blogdata_p'>{blogdata.description}</p>
-                <NavLink to={`/blog/${blogdata.string_id}`}><Button type='primary'>{t('more')}</Button></NavLink>
+                <div className="content-wrapper">
+                    <span className='blogdata'>{blogdata.post_date.toDateString()} von {blogdata.admin_name}</span>
+                    <h1 className='blogdata_title'>{title}</h1>
+                    <p className='blogdata_p'>{blogdata.description}</p>
+                    <NavLink to={`/blog/${blogdata.string_id}`}><Button type='primary'>{t('more')}</Button></NavLink>
+                </div>
             </div>
         </>
     )

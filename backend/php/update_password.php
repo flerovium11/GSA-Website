@@ -5,11 +5,11 @@
         try {
             if (!password_verify($_POST['old-password'].$admin['salt'], $admin['password'])) {
                 $response['status'] = 'warning';
-                $response['text'] = 'Old password wrong!';
+                $response['text'] = 'Altes Passwort stimmt nicht!';
             } else {
                 execute('update admin set password = ? where admin_id = ?', [password_hash($_POST['new-password'].$admin['salt'], PASSWORD_DEFAULT), $admin['admin_id']]);
                 $response['status'] = 'success';
-                $response['text'] = 'Password changed successfully!';
+                $response['text'] = 'Passwort erfolgreich geändert!';
             }
 
         } catch (Exception $error) {

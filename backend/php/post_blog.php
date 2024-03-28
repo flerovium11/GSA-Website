@@ -16,10 +16,10 @@
                     $firstImage = $images->item(0);
                     $image = $firstImage->getAttribute('src');
                 } else {
-                    $image = null;
+                    $image = '';
                 }
             }
-              
+             
             do {
                 $string_id = randstr(5);
             } while (fetch('select string_id from blogpost where string_id = ?', [$string_id]) != false);
@@ -29,6 +29,7 @@
             $response['text'] = $string_id;
         } catch (Exception $error) {
             $response['status'] = 'warning';
+            $reponse['text'] = 'hi';
         }
     }
 

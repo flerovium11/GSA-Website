@@ -42,7 +42,7 @@ export const BlogOverview:FC<BlogOverviewProps> = (props) => {
     }, [props])
 
     return (
-        <main className={isSite ? 'blog-container nopad' : undefined} style={isSite ? {marginTop: '100px'} : undefined}>
+        <main className={isSite ? 'blog-container nopad' : 'blog-container nopad nobg'} style={isSite ? {marginTop: '100px'} : undefined}>
             {(blogposts !== 'loading' && blogposts !== 'failed') && <>
                 <div className='blogs'>
                     {blogposts.map((item, index) => {
@@ -62,7 +62,7 @@ export const BlogOverview:FC<BlogOverviewProps> = (props) => {
                 </div>
             </>}
             {blogposts === 'loading' && <div className='px-24 w-full'>
-                <h2 className='pt-0 mb-5 mt-36 mt-36 m-5'>{isLoadingInfo}</h2>
+                <h2 className='pt-0 mb-5 m-5'>{isLoadingInfo}</h2>
                 <Skeleton active />
             </div>}
             {blogposts === 'failed' && <h2 className='m-5 sad'>Tut uns leid, da hat etwas nicht geklappt 😢</h2>}

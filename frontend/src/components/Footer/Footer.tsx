@@ -36,7 +36,7 @@ export const Footer:FC<FooterProps> = ({loading=false}) => {
                     </ul>
                 </nav>
                 <br />  
-                <p>
+                <p className='px-8'>
                     {t('contact')}: <a href={`mailto:gmundenspaceagency@gmail.com?subject=${t('request-over-website')}`}>gmundenspaceagency@gmail.com</a>
                 </p>
                 <p>Instagram: <a href='https://www.instagram.com/gmundenspaceagency'>gmundenspaceagency</a></p>

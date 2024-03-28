@@ -13,7 +13,7 @@
                 $salt = randstr(10);
                 execute('insert into admin (username, email, password, salt) values (?, ?, ?, ?)', [$name, $_POST['email'], password_hash($_POST['new-password'].$salt, PASSWORD_DEFAULT), $salt]);
                 $response['status'] = 'success';
-                $response['text'] = 'Admin added successfully!';
+                $response['text'] = 'Admin erfolgreich hinzugefügt!';
             }
 
         } catch (Exception $error) {

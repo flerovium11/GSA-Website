@@ -3,16 +3,16 @@
 
     if($loggedin) {
         $response['status'] = 'warning';
-        $response['text'] = "You're already logged in!";
+        $response['text'] = "Du bist schon eingeloggt!";
     } else {
         $user = fetch('select * from admin where username = ?', [$_POST['username']]);
 
         if ($user == false) {
             $response['status'] = 'warning';
-            $response['text'] = 'This admin does not exist!';
+            $response['text'] = 'Dieser Admin existiert nicht!';
         } elseif (!password_verify($_POST['password'].$user['salt'], $user['password'])) {
             $response['status'] = 'warning';
-            $response['text'] = 'Wrong password!';
+            $response['text'] = 'Falsches Passwort!';
         } else {
             $response['status'] = 'success';
             $new_token = create_user_token();

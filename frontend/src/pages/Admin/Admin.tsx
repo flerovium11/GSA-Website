@@ -71,8 +71,8 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
     }
 
     const onPostBlog = (values:any) => {
-        if (blogpostValue === '') return setInfo('Blog content cannot be left empty!', 'warning')
-        if (values['own-description'] === undefined || values['own-description'] === '') return setInfo('Blog description cannot be left empty!', 'warning')
+        if (blogpostValue.trim() === '') return setInfo('Der Inhalt vom Post darf nicht leer gelassen werden!', 'warning')
+        if (values['own-description'] === undefined || values['own-description'].trim() === '') return setInfo('Die Blogbeschreibung darf nicht leer gelassen werden!', 'warning')
         
         setPostBlogLoading(true)
 
@@ -84,13 +84,13 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
                     continuePostBlog(values)
                 } else {
                     setPostBlogLoading(false)
-                    return setInfo('Image URL does not exist!', 'warning')
+                    return setInfo('Bild URL existiert nicht!', 'warning')
                 }
             }
 
             image.onerror = function() {
                 setPostBlogLoading(false)
-                return setInfo('Image URL does not exist!', 'warning')
+                return setInfo('Bild URL existiert nicht!', 'warning')
             }
 
             image.src = values['own-image-url']
@@ -101,7 +101,7 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
 
     const continuePostBlog = (values:any) => {        
         backendRequest('php/post_blog.php', {...values, content: blogpostValue}).then((response) => {
-            setInfo(`Blog posted successfully! Visit it at www.gmundenspaceagency.org/blog/${response.text}`, 'success')
+            setInfo(`Blog erfolgreich gepostet! Besuch ihn auf www.gmundenspaceagency.org/blog/${response.text}`, 'success')
             localStorage.removeItem('blog-content')
             localStorage.removeItem('blog-description')
         }).catch((reason) => {
@@ -112,7 +112,7 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
     }
 
     const onAddAdmin = (values:any) => {
-        if (values['new-password'] !== values['repeat-password']) return setInfo('Passwords do not match!', 'warning')
+        if (values['new-password'] !== values['repeat-password']) return setInfo('Passwörter passen nicht zusammen!', 'warning')
         setAddAdminLoading(true)
 
         backendRequest('php/add_admin.php', values).then((response) => {
@@ -137,7 +137,7 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
                     items={[
                         {
                             key: '1',
-                            label: `My account`,
+                            label: `Mein Account`,
                             children: <>
                                 <Form
                                     initialValues={{ remember: true }}
@@ -166,7 +166,7 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
                                                         setUsernameLoading(true)
 
                                                         backendRequest('php/update_username.php', {new_username: usernameValue}).then((response) => {
-                                                            setInfo('Username changed successfully!', 'success')
+                                                            setInfo('Username erfolgreich geändert!', 'success')
                                                        }).catch((reason) => {
                                                             setInfo(reason.text, reason.status)
                                                         }).finally(() => {
@@ -195,51 +195,51 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
                                 >
                                     <Space direction='vertical'>
                                         <Form.Item
-                                            label="Old password"
+                                            label="Altes Passwort"
                                             name="old-password"
-                                            rules={[{ required: true, message: 'Please input your old password!' }]}
+                                            rules={[{ required: true, message: 'Bitte gib dein altes Passwort ein!' }]}
                                         >
                                             <Input.Password placeholder='password123' prefix={<LockOutlined />}/>
                                         </Form.Item>
 
                                         <Space direction='horizontal'>
                                             <Form.Item
-                                                label="New password"
+                                                label="Neues Passwort"
                                                 name="new-password"
-                                                rules={[{ required: true, message: 'Please input your new password!' }]}
+                                                rules={[{ required: true, message: 'Bitte gib dein neues Passwort ein!' }]}
                                             >
                                                 <Input.Password placeholder='password123' prefix={<LockOutlined />}/>
                                             </Form.Item>
                                             <Form.Item
-                                                label="Repeat new password"
+                                                label="Neues Passwort wiederholen"
                                                 name="repeat-password"
-                                                rules={[{ required: true, message: 'Please repeat your new password!' }]}
+                                                rules={[{ required: true, message: 'Bitte wiederhole dein neues Passwort!' }]}
                                             >
                                                 <Input.Password placeholder='password123' prefix={<LockOutlined />}/>
                                             </Form.Item>
                                         </Space>
                                         <Form.Item>
                                             <Button htmlType="submit" className='-mt-2' loading={changePasswordLoading}>
-                                                Change
+                                                Ändern
                                             </Button>
                                         </Form.Item>
                                     </Space>
                                 </Form>
                                 
-                                <h2 className='mt-3'>Danger Zone</h2>
+                                <h2 className='mt-3'>Gefahrenzone</h2>
                                 <div className='flex flex-wrap gap-5 mt-2'>
                                     <Button onClick={() => {setLoginInfo('', ''); location.reload()}}danger>Logout</Button>
                                     <Popconfirm
-                                        title="Delete your account"
-                                        description={<span>Are you sure you want to delete your account? <br /> This action is <b>irreversible</b></span>}
+                                        title="Account löschen"
+                                        description={<span>Bist du sicher, dass du deinen Account löschen willst? <br /> Diese Aktion kann <b>nicht rückgängig</b> gemacht werden</span>}
                                         onConfirm={confirmDeleteAccount}
                                         onCancel={cancelDeleteAccount}
                                         icon={<QuestionCircleOutlined />}
                                         okButtonProps={{danger: true, loading: deleteLoading}}
-                                        okText="Yes"
-                                        cancelText="Cancel"
+                                        okText="Ja"
+                                        cancelText="Abbrechen"
                                     >
-                                        <Button type='primary' danger loading={deleteLoading}>Delete Account</Button>
+                                        <Button type='primary' danger loading={deleteLoading}>Account löschen</Button>
                                     </Popconfirm>
                                 </div>
                             </>,
@@ -247,7 +247,7 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
                         },
                         {
                             key: '2',
-                            label: `Create Blogpost`,
+                            label: `Blogpost erstellen`,
                             children: <>
                                 <Form
                                     initialValues={{remember: true, 'own-description': localStorage.getItem('blog-description') ?? ''}}
@@ -309,7 +309,7 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
                         },
                         {
                             key: '3',
-                            label: `Add admin`,
+                            label: `Admin hinzufügen`,
                             children: <>
                                 <Form
                                     initialValues={{ remember: true }}
@@ -320,7 +320,7 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
                                     <Form.Item
                                         label="Username"
                                         name="username"
-                                        rules={[{ required: true, message: 'Please input the username!' }]}
+                                        rules={[{ required: true, message: 'Bitte gib den Username ein!' }]}
                                         hasFeedback
                                     >
                                         <Input
@@ -344,7 +344,7 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
                                             {
                                               required: true,
                                               type: "email",
-                                              message: "This is not not a valid email!",
+                                              message: "Das ist keine korrekte Email-Adresse!",
                                             },
                                         ]}
                                         hasFeedback
@@ -359,14 +359,14 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
                                         <Form.Item
                                             label="Password"
                                             name="new-password"
-                                            rules={[{ required: true, message: 'Please input a password!' }]}
+                                            rules={[{ required: true, message: 'Bitte gib ein Passwort ein!' }]}
                                         >
                                             <Input.Password placeholder='password123' prefix={<LockOutlined />}/>
                                         </Form.Item>
                                         <Form.Item
                                             label="Repeat password"
                                             name="repeat-password"
-                                            rules={[{ required: true, message: 'Please repeat the password!' }]}
+                                            rules={[{ required: true, message: 'Bitte wiederhole das Passwort!' }]}
                                         >
                                             <Input.Password placeholder='password123' prefix={<LockOutlined />}/>
                                         </Form.Item>
@@ -374,7 +374,7 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
 
                                     <Form.Item>
                                     <Button htmlType="submit" loading={addAdminLoading}>
-                                        Add admin
+                                        Admin hinzufügen
                                     </Button>
                                     </Form.Item>
                                 </Space>

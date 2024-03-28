@@ -83,13 +83,13 @@ export const backendRequest = async (url:string, data:sendData, stayLoggedIn:boo
         },
 
         error(xhr) {
-            reject({status: 'connerror', text: 'Connection to server failed, please inform site admin'})
+            reject({status: 'connerror', text: 'Verbindung zum Server fehlgeschlagen, bitte informiere den Admin dieser Seite!'})
         }
     }))
 }
 
 export const syncBackendRequest = (url:string, data:sendData, stayLoggedIn:null|boolean=null, adminTransaction:boolean=true):responseDataType => {
-    let returnVal:responseDataType = {status: 'connerror', text: 'No answer from server'}
+    let returnVal:responseDataType = {status: 'connerror', text: 'Keine Antwort vom Server'}
     const headers:Record<string, string> = {}
     const login:loginInfoType|null = getLoginInfo()
 
