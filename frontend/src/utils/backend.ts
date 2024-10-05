@@ -4,7 +4,7 @@ import { deleteCookie, getCookie, setCookie } from "./cookies";
 const backendURL: string =
   import.meta.env.MODE === "development"
     ? "http://localhost/GSA-Website/backend/"
-    : "https://gsa.bplaced.net/backend/";
+    : "http://gsa.bplaced.net/backend/";
 
 export const frontendURL: string =
   import.meta.env.MODE === "development"
