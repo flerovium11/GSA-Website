@@ -16,11 +16,15 @@ header{
         position: absolute;
         right: 10vw;
     
-        a{
+        a {
             text-decoration: none;
             color: $text-color;
             text-transform: uppercase;
         }
+    }
+
+    &.scrolled {
+        background-color: $main-color;
     }
 }
 
@@ -47,7 +51,7 @@ header{
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 5vw;
+    right: max(5vw, 2em);
     cursor: pointer;
     transition: .2s;
     transform-origin: right;
@@ -63,7 +67,7 @@ header{
     transform-origin: center;
 }
 
-@media (max-width: 800px){
+@media (max-width: 955px){
     .loggedin {
         .burger-menu{
             display: flex;
@@ -117,7 +121,7 @@ header{
     }
 }
 
-@media (max-width: 600px){
+@media (max-width: 808px){
     .burger-menu{
         display: flex;
     }

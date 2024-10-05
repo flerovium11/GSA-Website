@@ -56,7 +56,7 @@ export const About:FC = () => {
                     </div>
                     <div className="teammember">
                         <div className="card">
-                            <h1>Amelie (16)</h1>
+                            <h1>Amelie (17)</h1>
                             <a target='_blank' href='https://www.instagram.com/schulz010'><img className='instagram' src='/graphics/instagram.svg'></img></a>
                             <div className='fade'></div>
                         </div>

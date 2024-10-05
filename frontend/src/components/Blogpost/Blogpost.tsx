@@ -33,7 +33,7 @@ export const Blogpost:FC<BlogpostProps> = (props) => {
                     <img src={blogdata.title_image} className='blog_picture' alt="Kein Titelbild"/>
                 </div>
                 <div className="content-wrapper">
-                    <span className='blogdata'>{blogdata.post_date.toDateString()} von {blogdata.admin_name}</span>
+                    <span className='blogdata'>{blogdata.post_date.toLocaleDateString('en-GB', {day:'2-digit', month:'2-digit', year:'2-digit'}).replace(/\//g, '.')} von {blogdata.admin_name}</span>
                     <h1 className='blogdata_title'>{title}</h1>
                     <p className='blogdata_p'>{blogdata.description}</p>
                     <NavLink to={`/blog/${blogdata.string_id}`}><Button type='primary'>{t('more')}</Button></NavLink>

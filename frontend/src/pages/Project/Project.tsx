@@ -9,7 +9,8 @@ export const Project:FC = () => {
     return (
         <>
             <section className='project-top'>
-                    <img className='squares' src='/graphics/squares.svg'></img>
+                <img className='squares' src='/graphics/squares.svg'></img>
+                <div>
                     <h1>{t('the-project')}</h1>
                     <h2>{t('what-is-cansat')}</h2>
                     <p>
@@ -19,24 +20,25 @@ export const Project:FC = () => {
                     Die Teilnahme am CanSat-Wettbewerb bietet uns die einzigartige Gelegenheit, sämtliche Phasen eines realen Weltraumprojekts zu durchlaufen. Dies umfasst die Auswahl der Mission, das Design des CanSats, die Integration technischer Komponenten, technische Testläufe sowie den eigentlichen Start des Minisatelliten. Darüber hinaus gehört auch die wissenschaftliche Analyse der gesammelten Daten zu den Aufgaben.
                     </p>
                     <a target="_blank" href="https://ars.electronica.art/esero/de/projects/cansat/">Mehr zum Wettbewerb &nbsp;<ExportOutlined /></a>
-                <div className='outlined-rect'></div>
-                </section>
+                    <div className='outlined-rect'></div>
+                </div>
+            </section>
             <section className="primary-mission">
                 <h1>Erste Mission</h1>
                 <div className='missions'>
                     <div className="mission">
                         <img src="/graphics/planet.svg" alt="Planet" />
-                        <h2>Mission 1</h2>
+                        <h2>Teil 1</h2>
                         <p>Messung von Temperatur und Luftdruck</p>
                     </div>
                     <div className="mission">
                         <img src="/graphics/rocket.svg" alt="Planet" />
-                        <h2>Mission 2</h2>
+                        <h2>Teil 2</h2>
                         <p>Ermitteln der tatsächlichen Auswurfhöhe und Fallgeschwindigkeit</p>
                     </div>
                     <div className="mission">
                         <img src="/graphics/temperature.svg" alt="Planet" />
-                        <h2>Mission 3</h2>
+                        <h2>Teil 3</h2>
                         <p>Erstellen eines Temperaturprofils</p>
                     </div>
                 </div>

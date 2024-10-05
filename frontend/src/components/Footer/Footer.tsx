@@ -5,6 +5,7 @@ import LanguageMenu from '../LanguageMenu'
 import './Footer.scss'
 import {useTranslation} from 'react-i18next'
 import { Skeleton } from 'antd'
+import { InstagramOutlined, MailOutlined } from '@ant-design/icons'
 
 interface FooterProps {
     loading?:boolean
@@ -35,12 +36,13 @@ export const Footer:FC<FooterProps> = ({loading=false}) => {
                         <li><a onClick={() => window.scrollTo(0, 0)}>{t('to-top')}</a></li>
                     </ul>
                 </nav>
-                <br />  
-                <p className='px-8'>
-                    {t('contact')}: <a href={`mailto:gmundenspaceagency@gmail.com?subject=${t('request-over-website')}`}>gmundenspaceagency@gmail.com</a>
-                </p>
-                <p>Instagram: <a href='https://www.instagram.com/gmundenspaceagency'>gmundenspaceagency</a></p>
-                <LanguageMenu />
+                <div className='flex w-full flex-wrap justify-center gap-x-8 gap-y-4'>
+                    <span className='text-white text-center'>
+                        <MailOutlined /> <a href={`mailto:gmundenspaceagency@gmail.com?subject=${t('request-over-website')}`}>gmundenspaceagency@gmail.com</a>
+                    </span>
+                    <span className='text-white text-center'><InstagramOutlined /> <a target='_blank' href='https://www.instagram.com/gmundenspaceagency'>gmundenspaceagency</a></span>
+                    <LanguageMenu />
+                </div>
                 <p>
                     {/* "GSA" ist der Link zum Admin Login, wenn dir eine bessere Position für 
                     den Link einfällt, dann ja bitte, ich hab den einfach irgendwohin gepackt */}

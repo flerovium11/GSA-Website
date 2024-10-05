@@ -10,6 +10,11 @@
     src: url('/fonts/AstroSpace-eZ2Bg.ttf');
 }
 
+.umlaut {
+    font-family: Arial;
+    font-weight: bold;
+}
+
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
@@ -94,5 +99,6 @@ a:not(a:has(img, button)) {
 #admin-panel h1:not(.w-md-editor-preview h1), html * .ant-form h1:not(.w-md-editor-preview h1) {
     margin-top: 100px !important;
     font-size: 50px !important;
+    line-height: 1em;
     padding: 1em 0 .5em 0 !important;
 }

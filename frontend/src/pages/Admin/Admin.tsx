@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { backendRequest, setLoginInfo } from '../../utils/backend'
 import TextArea from 'antd/es/input/TextArea'
 import MDEditor from '@uiw/react-md-editor'
+import {frontendURL} from '../../utils/backend'
 
 type AdminProps = {
     setUsername:Function
@@ -56,13 +57,13 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
     }
 
     const onSendPassword = (values:any) => {
-        if (values['new-password'] !== values['repeat-password']) return setInfo('Passwords do not match!', 'warning')
-        if (values['new-password'] === values['old-password']) return setInfo("You didn't change anything!", 'warning')
+        if (values['new-password'] !== values['repeat-password']) return setInfo('Passwörter sind nicht gleich!', 'warning')
+        if (values['new-password'] === values['old-password']) return setInfo("Es wurde nichts geändert!", 'warning')
 
         setChangePasswordLoading(true)
 
         backendRequest('php/update_password.php', values).then((response) => {
-            setInfo('Password changed successfully!', 'success')
+            setInfo('Passwort erfolgreich geändert!', 'success')
         }).catch((reason) => {
             setInfo(reason.text, reason.status)
         }).finally(() => {
@@ -101,7 +102,7 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
 
     const continuePostBlog = (values:any) => {        
         backendRequest('php/post_blog.php', {...values, content: blogpostValue}).then((response) => {
-            setInfo(`Blog erfolgreich gepostet! Besuch ihn auf www.gmundenspaceagency.org/blog/${response.text}`, 'success')
+            setInfo(`Blog erfolgreich gepostet! Besuche ihn auf ${frontendURL}blog/${response.text}`, 'success')
             localStorage.removeItem('blog-content')
             localStorage.removeItem('blog-description')
         }).catch((reason) => {
@@ -116,7 +117,7 @@ export const Admin:FC<AdminProps> = ({setUsername}) => {
         setAddAdminLoading(true)
 
         backendRequest('php/add_admin.php', values).then((response) => {
-            setInfo('Admin added successfully!', 'success')
+            setInfo('Admin erfolgreich hinzugefügt!', 'success')
         }).catch((reason) => {
             setInfo(reason.text, reason.status)
         }).finally(() => {

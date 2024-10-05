@@ -2,7 +2,7 @@
 
 .h1_home{
     margin: 0;
-    padding-top: 10vw !important;
+    padding-top: 0em!important;
     color: $text-color;
     font-family: $headings;
     z-index: 10;
@@ -15,10 +15,15 @@ p{
     z-index: 10;
 }
 
+.home-top {
+    padding-top: calc(100px + 5em)!important;
+}
+
 .home-top, .project-top{
     padding: 100px 7vw 5em 7vw;
     background-image: url('/graphics/galaxy.jpg');
     background-size: cover;
+    background-position: bottom;
     position: relative;
     overflow-y: hidden;
     margin-top: -100px;
@@ -32,7 +37,7 @@ p{
         content: '';
         position: absolute!important;
         width: 100%;
-        height: 200vh;
+        height: 300vh;
         top: 0;
         left: 0;
         opacity: 0.718;
@@ -57,16 +62,9 @@ h2{
     margin-left: 7vw;
 }
 
-@media (max-width: 1500px){
-    .h1_home{
-        padding-top: 5vw !important;
-    }
-}
-
 @media (max-width: 1000px){
     .h1_home{
         font-size: 7vw !important;
-        padding-top: 10vw !important;
     }
 }
 
@@ -101,8 +99,10 @@ h2{
     }
 }
 
-@media (max-width: 400px){
-    .h1_home{
-        padding-top: 30vw !important;
+@media(max-width: 500px) {
+    .home-content h2 {
+        width: fit-content;
+        margin: auto!important;
+        margin-bottom: 2em!important;
     }
 }

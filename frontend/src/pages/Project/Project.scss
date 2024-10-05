@@ -1,23 +1,18 @@
 @import '../../variables';
 
 .project-top {
-
-
     .squares{
-        height: 28em;
-        position: absolute;
-        right: 10vw;
-        top: 13vw;
-        z-index: -1;
+        height: 25vw;
+        order: 1;
     }
 
-    .project-wrapper{
-        height: 100vh;
-    }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: calc(100px + 5em);
+    gap: 5em;
 
     h1{
-        margin-left: 7vw;
-        padding-top: 10vh!important;
         color: $text-color;
         font-family: $headings;
         z-index: 10;
@@ -25,26 +20,19 @@
         font-weight: lighter;
     }
 
-    p{
-        margin-left: 7vw;
-        margin-right: 45vw;
-        margin-bottom: 2em;
-    }
-
-    h2{
-        margin-top: 1vw;
+    h2 {
         font-family: $text;
         color: $blog-color;
         font-size: 2.5em;
         margin-bottom: 0;
-        margin-left: 7vw;
     }
 
     a{
-        margin-left: 7vw;
         text-decoration: none;
         color: $blog-color;
         font-size: 1.5em;
+        padding-top: 1em;
+        display: block;
     }
 }
 
@@ -79,6 +67,7 @@
 
     .mission{
         width: 20em;
+        max-width: calc(100vw - 2em);
         height: 8em;
         position: relative;
         margin: 1em;
@@ -98,6 +87,8 @@
 
         p{
             margin-left: 7.5em;
+            max-width: calc(100vw - 10em);
+            word-wrap: break-word;
             position: absolute;
         }
     }
@@ -136,64 +127,44 @@
 
    .card{   
         position: relative;
-        height: 35em;
         width: 40em;
+        max-width: calc(100vw - 1em);
         margin: auto;
         margin-top: 3vw;
         background: linear-gradient(hsla(232, 28%, 40%, 0.7) 25%, rgba(214, 216, 229, 0.7) 25%);
         border-radius: 10px;
         margin-bottom: 5em;
+        padding: 2em;
 
         p{
             text-align: justify;
             hyphens: auto;
             color: $main-color !important;
-            position: absolute;
-            top: 65%;
-            transform: translateY(-50%);
-            margin: 0 2em 0 2em;
+            margin-top: 6em;
         }
         
         img{
             height: 6em;
             width: 6em;
             padding: .5em;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
+            transform: translateY(2em);
             top: 6em;
             background-color: $text-color;
             border-radius: 1000px;
+            margin: auto;
         }
     
    }
 
 }
 
-
-@media (max-width: 1500px){
-
-    .project-top p{
-        margin-right: 30vw !important;
-    }
-
-    
-    .squares{
-        display: none;
-    }
-}
-
-
-@media (max-width: 1000px){
-
-    .project-top p{
-        margin-right: 20vw !important;
-    }
-}
-
 @media (max-width: 900px){
     .project-top h1{
         font-size: 10vw !important;
+    }
+    
+    .squares{
+        display: none;
     }
 
     .primary-mission h1{
@@ -203,10 +174,6 @@
     
     .secondary-mission h1{
         font-size: 7vw !important;
-    }
-
-    .project-top p{
-        margin-right: 10vw !important;
     }
 
     .box_blue, .galaxy_wrapper {
@@ -222,17 +189,6 @@
 
     .project-top a{
         font-size: 1.2em;
-    }
-
-    .project-top p{
-        margin-right: 5vw !important;
-    }
-}
-
-@media (max-height: 800px){
-
-    .project-top p{
-        margin-bottom: 1em !important;
     }
 }
 
@@ -252,13 +208,24 @@
 
 @media (max-width: 500px){
     
-    .card{
+    .secondary-mission .card{
         margin-left: 0 !important;
+        width: calc(100vw - 1em) !important;
+    }
+
+    .secondary-mission .fade{
         width: 100vw !important;
     }
 
-    .fade{
-        width: 100vw !important;
+    .mission {
+        img {
+            height: 4em!important;
+        }
+
+        p, h2 {
+            margin-left: 5em!important;
+            max-width: calc(100vw - 7em)!important;
+        }
     }
 
     .teammembers p{
@@ -266,7 +233,6 @@
         text-align: center;
         margin-top: 2em !important;
     }
-
     
     .box_blue, .galaxy_wrapper {
         height: 110vh !important;

@@ -16,6 +16,7 @@ import Admin from '../../pages/Admin'
 import Imprint from '../../pages/Imprint'
 import Privacy from '../../pages/Privacy'
 import About from '../../pages/About'
+import Results from '../../pages/Results'
 import Infomessage from '../Infomessage'
 import { Skeleton, Space } from 'antd'
 
@@ -128,6 +129,7 @@ export const App:FC = () => {
             <Route path="/blog/:id" element={<Blog />} />
             <Route path="/login" element={<Login />} />
             <Route path="/project" element={<Project />} />
+            <Route path="/results" element={<Results />} />
             <Route path="/about" element={<About />} />
             <Route path="/admin" element={<Admin setUsername={setUsername}/>} />
             <Route path="/imprint" element={<Imprint />} />

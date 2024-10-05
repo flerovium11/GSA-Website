@@ -49,6 +49,7 @@ export const Header:FC<HeaderProps> = ({loading=false}) => {
           <li><NavLink to='/project'>{t('the-project')}</NavLink></li>
           <li><NavLink to='/blog'>Blog</NavLink></li>
           <li><NavLink to='/about'>{t('we')}</NavLink></li>
+          <li><NavLink to='/results'>Ergebnisse</NavLink></li>
           {username !== null && <li><NavLink to='/admin'>{username}</NavLink></li>}
         </ul>
       </nav>

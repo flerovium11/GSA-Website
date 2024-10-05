@@ -124,8 +124,8 @@ export const Blog:FC = () => {
                         {reactions.map((re) => 
                             {
                              return <Tooltip key={re.reaction_name} title={re.reaction_name} placement='bottom' >
-                                <div className={(reaction === re.reaction_id ? "reaction active" : "reaction")} onClick={() => reaction === re.reaction_id ? handleSetReaction(blogpost.blogpost_id, '') : handleSetReaction(blogpost.blogpost_id, re.reaction_id)}>
-                                    <span className='old-num'>{re.reaction_id === initialReaction ? Number(re.num) - 1 : Number(re.num)}</span><span className={'new-num' + ' content-len-' + String(re.reaction_id === initialReaction ? Number(re.num) : Number(re.num) + 1).length}>{re.reaction_id === initialReaction ? Number(re.num) : Number(re.num) + 1}</span>
+                                <div className={(reaction == re.reaction_id ? "reaction active" : "reaction")} onClick={() => reaction == re.reaction_id ? handleSetReaction(blogpost.blogpost_id, '') : handleSetReaction(blogpost.blogpost_id, re.reaction_id)}>
+                                    <span className='old-num'>{re.reaction_id == initialReaction ? Number(re.num) - 1 : Number(re.num)}</span><span className={'new-num' + ' content-len-' + String(re.reaction_id == initialReaction ? Number(re.num) : Number(re.num) + 1).length}>{re.reaction_id == initialReaction ? Number(re.num) : Number(re.num) + 1}</span>
                                     <span className='emoji'>{re.reaction_content}</span>
                                 </div>
                             </Tooltip>

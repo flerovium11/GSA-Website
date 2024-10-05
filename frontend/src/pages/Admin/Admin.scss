@@ -1,6 +1,6 @@
 @import '../../variables';
 
-button > *, .ant-tabs-tab > *, .light-font{
+button:not(.results button) > *, .ant-tabs-tab > *, .light-font{
     color: $text-color;
 }
 

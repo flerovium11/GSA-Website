@@ -52,7 +52,7 @@ export const Login:FC = () => {
         initialValues={{ remember: true }}
         onFinish={onFinish}
         layout='vertical'
-        className='pb-10'
+        className='px-7 pb-10'
       >
         <h1 className='text-2xl mb-3'>Admin Login</h1>
         <Form.Item<FieldType>

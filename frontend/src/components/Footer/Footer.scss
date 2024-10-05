@@ -4,37 +4,44 @@ footer {
     background-color: $main-color;
     
     display: flex;
-    height: 30vw;
+    flex-wrap: wrap;
     position: relative;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    padding: 2em 1em;
+    gap: 2em;
 
-    p{
-        margin: 1em 0 1em 0;
+    p {
+        width: 100%;
+        text-align: center;
+        word-wrap: break-word;
+    }
+
+    span {
+        word-wrap: break-word;
+        max-width: 100%;
     }
 
     nav {
         display: flex;
+        width: 100%;
         align-items: center;
         font-family: $headings;
     }
 
     ul{
         display: flex;
+        width: 100%;
         list-style: none;
         gap: 2em 5em;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
         align-items: center;
         justify-content: center;
         flex-wrap: wrap;
-        margin-bottom: 5em;
-        margin-top: 1em;
 
-    
+        li {
+            text-align: center;
+        }
+
         a{
             text-decoration: none;
             color: $text-color;
@@ -54,25 +61,4 @@ footer {
 
 .active-lang{
     color: $text-color;
-}
-
-@media (max-width: 1200px){
-    
-    footer{
-        height: 50vw;
-    }
-}
-
-@media (max-width: 600px){
-    
-    footer{
-        height: 120vw;
-    }
-}
-
-@media (max-width: 300px){
-    
-    footer{
-        height: 50vh;
-    }
 }
