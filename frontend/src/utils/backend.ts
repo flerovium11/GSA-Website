@@ -1,15 +1,8 @@
 import $ from "jquery";
 import { deleteCookie, getCookie, setCookie } from "./cookies";
 
-const backendURL: string =
-  import.meta.env.MODE === "development"
-    ? "http://localhost/GSA-Website/backend/"
-    : "http://gsa.bplaced.net/backend/";
-
-export const frontendURL: string =
-  import.meta.env.MODE === "development"
-    ? "http://localhost:5173/"
-    : "http://gsa.bplaced.net/";
+const backendURL: string = import.meta.env.VITE_BACKEND_URL;
+export const frontendURL: string = import.meta.env.VITE_FRONTEND_URL;
 
 const shortRememberTimeHours = 4;
 

@@ -29,7 +29,7 @@
             $response['text'] = $string_id;
         } catch (Exception $error) {
             $response['status'] = 'warning';
-            $reponse['text'] = 'hi';
+            $reponse['text'] = 'Ups, da ist etwas schiefgegangen. Versuche es später erneut!';
         }
     }
 
