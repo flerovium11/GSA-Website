@@ -136,6 +136,7 @@
         exit;
     }
 
+    // $source_path = "C:\\xampp\\htdocs\\GSA-Website\\backend\\";
     // require_once $source_path.'assets/PHPMailer/src/PHPMailer.php';
     // require_once $source_path.'assets/PHPMailer/src/Exception.php';
     // require_once $source_path.'assets/PHPMailer/src/SMTP.php';

@@ -1,9 +1,4 @@
 <?php
-$source_path = "C:\\xampp\\htdocs\\GSA-Website\\backend\\";
-$server_path = "http://localhost/GSA-Website/backend/";
-$frontend_path = "http://localhost:5173";
-
-
 if (!getenv('POSTGRES_URL') && file_exists(__DIR__ . '/../.env.local')) {
     $envFile = file(__DIR__ . '/../.env.local', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($envFile as $line) {
@@ -16,6 +11,7 @@ if (!getenv('POSTGRES_URL') && file_exists(__DIR__ . '/../.env.local')) {
 }
 
 $postgres_url = getenv('POSTGRES_URL_NON_POOLING') ?: getenv('POSTGRES_URL');
+$frontend_url = getenv('FRONTEND_URL') ?: 'http://localhost:5173/';
 
 if ($postgres_url) {
     $url = parse_url($postgres_url);
