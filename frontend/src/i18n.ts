@@ -3,10 +3,10 @@ import i18nBackend from "i18next-http-backend";
 import { initReactI18next } from "react-i18next";
 import { getCookie } from "./utils/cookies";
 
-const currentHost: string =
-  import.meta.env.MODE === "development"
-    ? "http://localhost:5173"
-    : "http://gsa.bplaced.net";
+const currentHost: string = import.meta.env.VITE_FRONTEND_URL.replace(
+  /\/$/,
+  ""
+);
 
 const currentLang = (): string => {
   const languageCookie = getCookie("userLanguage");
