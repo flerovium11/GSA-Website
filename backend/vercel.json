@@ -1,0 +1,17 @@
+{
+  "functions": {
+    "php/*.php": { "runtime": "vercel-php@0.6.0" }
+  },
+  "routes": [
+    { "src": "/logininfo", "dest": "/php/logininfo.php" },
+    { "src": "/add_admin", "dest": "/php/add_admin.php" },
+    { "src": "/delete_account", "dest": "/php/delete_account.php" },
+    { "src": "/delete_post", "dest": "/php/delete_post.php" },
+    { "src": "/get_posts", "dest": "/php/get_posts.php" },
+    { "src": "/get_reactions", "dest": "/php/get_reactions.php" },
+    { "src": "/post_blog", "dest": "/php/post_blog.php" },
+    { "src": "/post_reaction", "dest": "/php/post_reaction.php" },
+    { "src": "/update_password", "dest": "php/update_password.php" },
+    { "src": "/update_username", "dest": "php/update_username.php" }
+  ]
+}
