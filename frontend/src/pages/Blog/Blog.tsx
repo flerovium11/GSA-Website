@@ -220,7 +220,7 @@ export const Blog: FC = () => {
 
       {blogpost === "loading" && (
         <div className="px-24 w-full">
-          <h2 className="pt-0 mb-5 mt-36 mt-36 m-5">{isLoadingInfo}</h2>
+          <h2 className="pt-0 mb-5 mt-36 m-5">{isLoadingInfo}</h2>
           <Skeleton active />
         </div>
       )}

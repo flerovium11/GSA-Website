@@ -4,6 +4,7 @@
   },
   "routes": [
     { "src": "/logininfo", "dest": "/api/logininfo.php" },
+    { "src": "/login", "dest": "/api/login.php" },
     { "src": "/add_admin", "dest": "/api/add_admin.php" },
     { "src": "/delete_account", "dest": "/api/delete_account.php" },
     { "src": "/delete_post", "dest": "/api/delete_post.php" },
