@@ -49,7 +49,7 @@ export const backendRequest = async (
   const login: loginInfoType | null = getLoginInfo();
 
   if (login && adminTransaction) {
-    headers["GSA-Username"] = login.username;
+    headers["Gsa-Username"] = login.username;
     headers["Authorization"] = `Bearer ${login.token}`;
   }
 
@@ -129,7 +129,7 @@ export const syncBackendRequest = (
   const login: loginInfoType | null = getLoginInfo();
 
   if (login && adminTransaction) {
-    headers["GSA-Username"] = login.username;
+    headers["Gsa-Username"] = login.username;
     headers["Authorization"] = `Bearer ${login.token}`;
   }
 

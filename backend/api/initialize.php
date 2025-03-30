@@ -3,26 +3,27 @@
     require_once 'functions.php'; 
 
     header("Access-Control-Allow-Origin: {$frontend_url}");
-    header('Access-Control-Allow-Methods: GET, POST');
-    header('Access-Control-Allow-Headers: Content-Type, Authorization, GSA-Username');
+    header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+    header('Access-Control-Allow-Headers: Content-Type, Authorization, Gsa-Username');
     
     $loggedin = false;
     $headers = apache_request_headers();
     $response = ['status' => 'error', 'text' => "Nope, try again later :(", 'username' => null, 'token' => null];
 
-    if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
-        $headers['Autorization'] = $_SERVER['HTTP_AUTHORIZATION'];
+    if (!empty($_SERVER['HTTP_AUTHORIZATION'])) {
+        $headers['Authorization'] = $_SERVER['HTTP_AUTHORIZATION'];
     }
-    if (isset($_SERVER['HTTP_GSA_USERNAME'])) {
-        $headers['GSA-Username'] = $_SERVER['HTTP_GSA_USERNAME'];
+
+    if (!empty($_SERVER['HTTP_GSA_USERNAME'])) {
+        $headers['Gsa-Username'] = $_SERVER['HTTP_GSA_USERNAME'];
     }
 
     if(
         !empty($headers['Authorization'])
-        && !empty($headers['GSA-Username'])
+        && !empty($headers['Gsa-Username'])
     ) {
         try {
-            $user = fetch('select * from admin where username = ?', [$headers['GSA-Username']]);
+            $user = fetch('select * from admin where username = ?', [$headers['Gsa-Username']]);
 
             if($user != false) {
                 if(password_verify(str_replace('Bearer ', '', $headers['Authorization']).$user['salt'], $user['login_token'])) {
@@ -31,7 +32,6 @@
                     $loggedin = true;
                     $response['username'] = $user['username'];
                     $response['token'] = $new_token;
-
                 } else {
                     $login_warning = "Login mit Token fehlgeschlagen! Wenn du dich nicht von einem anderen Gerät eingeloggt hast, bitte ändere dein Passwort!";
                 }
@@ -42,6 +42,8 @@
             $login_warning = "Ups, da ist etwas schiefgegangen. Versuche es später erneut!";
         }
         
+    } else {
+        $login_warning = "Falsche Request-Header!";
     }
 
     if($loggedin) {
